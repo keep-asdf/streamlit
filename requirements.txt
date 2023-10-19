@@ -1,5 +1,4 @@
-# Create the requirements.txt content based on the provided conda list
-requirements_content = """
+
 _libgcc_mutex==0.1
 _openmp_mutex==4.5
 argcomplete==1.12.3
