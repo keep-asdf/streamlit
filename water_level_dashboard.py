@@ -29,9 +29,9 @@ def main():
     st.title("Water Level Dashboard")
 
     # 데이터를 로드합니다.
-    @st.cache
+    @st.cache_data
     def load_data():
-        return pd.read_csv('data/water_level_with_moving_averages.csv')  # 실제 데이터 경로로 바꾸세요.
+        return pd.read_csv('data/water_level_with_moving_averages.csv').copy()  # 실제 데이터 경로로 바꾸세요.
 
     data = load_data()
 
