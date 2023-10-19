@@ -13,6 +13,8 @@ st.title("Water Level Dashboard")
 
 # 데이터 프레임을 그래프로 표시합니다.
 st.write("Predicted MHC Water Level Visualization")
-visualize_moving_averages_with_cross_highlighted(data)
+
+# 데이터의 복사본을 사용하여 시각화 함수를 호출합니다.
+visualize_moving_averages_with_cross_highlighted(data.copy())
 
 st.write(data)  # 데이터 프레임을 표로도 표시합니다.
