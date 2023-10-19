@@ -4,9 +4,8 @@ from bokeh.io import push_notebook
 from bokeh.models import ColumnDataSource, Band, Legend, HoverTool
 from bokeh.palettes import Category10
 from bokeh.layouts import column
-
-def visualize_moving_averages_with_bokeh(dataframe):
-    
+ef visualize_moving_averages_with_bokeh(dataframe):
+    dataframe = dataframe.copy()  # 캐싱된 데이터프레임을 수정하기 전에 복사본을 만듭니다.
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
 
     p = figure(x_axis_type="datetime", width=800, height=400, 
@@ -14,7 +13,7 @@ def visualize_moving_averages_with_bokeh(dataframe):
     source = ColumnDataSource(dataframe)
 
     # Plot the Predicted Water Level
-    line = p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="blue", legend_label="Predicted Water Level")
+    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="blue", legend_label="Predicted Water Level")
 
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
@@ -25,39 +24,27 @@ def visualize_moving_averages_with_bokeh(dataframe):
     for column in dataframe.columns:
         if "MA" in column:
             color = next(ma_colors)
-            ma_line = p.line('Time', column, source=source, color=color, legend_label=column)
-    
-    # Create a new source for the status lines
-    status_data = {
-        'Time': [dataframe.Time.min(), dataframe.Time.max()],
+            p.line('Time', column, source=source, color=color, legend_label=column)
 
-    }
-    status_source = ColumnDataSource(status_data)
-
-    # Adding the status lines using the status source
-    p.line('Time', 'Severe',  color='red', line_dash="dashed", legend_label="Severe")
-    p.line('Time', 'Alert',  color='orange', line_dash="dashed", legend_label="Alert")
-    p.line('Time', 'Caution',  color='yellow', line_dash="dashed", legend_label="Caution")
-    p.line('Time', 'Attention',  color='green', line_dash="dashed", legend_label="Attention")
+    # Adding the status lines using fixed values
+    p.line(x=dataframe['Time'], y=9.2, color='red', line_dash="dashed", legend_label="Severe")
+    p.line(x=dataframe['Time'], y=8.0, color='orange', line_dash="dashed", legend_label="Alert")
+    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="Caution")
+    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="Attention")
 
     # Modify the hover tool to display information for each status line
     hover = HoverTool(
         tooltips=[
-            
             ("Time", "@Time{%F %T}"),
             ("Water Level", "@Predicted_MHC_Water_Level"),
-            ("Confidence Interval", "(@CI_Lower, @CI_Upper)"),
-
+            ("Confidence Interval", "(@CI_Lower, @CI_Upper)")
         ],
-        formatters={
-            "@Time": "datetime"
-        },
+        formatters={"@Time": "datetime"},
         mode='mouse'
     )
     p.add_tools(hover)
 
     return p
-
 
 def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
