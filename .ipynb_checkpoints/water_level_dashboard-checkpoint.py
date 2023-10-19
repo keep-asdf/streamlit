@@ -54,6 +54,7 @@
 
 # if __name__ == '__main__':
 #     main()
+
 import streamlit as st
 from visualizations import *
 import pandas as pd
@@ -68,13 +69,9 @@ def main():
     # 사이드바를 사용하여 그래프 선택
     graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
-    # 만약 버튼이 클릭되면, 데이터를 다시 로드하고 그래프와 표를 다시 그립니다.
-    if update_button:
-        st.caching.clear_cache()
-
     if graph_selection == "Moving Averages":
         # 데이터를 로드합니다.
-        @st.cache_data
+        @st.cache_data(allow_output_mutation=True)
         def load_data_moving_averages():
             return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
 
@@ -85,7 +82,7 @@ def main():
 
     elif graph_selection == "True vs Predicted with CI":
         # 데이터를 로드합니다.
-        @st.cache_data
+        @st.cache_data(allow_output_mutation=True)
         def load_data_true_pred():
             return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
