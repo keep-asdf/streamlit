@@ -31,18 +31,15 @@ def visualize_moving_averages_with_bokeh(dataframe):
     # Create a new source for the status lines
     status_data = {
         'Time': [dataframe.Time.min(), dataframe.Time.max()],
-        'Severe': [9.2, 9.2],
-        'Alert': [8.0, 8.0],
-        'Caution': [7.0, 7.0],
-        'Attention': [5.0, 5.0]
+
     }
     status_source = ColumnDataSource(status_data)
 
     # Adding the status lines using the status source
-    p.line('Time', 'Severe', source=status_source, color='red', line_dash="dashed", legend_label="Severe")
-    p.line('Time', 'Alert', source=status_source, color='orange', line_dash="dashed", legend_label="Alert")
-    p.line('Time', 'Caution', source=status_source, color='yellow', line_dash="dashed", legend_label="Caution")
-    p.line('Time', 'Attention', source=status_source, color='green', line_dash="dashed", legend_label="Attention")
+    p.line('Time', 'Severe',  color='red', line_dash="dashed", legend_label="Severe")
+    p.line('Time', 'Alert',  color='orange', line_dash="dashed", legend_label="Alert")
+    p.line('Time', 'Caution',  color='yellow', line_dash="dashed", legend_label="Caution")
+    p.line('Time', 'Attention',  color='green', line_dash="dashed", legend_label="Attention")
 
     # Modify the hover tool to display information for each status line
     hover = HoverTool(
@@ -50,10 +47,7 @@ def visualize_moving_averages_with_bokeh(dataframe):
             ("Time", "@Time{%F %T}"),
             ("Water Level", "@Predicted_MHC_Water_Level"),
             ("Confidence Interval", "(@CI_Lower, @CI_Upper)"),
-            ("Severe", "@Severe"),
-            ("Alert", "@Alert"),
-            ("Caution", "@Caution"),
-            ("Attention", "@Attention")
+
         ],
         formatters={
             "@Time": "datetime"
