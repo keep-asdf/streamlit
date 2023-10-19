@@ -1,61 +1,60 @@
-from bokeh.plotting import figure, show, output_file, save
-from bokeh.io import output_notebook
-from bokeh.models import ColumnDataSource, HoverTool, Legend
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
 
-def visualize_last_6_hours_with_moving_averages_bokeh(dataframe, save_path="streamlit/graph/with_moving_averages_last_6_hours.html"):
+def visualize_moving_averages_with_cross_highlighted(dataframe):
     """
-    Visualize the predicted MHC water level, its moving averages, confidence intervals, and status lines from the last 6 hours of 
-    the given dataframe and save the plot to the specified path using Bokeh.
+    Visualize the predicted MHC water level, its moving averages, confidence intervals, and status lines from the given dataframe 
+    and save the plot to the specified path. English labels are used to avoid font issues.
     
     Parameters:
-    - dataframe: A pandas DataFrame with columns 'Time', 'Predicted_MHC_Water_Level', 'CI_Lower', and 'CI_Upper', 
+    - dataframe: A pandas DataFrame with columns 'Time', 'Predicted_MHC_Water_Level', 'CI_Lower', 'CI_Upper', 
     and other columns for moving averages.
-    - save_path: Path to save the plot. Default is "streamlit/graph/with_moving_averages_last_6_hours.html".
+    - save_path: Path to save the plot. Default is "streamlit/graph/with_moving_averages_cross_highlighted.png".
     """
-    # Filter the dataframe to only include the last 6 hours of data
-    end_time = dataframe['Time'].max()
-    start_time = end_time - datetime.timedelta(hours=6)
-    dataframe = dataframe[(dataframe['Time'] >= start_time) & (dataframe['Time'] <= end_time)]
+    # Convert the Time column to datetime format for better plotting
+    dataframe['Time'] = pd.to_datetime(dataframe['Time'])
+
+    # Set the theme
+    sns.set_theme(style="darkgrid")
+
+    # Create the plot
+    plt.figure(figsize=(15, 6))
+    sns.lineplot(x='Time', y='Predicted_MHC_Water_Level', data=dataframe, label='Predicted Water Level', color='blue')
+    plt.fill_between(dataframe['Time'], dataframe['CI_Lower'], dataframe['CI_Upper'], color='blue', alpha=0.3)
     
-    source = ColumnDataSource(dataframe)
-    
-    # Create a new plot with a datetime axis type
-    p = figure(width=900, height=400, x_axis_type="datetime", title="Predicted MHC Water Level from Last 6 Hours with Confidence Intervals, Moving Averages and Status Lines")
-    
-    # Adding the status lines
-    p.line(dataframe['Time'], [9.2]*len(dataframe), color="red", legend_label="Severe")
-    p.line(dataframe['Time'], [8.0]*len(dataframe), color="orange", legend_label="Alert")
-    p.line(dataframe['Time'], [7.0]*len(dataframe), color="yellow", legend_label="Caution")
-    p.line(dataframe['Time'], [5.0]*len(dataframe), color="green", legend_label="Attention")
-    
-    # Adding the predicted values
-    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="blue", legend_label="Predicted Water Level")
-    
-    # Filling the confidence intervals
-    p.varea(x='Time', y1='CI_Lower', y2='CI_Upper', color="blue", alpha=0.3, source=source)
+    # Check for crosses where 12H_MA crosses other MAs
+    prev_12H = None
+    for i, row in dataframe.iterrows():
+        for column in dataframe.columns:
+            if "MA" in column and column != "12H_MA":
+                if prev_12H is not None and prev_12H < dataframe.at[i-1, column] and row["12H_MA"] > row[column]:
+                    plt.scatter(row['Time'], row['12H_MA'], color='gold', marker='x', s=100)
+        prev_12H = row["12H_MA"]
     
     # Adding the moving averages
     for column in dataframe.columns:
         if "MA" in column:
-            p.line('Time', column, source=source, legend_label=column)
+            if column == "12H_MA":
+                sns.lineplot(x='Time', y=column, data=dataframe, label=column, linewidth=2.5, color='darkred')
+            else:
+                sns.lineplot(x='Time', y=column, data=dataframe, label=column)
     
-    # Hover tool
-    hover = HoverTool()
-    hover.tooltips = [("Time", "@Time{%Y-%m-%d %H:%M:%S}"), 
-                      ("Value", "$y"), 
-                      ("Lower CI", "@CI_Lower"), 
-                      ("Upper CI", "@CI_Upper")]
-    hover.formatters = {'@Time': 'datetime'}
-    p.add_tools(hover)
-    
-    # Styling
-    p.legend.location = "top_left"
-    
-    # Save the plot to the specified path
-    output_file(save_path)
-    save(p)
-    output_notebook()
-    show(p)
+    # Adding the status lines based on the provided criteria with English labels
+    plt.axhline(9.2, color='red', linestyle='--', label='Severe')
+    plt.axhline(8.0, color='orange', linestyle='--', label='Alert')
+    plt.axhline(7.0, color='yellow', linestyle='--', label='Caution')
+    plt.axhline(5.0, color='green', linestyle='--', label='Attention')
 
-# Testing the function with the provided data
-visualize_last_6_hours_with_moving_averages_bokeh(moving_averages)
+    plt.title("Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines")
+    plt.ylabel("Water Level")
+    plt.xlabel("Time")
+    # Position the legend to the top right
+    plt.legend(loc='upper right', bbox_to_anchor=(1, 1))
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+
+    # Save the plot to the specified path
+    plt.show()
+    plt.close()
+
