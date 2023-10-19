@@ -21,7 +21,7 @@
 
 
 import streamlit as st
-from visualizations.py import *
+from visualizations import *
 
 
 # Streamlit app
