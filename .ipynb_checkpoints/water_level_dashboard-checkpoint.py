@@ -71,7 +71,7 @@ def main():
 
     if graph_selection == "Moving Averages":
         # 데이터를 로드합니다.
-        @st.cache_data(allow_output_mutation=True)
+        @st.cache(allow_output_mutation=True)
         def load_data_moving_averages():
             return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
 
@@ -82,7 +82,7 @@ def main():
 
     elif graph_selection == "True vs Predicted with CI":
         # 데이터를 로드합니다.
-        @st.cache_data(allow_output_mutation=True)
+        @st.cache(allow_output_mutation=True)
         def load_data_true_pred():
             return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
