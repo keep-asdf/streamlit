@@ -5,7 +5,7 @@ from visualizations import visualize_moving_averages_with_cross_highlighted
 # 데이터를 로드합니다.
 @st.cache
 def load_data():
-    return pd.read_csv('data/pred_with_CI.csv')  # 실제 데이터 경로로 바꾸세요.
+    return pd.read_csv('data/water_level_with_moving_averages.csv')  # 실제 데이터 경로로 바꾸세요.
 
 data = load_data()
 
