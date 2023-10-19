@@ -21,5 +21,4 @@ fig.add_scatter(x=data['Time'], y=data['CI_Upper'], mode='lines', name='CI Upper
 st.plotly_chart(fig)
     
     
-if __name__ == "__main__":
-    main()
+
