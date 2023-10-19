@@ -14,7 +14,7 @@ def load_data():
 data = load_data()
 
 # Plotly를 사용하여 그래프 그리기
-fig = px.line(data, x='Time', y='Predicted_MHC_Water_Level_Last_6_Hours', title='Predicted MHC Water Level')
+fig = px.line(data, x='Time', y='Predicted_MHC_Water_Level', title='Predicted MHC Water Level')
 fig.add_scatter(x=data['Time'], y=data['CI_Lower'], mode='lines', name='CI Lower')
 fig.add_scatter(x=data['Time'], y=data['CI_Upper'], mode='lines', name='CI Upper')
 
