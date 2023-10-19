@@ -11,7 +11,7 @@ st.title("Water Level Predictions with Confidence Interval")
 # 데이터 로드
 @st.cache
 def load_data():
-    return pd.read_csv('data/predicted_values_with_CI.csv')
+    return pd.read_csv('data/pred_with_CI.csv')
 
 data = load_data()
 
