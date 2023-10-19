@@ -95,6 +95,46 @@
 #     main()
 
 
+# import streamlit as st
+# from visualizations import *
+# import pandas as pd
+
+# # Streamlit app
+# def main():
+#     st.title("Water Level Dashboard")
+
+#     # 사이드바에 버튼을 추가합니다.
+#     update_button = st.sidebar.button("Update Data")
+
+#     # 사이드바를 사용하여 그래프 선택
+#     graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
+
+#     if graph_selection == "Moving Averages":
+#         # 데이터를 로드합니다.
+#         @st.cache_data
+#         def load_data_moving_averages():
+#             return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
+
+#         data_moving_averages = load_data_moving_averages()
+
+#         st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages))
+#         st.write(data_moving_averages)
+
+#     elif graph_selection == "True vs Predicted with CI":
+#         # 데이터를 로드합니다.
+#         @st.cache_data
+#         def load_data_true_pred():
+#             return pd.read_csv('data/true_pred_with_CI.csv').copy()
+
+#         data_true_pred = load_data_true_pred()
+
+#         st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
+#         st.write(data_true_pred)
+
+# if __name__ == '__main__':
+#     main()
+
+
 import streamlit as st
 from visualizations import *
 import pandas as pd
@@ -110,8 +150,8 @@ def main():
     graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
     if graph_selection == "Moving Averages":
-        # 데이터를 로드합니다.
-        @st.cache_data
+        # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+        @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
         def load_data_moving_averages():
             return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
 
@@ -121,8 +161,8 @@ def main():
         st.write(data_moving_averages)
 
     elif graph_selection == "True vs Predicted with CI":
-        # 데이터를 로드합니다.
-        @st.cache_data
+        # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+        @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
         def load_data_true_pred():
             return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
