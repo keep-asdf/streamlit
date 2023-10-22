@@ -59,7 +59,7 @@ def create_individual_graphs(dataframe):
 
    
     for feature in features:
-        p = figure(width=250, height=250, title=feature, 
+        p = figure(width=500, height=250, title=feature, 
                    min_border_left=0, min_border_right=0, 
                    min_border_top=0, min_border_bottom=0) 
         
