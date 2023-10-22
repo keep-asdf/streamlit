@@ -138,6 +138,13 @@
 import streamlit as st
 from visualizations import *
 import pandas as pd
+from streamlit_option_menu import option_menu
+import streamlit.components.v1 as html
+from  PIL import Image
+import numpy as np
+import plotly.express as px
+import io
+
 
 # Streamlit app
 def main():
@@ -147,18 +154,18 @@ def main():
     update_button = st.sidebar.button("Update Data")
 
     # 사이드바를 사용하여 그래프 선택
-    graph_selection = st.sidebar.multiselect("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
-    # with st.sidebar:
-    # choice = option_menu("Menu", ["Moving Averages", "True vs Predicted with CI", ],
-    #                      # icons=['house', 'kanban', 'bi bi-robot'],
-    # #                      menu_icon="app-indicator", default_index=0,
-    # #                      styles={
-    # #     "container": {"padding": "4!important", "background-color": "#fafafa"},
-    # #     "icon": {"color": "black", "font-size": "25px"},
-    # #     "nav-link": {"font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#fafafa"},
-    # #     "nav-link-selected": {"background-color": "#08c7b4"},
-    # # }
-    # )
+    # graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
+    with st.sidebar:
+    choice = option_menu("Menu", ["Moving Averages", "True vs Predicted with CI", ],
+                         # icons=['house', 'kanban', 'bi bi-robot'],
+    #                      menu_icon="app-indicator", default_index=0,
+    #                      styles={
+    #     "container": {"padding": "4!important", "background-color": "#fafafa"},
+    #     "icon": {"color": "black", "font-size": "25px"},
+    #     "nav-link": {"font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#fafafa"},
+    #     "nav-link-selected": {"background-color": "#08c7b4"},
+    # }
+    )
     
     
     if graph_selection == "Moving Averages":
