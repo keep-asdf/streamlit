@@ -142,7 +142,6 @@ import numpy as np
 from streamlit_option_menu import option_menu
 
 
-st.set_page_config(layout="wide")
 
 
 # Streamlit app
@@ -177,6 +176,9 @@ def main():
     
     if choice == "Moving Averages":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+        
+        st.set_page_config(layout="wide")
+
         @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
         def load_data_moving_averages():
             return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
@@ -202,6 +204,8 @@ def main():
     
     elif choice == "True vs Predicted with CI":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+        st.set_page_config(layout="wide")
+
         @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
         def load_data_true_pred():
             return pd.read_csv('data/true_pred_with_CI.csv').copy()
