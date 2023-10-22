@@ -173,11 +173,10 @@ def main():
 #         grid = gridplot([graphs[:3], graphs[3:]])
 #         st.bokeh_chart(grid)
     
-    
+    st.set_page_config(layout="wide")
     if choice == "Moving Averages":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
         
-        st.set_page_config(layout="wide")
 
         @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
         def load_data_moving_averages():
