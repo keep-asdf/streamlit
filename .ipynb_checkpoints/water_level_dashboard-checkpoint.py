@@ -200,7 +200,7 @@ def main():
         st.bokeh_chart(grid)       
         
         data_moving_averages_reverse = data_moving_averages.sort_values(by = 'Time')
-        st.write(data_moving_averages)
+        st.write(data_moving_averages_reverse)
     
     elif choice == "True vs Predicted with CI":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
