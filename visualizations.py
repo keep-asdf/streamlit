@@ -49,7 +49,7 @@ def visualize_moving_averages_with_bokeh(dataframe):
 
 
 def create_individual_graphs(dataframe):
-    features = ['MHCwaterlevel', 'mh water level', 'pg water level', 'hh water level', 'gg water level']
+    features = ['MHC_Water_Level', 'MH_Water_Level', 'PG_Water_Level', 'HH_Water_Level', 'GG_Water_Level']
     graphs = []
 
     for feature in features:
