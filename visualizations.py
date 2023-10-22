@@ -156,7 +156,8 @@ def visualize_last_6h_moving_averages(data):
     y_max = 9.5
 
     # 그래프 생성 with adjusted y_range
-    p = figure(title="Moving Averages for Last 6H", x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
+    p = figure(title="한글 되니?Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines for Last 6H", 
+               x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
               width=750, height=430, )
     
     # 그래프에 데이터 추가
