@@ -3,7 +3,7 @@ from bokeh.plotting import figure, show, output_notebook
 from bokeh.io import push_notebook
 from bokeh.models import ColumnDataSource, Band, Legend, HoverTool
 from bokeh.palettes import Category10
-from bokeh.layouts import column
+from bokeh.layouts import column, gridplot
 
 def visualize_moving_averages_with_bokeh(dataframe):
     dataframe = dataframe.copy()  # 캐싱된 데이터프레임을 수정하기 전에 복사본을 만듭니다.
@@ -46,6 +46,22 @@ def visualize_moving_averages_with_bokeh(dataframe):
     p.add_tools(hover)
 
     return p
+
+
+def create_individual_graphs(dataframe):
+    features = ['MHCwaterlevel', 'mh water level', 'pg water level', 'hh water level', 'gg water level']
+    graphs = []
+
+    for feature in features:
+        p = figure(width=250, height=250, title=feature)
+        p.line(dataframe.index, dataframe[feature], line_width=2)
+        p.xaxis.axis_label = 'Time'
+        p.yaxis.axis_label = feature
+        graphs.append(p)
+
+    return graphs
+
+
 
 def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
