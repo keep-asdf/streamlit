@@ -10,7 +10,9 @@ def visualize_moving_averages_with_bokeh(dataframe):
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
 
     p = figure(x_axis_type="datetime", width=800, height=400, 
-               title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines")
+               title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines"),
+               min_border_left=10, min_border_right=10, 
+               min_border_top=10, min_border_bottom=10)
     source = ColumnDataSource(dataframe)
 
     # Plot the Predicted Water Level
@@ -53,7 +55,10 @@ def create_individual_graphs(dataframe):
     graphs = []
 
     for feature in features:
-        p = figure(width=250, height=250, title=feature)
+        p = figure(width=250, height=250, title=feature, 
+                   min_border_left=10, min_border_right=10, 
+                   min_border_top=10, min_border_bottom=10) 
+        
         p.line(dataframe.index, dataframe[feature], line_width=2)
         p.xaxis.axis_label = 'Time'
         p.yaxis.axis_label = feature
