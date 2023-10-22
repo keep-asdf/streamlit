@@ -201,7 +201,7 @@ def main():
             st.bokeh_chart(grid)       
         
             data_moving_averages_reverse = data_moving_averages.sort_values(by = 'Time', ascending = False)
-            st.write(data_moving_averages_reverse)
+            st.dataframe(data_moving_averages_reverse)
     
     elif choice == "True vs Predicted with CI":
         
