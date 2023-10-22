@@ -159,7 +159,7 @@ def main():
         choice = option_menu("Menu", ["Moving Averages", "True vs Predicted with CI"])
     
     if choice == "Moving Averages":
-        data = pd.read_csv('water_data.csv')
+        data = pd.read_csv('data/water_data.csv')
         
         # 이동 평균선 그래프 생성 및 표시
         st.bokeh_chart(visualize_moving_averages_with_bokeh(data))
