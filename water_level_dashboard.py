@@ -198,7 +198,8 @@ def main():
         # 2x3 그리드로 그래프 표시
         grid = gridplot([graphs[:3], graphs[3:]])
         st.bokeh_chart(grid)       
-    
+        
+        data_moving_averages_reverse = data_moving_averages.sort_value(by = 'Time')
         st.write(data_moving_averages)
     
     elif choice == "True vs Predicted with CI":
