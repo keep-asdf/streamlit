@@ -177,42 +177,45 @@ def main():
     if choice == "Moving Averages":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
         
+        with.st.container():
+            
+            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            def load_data_moving_averages():
+                return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
 
-        @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-        def load_data_moving_averages():
-            return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
+            data_moving_averages = load_data_moving_averages()
 
-        data_moving_averages = load_data_moving_averages()
-
-        st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages))
+            st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages))
         
-        @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-        def load_water_data():
-            return pd.read_csv('data/water_data.csv').copy()
+            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            def load_water_data():
+                return pd.read_csv('data/water_data.csv').copy()
        
-        data_water_data = load_water_data()
+            data_water_data = load_water_data()
          
-        # 각 feature에 대한 그래프 생성
-        graphs = create_individual_graphs(data_water_data)
+            # 각 feature에 대한 그래프 생성
+            graphs = create_individual_graphs(data_water_data)
         
-        # 2x3 그리드로 그래프 표시
-        grid = gridplot([graphs[:3], graphs[3:]])
-        st.bokeh_chart(grid)       
+            # 2x3 그리드로 그래프 표시
+            grid = gridplot([graphs[:3], graphs[3:]])
+            st.bokeh_chart(grid)       
         
-        data_moving_averages_reverse = data_moving_averages.sort_values(by = 'Time', ascending = False)
-        st.write(data_moving_averages_reverse)
+            data_moving_averages_reverse = data_moving_averages.sort_values(by = 'Time', ascending = False)
+            st.write(data_moving_averages_reverse)
     
     elif choice == "True vs Predicted with CI":
-        # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
         
-        @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-        def load_data_true_pred():
-            return pd.read_csv('data/true_pred_with_CI.csv').copy()
+        with.st.container():
+            
+            # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            def load_data_true_pred():
+                return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
-        data_true_pred = load_data_true_pred()
+            data_true_pred = load_data_true_pred()
 
-        st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
-        st.write(data_true_pred)
+            st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
+            st.write(data_true_pred)
 
 if __name__ == '__main__':
     main()
