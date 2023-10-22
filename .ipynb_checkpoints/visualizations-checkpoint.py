@@ -154,7 +154,7 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
 #     p.legend.visible = False
 
 #     return p
-def visualize_last_6h_moving_averages_with_status_lines(data):
+def visualize_last_6h_moving_averages(data):
     # 데이터를 ColumnDataSource로 변환
     source = ColumnDataSource(data)
 
