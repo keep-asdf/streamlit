@@ -6,7 +6,20 @@ from streamlit_option_menu import option_menu
 
 
 
-st.set_page_config(layout="wide")
+# st.set_page_config(layout="wide")
+st.set_page_config(
+    page_title="My Streamlit App",
+    page_icon=":shark:",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    theme={
+        'primaryColor': '#E694FF',
+        'backgroundColor': '#00172B',
+        'secondaryBackgroundColor': '#0083B8',
+        'textColor': '#DCDCDC',
+        'font': 'sans serif'
+    }
+)
 
 # Streamlit app
 def main():
