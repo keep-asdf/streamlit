@@ -141,7 +141,6 @@ import pandas as pd
 import numpy as np
 from streamlit_option_menu import option_menu
 
-from tkinter.tix import COLUMN
 from pyparsing import empty
 
 empty1,con1,empty2 = st.columns([0.3,1.0,0.3])
