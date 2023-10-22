@@ -147,7 +147,7 @@ def main():
     update_button = st.sidebar.button("Update Data")
 
     # 사이드바를 사용하여 그래프 선택
-    graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
+    graph_selection = st.radio("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
     if graph_selection == "Moving Averages":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
