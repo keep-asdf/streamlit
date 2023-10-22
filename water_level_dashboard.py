@@ -193,6 +193,9 @@ def main():
        
             data_water_data = load_water_data()
          
+            data_moving_averages_reverse = data_moving_averages.sort_values(by = 'Time', ascending = False)
+            st.write(data_moving_averages_reverse)
+            
             # 각 feature에 대한 그래프 생성
             graphs = create_individual_graphs(data_water_data)
         
@@ -200,16 +203,7 @@ def main():
             grid = gridplot([graphs[:3], graphs[3:]])
             st.bokeh_chart(grid)       
         
-            data_moving_averages_reverse = data_moving_averages.sort_values(by = 'Time', ascending = False)
-            
-            # CSS 스타일 적용
-            st.markdown("""
-                           <style>
-                              table {
-                              width: 100%;
-                            }
-                            </style>""", unsafe_allow_html=True)
-            st.write(data_moving_averages_reverse)
+
     
     elif choice == "True vs Predicted with CI":
         
