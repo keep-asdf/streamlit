@@ -154,22 +154,22 @@ def main():
     # graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
     
-    # 사이드바를 사용하여 그래프 선택
-    with st.sidebar:
-        choice = option_menu("Menu", ["Moving Averages", "True vs Predicted with CI"])
+#     # 사이드바를 사용하여 그래프 선택
+#     with st.sidebar:
+#         choice = option_menu("Menu", ["Moving Averages", "True vs Predicted with CI"])
     
-    if choice == "Moving Averages":
-        data = pd.read_csv('data/water_data.csv')
+#     if choice == "Moving Averages":
+#         data = pd.read_csv('data/water_data.csv')
         
-        # 이동 평균선 그래프 생성 및 표시
-        st.bokeh_chart(visualize_moving_averages_with_bokeh(data))
+#         # 이동 평균선 그래프 생성 및 표시
+#         st.bokeh_chart(visualize_moving_averages_with_bokeh(data))
         
-        # 각 feature에 대한 그래프 생성
-        graphs = create_individual_graphs(data)
+#         # 각 feature에 대한 그래프 생성
+#         graphs = create_individual_graphs(data)
         
-        # 2x3 그리드로 그래프 표시
-        grid = gridplot([graphs[:3], graphs[3:]])
-        st.bokeh_chart(grid)
+#         # 2x3 그리드로 그래프 표시
+#         grid = gridplot([graphs[:3], graphs[3:]])
+#         st.bokeh_chart(grid)
     
     
     if choice == "Moving Averages":
@@ -182,7 +182,20 @@ def main():
 
         st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages))
         st.write(data_moving_averages)
-
+        
+        @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+        def load_water_data():
+            return pd.read_csv('data/water_data.csv').copy()
+       
+        data_water_data = load_water_data()
+         
+        # 각 feature에 대한 그래프 생성
+        graphs = create_individual_graphs(data_water_data)
+        
+        # 2x3 그리드로 그래프 표시
+        grid = gridplot([graphs[:3], graphs[3:]])
+        st.bokeh_chart(grid)       
+    
     elif choice == "True vs Predicted with CI":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
         @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
