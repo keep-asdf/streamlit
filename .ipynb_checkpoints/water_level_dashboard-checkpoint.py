@@ -229,7 +229,6 @@ def main():
             data_true_pred = load_data_true_pred()
 
             st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
-            st.write(data_true_pred)
             st.write(data_true_pred.sort_values(by='Time', ascending=False))
 
 if __name__ == '__main__':
