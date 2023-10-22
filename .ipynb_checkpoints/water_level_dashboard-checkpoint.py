@@ -201,7 +201,15 @@ def main():
             st.bokeh_chart(grid)       
         
             data_moving_averages_reverse = data_moving_averages.sort_values(by = 'Time', ascending = False)
-            st.dataframe(data_moving_averages_reverse)
+            
+            # CSS 스타일 적용
+            st.markdown("""
+                           <style>
+                              table {
+                              width: 100%;
+                            }
+                            </style>""", unsafe_allow_html=True)
+            st.write(data_moving_averages_reverse)
     
     elif choice == "True vs Predicted with CI":
         
