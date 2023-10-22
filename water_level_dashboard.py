@@ -199,7 +199,7 @@ def main():
         grid = gridplot([graphs[:3], graphs[3:]])
         st.bokeh_chart(grid)       
         
-        data_moving_averages_reverse = data_moving_averages.sort_value(by = 'Time')
+        data_moving_averages_reverse = data_moving_averages.sort_values(by = 'Time')
         st.write(data_moving_averages)
     
     elif choice == "True vs Predicted with CI":
