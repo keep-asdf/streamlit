@@ -206,7 +206,7 @@ def main():
             def load_water_data():
                 return pd.read_csv('data/water_data.csv').copy()
        
-
+            data_water_data = load_water_data().copy()
             # 각 feature에 대한 그래프 생성
             graphs = create_individual_graphs(data_water_data)
         
