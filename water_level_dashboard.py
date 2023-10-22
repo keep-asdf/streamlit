@@ -17,6 +17,7 @@ def main():
     
     
     # 사이드바를 사용하여 그래프 선택
+    # graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
     
     # 사이드바를 사용하여 그래프 선택
@@ -63,7 +64,12 @@ def main():
             grid = gridplot([graphs[:3], graphs[3:]])
             st.bokeh_chart(grid)       
         
+            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            def traffic_data():
+                return pd.read_csv('data/traffic_data.csv').copy()
 
+            traffic_data = traffic_data()
+            st.write(traffic_data)
     
     elif choice == "Learning Result":
         
