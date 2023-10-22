@@ -11,7 +11,7 @@ def visualize_moving_averages_with_bokeh(dataframe):
 
     p = figure(x_axis_type="datetime", width=1600, height=400, 
                title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines",
-               min_border_left=1, min_border_right=1, 
+               min_border_left=1,  
                min_border_top=1, min_border_bottom=1)
     source = ColumnDataSource(dataframe)
 
