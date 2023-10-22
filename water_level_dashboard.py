@@ -141,12 +141,9 @@ import pandas as pd
 import numpy as np
 from streamlit_option_menu import option_menu
 
-from pyparsing import empty
 
-empty1,con1,empty2 = st.columns([0.3,1.0,0.3])
-empyt1,con2,con3,empty2 = st.columns([0.3,0.5,0.5,0.3])
-empyt1,con4,empty2 = st.columns([0.3,1.0,0.3])
-empyt1,con5,con6,empty2 = st.columns([0.3,0.5,0.5,0.3])
+st.set_page_config(layout="wide")
+
 
 # Streamlit app
 def main():
