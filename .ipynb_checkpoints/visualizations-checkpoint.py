@@ -168,12 +168,6 @@ def visualize_last_6h_moving_averages(data):
     p.line(x='Time', y='120H_MA', source=source, legend_label="120H Moving Average", color="orange", alpha=0.6)
     
 
-    # Adding the status lines
-    p.line([source.Time.min(), source.Time.max()], [9.2, 9.2], color='red', line_dash="dashed", legend_label="Severe")
-    p.line([source.Time.min(), source.Time.max()], [8.0, 8.0], color='orange', line_dash="dashed", legend_label="Alert")
-    p.line([source.Time.min(), source.Time.max()], [7.0, 7.0], color='yellow', line_dash="dashed", legend_label="Caution")
-    p.line([source.Time.min(), source.Time.max()], [5.0, 5.0], color='green', line_dash="dashed", legend_label="Attention")
-
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
     p.add_layout(band)
