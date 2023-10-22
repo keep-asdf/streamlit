@@ -226,10 +226,10 @@ def main():
             def load_data_true_pred():
                 return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
-#             data_true_pred = load_data_true_pred()
+            data_true_pred = load_data_true_pred()
 
-#             st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
-#             st.write(data_true_pred.sort_values(by='Time', ascending=False))
+            st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
+            # st.write(data_true_pred.sort_values(by='Time', ascending=False))
             
             ################# visualize_true_vs_predicted_last_6h
             

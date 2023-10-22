@@ -169,8 +169,8 @@ def visualize_true_vs_predicted_last_6h(data):
     source = ColumnDataSource(data)
 
     # y축 범위 설정
-    y_min = data[["True_Value", "Predicted_Value", "CI_Lower", "CI_Upper"]].min().min() - 0.5
-    y_max = data[["True_Value", "Predicted_Value", "CI_Upper"]].max().max() + 0.5
+    y_min = 0
+    y_max = 9
 
     # 그래프 생성 with adjusted y_range
     p = figure(title="True vs Predicted MHC Water Level with Confidence Intervals for Last 6H", 
