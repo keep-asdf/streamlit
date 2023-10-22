@@ -152,8 +152,8 @@ def visualize_last_6h_moving_averages(data):
     source = ColumnDataSource(data)
 
     # y축 범위 설정: 최소값과 최대값을 기반으로 약간의 여유를 둠
-    y_min = data['Predicted_MHC_Water_Level'].min() - 0.05 * data['Predicted_MHC_Water_Level'].std()
-    y_max = data['Predicted_MHC_Water_Level'].max() + 0.05 * data['Predicted_MHC_Water_Level'].std()
+    y_min = 0
+    y_max = 9.5
 
     # 그래프 생성 with adjusted y_range
     p = figure(title="Moving Averages for Last 6H", x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
