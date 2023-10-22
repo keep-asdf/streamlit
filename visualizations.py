@@ -185,5 +185,3 @@ def visualize_last_6h_moving_averages(data):
 
     return p
 
-# Return the modified function
-visualize_last_6h_moving_averages_adjusted
