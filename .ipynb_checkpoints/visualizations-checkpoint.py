@@ -118,16 +118,23 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
 #     # 데이터를 ColumnDataSource로 변환
 #     source = ColumnDataSource(data)
 
-#     # 그래프 생성
-#     p = figure(title="Moving Averages for Last 6H", x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level")
+#     # y축 범위 설정: 최소값과 최대값을 기반으로 약간의 여유를 둠
+#     y_min = 0
+#     y_max = 9.5
+
+#     # 그래프 생성 with adjusted y_range
+#     p = figure(title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines for Last 6H", 
+#                x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
+#               width=750, height=430, )
     
-#     # Predicted_MHC_Water_Level와 이동 평균들을 그래프에 추가
+#     # 그래프에 데이터 추가
 #     p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, legend_label="Predicted Water Level", color="blue", alpha=0.6)
 #     p.line(x='Time', y='12H_MA', source=source, legend_label="12H Moving Average", color="red", alpha=0.6)
 #     p.line(x='Time', y='72H_MA', source=source, legend_label="72H Moving Average", color="green", alpha=0.6)
 #     p.line(x='Time', y='96H_MA', source=source, legend_label="96H Moving Average", color="purple", alpha=0.6)
 #     p.line(x='Time', y='120H_MA', source=source, legend_label="120H Moving Average", color="orange", alpha=0.6)
     
+
 #     # Plot confidence intervals
 #     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
 #     p.add_layout(band)
@@ -142,35 +149,40 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
 #                       ("120H MA", "@120H_MA")]
 #     hover.formatters = {"@Time": "datetime"}
 #     p.add_tools(hover)
-
+    
 #     # Hide the legend
 #     p.legend.visible = False
-    
+
 #     return p
-def visualize_last_6h_moving_averages(data):
+def visualize_last_6h_moving_averages_with_status_lines(data):
     # 데이터를 ColumnDataSource로 변환
     source = ColumnDataSource(data)
 
-    # y축 범위 설정: 최소값과 최대값을 기반으로 약간의 여유를 둠
+    # y축 범위 설정
     y_min = 0
     y_max = 9.5
 
     # 그래프 생성 with adjusted y_range
     p = figure(title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines for Last 6H", 
                x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
-              width=750, height=430, )
+              width=750, height=430)
     
     # 그래프에 데이터 추가
-    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, legend_label="Predicted Water Level", color="blue", alpha=0.6)
-    p.line(x='Time', y='12H_MA', source=source, legend_label="12H Moving Average", color="red", alpha=0.6)
-    p.line(x='Time', y='72H_MA', source=source, legend_label="72H Moving Average", color="green", alpha=0.6)
-    p.line(x='Time', y='96H_MA', source=source, legend_label="96H Moving Average", color="purple", alpha=0.6)
-    p.line(x='Time', y='120H_MA', source=source, legend_label="120H Moving Average", color="orange", alpha=0.6)
+    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, color="blue", alpha=0.6)
+    p.line(x='Time', y='12H_MA', source=source, color="red", alpha=0.6)
+    p.line(x='Time', y='72H_MA', source=source, color="green", alpha=0.6)
+    p.line(x='Time', y='96H_MA', source=source, color="purple", alpha=0.6)
+    p.line(x='Time', y='120H_MA', source=source, color="orange", alpha=0.6)
     
-
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
     p.add_layout(band)
+    
+    # Adding the status lines
+    p.line([data['Time'].min(), data['Time'].max()], [9.2, 9.2], color='red', line_dash="dashed")
+    p.line([data['Time'].min(), data['Time'].max()], [8.0, 8.0], color='orange', line_dash="dashed")
+    p.line([data['Time'].min(), data['Time'].max()], [7.0, 7.0], color='yellow', line_dash="dashed")
+    p.line([data['Time'].min(), data['Time'].max()], [5.0, 5.0], color='green', line_dash="dashed")
     
     # Hover tool 추가
     hover = HoverTool()
@@ -187,43 +199,3 @@ def visualize_last_6h_moving_averages(data):
     p.legend.visible = False
 
     return p
-
-# def visualize_last_6h_true_pred(data):
-#     # 데이터를 ColumnDataSource로 변환
-#     source = ColumnDataSource(data)
-
-#     y_min = 0
-#     y_max = 9.5
-
-#     # 그래프 생성 with adjusted y_range
-#     p = figure(title="for Last 6H", 
-#                x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
-#               width=750, height=430, )
-    
-#     # 그래프에 데이터 추가
-#     p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, legend_label="Predicted Water Level", color="blue", alpha=0.6)
-#     p.line(x='Time', y='True_Value', source=source, legend_label="12H Moving Average", color="red", alpha=0.6)
-
-#     # Adding the status lines
-#     p.line([dataframe.Time.min(), dataframe.Time.max()], [9.2, 9.2], color='red', line_dash="dashed", legend_label="Severe")
-#     p.line([dataframe.Time.min(), dataframe.Time.max()], [8.0, 8.0], color='orange', line_dash="dashed", legend_label="Alert")
-#     p.line([dataframe.Time.min(), dataframe.Time.max()], [7.0, 7.0], color='yellow', line_dash="dashed", legend_label="Caution")
-#     p.line([dataframe.Time.min(), dataframe.Time.max()], [5.0, 5.0], color='green', line_dash="dashed", legend_label="Attention")
-
-#     # Plot confidence intervals
-#     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
-#     p.add_layout(band)
-    
-#     # Hover tool 추가
-#     hover = HoverTool()
-#     hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
-#                       ("True Value", "@True_Value"),
-#                       ("Predicted Value", "@Predicted_Value"),
-#                       ("Confidence Interval", "(@CI_Lower, @CI_Upper)")
-#     hover.formatters = {"@Time": "datetime"}
-#     p.add_tools(hover)
-    
-#     # Hide the legend
-#     p.legend.visible = False
-
-#     return p
