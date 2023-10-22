@@ -138,12 +138,7 @@
 import streamlit as st
 from visualizations import *
 import pandas as pd
-from streamlit_option_menu import option_menu
-import streamlit.components.v1 as html
-from  PIL import Image
 import numpy as np
-import plotly.express as px
-import io
 
 
 # Streamlit app
@@ -152,7 +147,8 @@ def main():
 
     # 사이드바에 버튼을 추가합니다.
     update_button = st.sidebar.button("Update Data")
-
+    
+    
     # 사이드바를 사용하여 그래프 선택
     # graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
