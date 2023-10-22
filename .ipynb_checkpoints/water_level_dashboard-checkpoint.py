@@ -177,7 +177,7 @@ def main():
     if choice == "Moving Averages":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
         
-        with.st.container():
+        with st.container():
             
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_data_moving_averages():
@@ -205,7 +205,7 @@ def main():
     
     elif choice == "True vs Predicted with CI":
         
-        with.st.container():
+        with st.container():
             
             # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
