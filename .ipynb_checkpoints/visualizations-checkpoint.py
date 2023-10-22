@@ -51,9 +51,13 @@ def visualize_moving_averages_with_bokeh(dataframe):
 
 
 def create_individual_graphs(dataframe):
+    
+    dataframe = dataframe.copy()  # 캐싱된 데이터프레임을 수정하기 전에 복사본을 만듭니다.
+    dataframe['Time'] = pd.to_datetime(dataframe['Time'])  # Convert 'Time' column to datetime
     features = ['MHC_Water_Level', 'MH_Water_Level', 'PG_Water_Level', 'HH_Water_Level', 'GG_Water_Level']
     graphs = []
 
+   
     for feature in features:
         p = figure(width=250, height=250, title=feature, 
                    min_border_left=1, min_border_right=1, 
