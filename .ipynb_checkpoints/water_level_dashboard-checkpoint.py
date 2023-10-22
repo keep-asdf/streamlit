@@ -144,7 +144,6 @@ from streamlit_option_menu import option_menu
 from tkinter.tix import COLUMN
 from pyparsing import empty
 
-st.set_page_config(layout="wide")
 empty1,con1,empty2 = st.columns([0.3,1.0,0.3])
 empyt1,con2,con3,empty2 = st.columns([0.3,0.5,0.5,0.3])
 empyt1,con4,empty2 = st.columns([0.3,1.0,0.3])
