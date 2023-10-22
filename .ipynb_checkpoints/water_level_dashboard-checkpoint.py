@@ -143,6 +143,7 @@ from streamlit_option_menu import option_menu
 
 
 
+st.set_page_config(layout="wide")
 
 # Streamlit app
 def main():
@@ -173,7 +174,6 @@ def main():
 #         grid = gridplot([graphs[:3], graphs[3:]])
 #         st.bokeh_chart(grid)
     
-    st.set_page_config(layout="wide")
     if choice == "Moving Averages":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
         
