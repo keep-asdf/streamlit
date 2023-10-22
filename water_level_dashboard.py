@@ -159,7 +159,7 @@ def main():
     
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
-        choice = option_menu("Menu", ["Moving Averages", "True vs Predicted with CI"])
+        choice = option_menu("Menu", ["Prediction Result", "Learning Result"])
     
 #     if choice == "Moving Averages":
 #         data = pd.read_csv('data/water_data.csv')
