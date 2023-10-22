@@ -182,7 +182,7 @@ def main():
 
         st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages))
         st.write(data_moving_averages)
-
+        
     elif choice == "True vs Predicted with CI":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
         @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
