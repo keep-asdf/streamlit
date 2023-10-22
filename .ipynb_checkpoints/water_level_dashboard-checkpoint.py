@@ -229,15 +229,10 @@ def main():
             data_true_pred = load_data_true_pred()
 
             st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
-            # st.write(data_true_pred.sort_values(by='Time', ascending=False))
-            
-            ################# visualize_true_vs_predicted_last_6h
+
             
             data_true_pred = load_data_true_pred()
-            # last_6h_data = data_moving_averages.last('6H')  # 마지막 6시간의 데이터 선택
-            # last_6h_data = data_moving_averages.loc[data_moving_averages['Time'] >= data_moving_averages['Time'].iloc[-1] - pd.Timedelta(hours=6)]
 
-            # Convert the 'Time' column to datetime format
             data_true_pred['Time'] = pd.to_datetime(data_true_pred['Time'])
 
             # Check the last 6 hours of data
