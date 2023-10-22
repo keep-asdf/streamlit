@@ -194,42 +194,42 @@ def visualize_last_6h_moving_averages(data):
 
     return p
 
-def visualize_last_6h_true_pred(data):
-    # 데이터를 ColumnDataSource로 변환
-    source = ColumnDataSource(data)
+# def visualize_last_6h_true_pred(data):
+#     # 데이터를 ColumnDataSource로 변환
+#     source = ColumnDataSource(data)
 
-    y_min = 0
-    y_max = 9.5
+#     y_min = 0
+#     y_max = 9.5
 
-    # 그래프 생성 with adjusted y_range
-    p = figure(title="for Last 6H", 
-               x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
-              width=750, height=430, )
+#     # 그래프 생성 with adjusted y_range
+#     p = figure(title="for Last 6H", 
+#                x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
+#               width=750, height=430, )
     
-    # 그래프에 데이터 추가
-    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, legend_label="Predicted Water Level", color="blue", alpha=0.6)
-    p.line(x='Time', y='True_Value', source=source, legend_label="12H Moving Average", color="red", alpha=0.6)
+#     # 그래프에 데이터 추가
+#     p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, legend_label="Predicted Water Level", color="blue", alpha=0.6)
+#     p.line(x='Time', y='True_Value', source=source, legend_label="12H Moving Average", color="red", alpha=0.6)
 
-    # Adding the status lines
-    p.line([dataframe.Time.min(), dataframe.Time.max()], [9.2, 9.2], color='red', line_dash="dashed", legend_label="Severe")
-    p.line([dataframe.Time.min(), dataframe.Time.max()], [8.0, 8.0], color='orange', line_dash="dashed", legend_label="Alert")
-    p.line([dataframe.Time.min(), dataframe.Time.max()], [7.0, 7.0], color='yellow', line_dash="dashed", legend_label="Caution")
-    p.line([dataframe.Time.min(), dataframe.Time.max()], [5.0, 5.0], color='green', line_dash="dashed", legend_label="Attention")
+#     # Adding the status lines
+#     p.line([dataframe.Time.min(), dataframe.Time.max()], [9.2, 9.2], color='red', line_dash="dashed", legend_label="Severe")
+#     p.line([dataframe.Time.min(), dataframe.Time.max()], [8.0, 8.0], color='orange', line_dash="dashed", legend_label="Alert")
+#     p.line([dataframe.Time.min(), dataframe.Time.max()], [7.0, 7.0], color='yellow', line_dash="dashed", legend_label="Caution")
+#     p.line([dataframe.Time.min(), dataframe.Time.max()], [5.0, 5.0], color='green', line_dash="dashed", legend_label="Attention")
 
-    # Plot confidence intervals
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
-    p.add_layout(band)
+#     # Plot confidence intervals
+#     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
+#     p.add_layout(band)
     
-    # Hover tool 추가
-    hover = HoverTool()
-    hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
-                      ("True Value", "@True_Value"),
-                      ("Predicted Value", "@Predicted_Value"),
-                      ("Confidence Interval", "(@CI_Lower, @CI_Upper)")
-    hover.formatters = {"@Time": "datetime"}
-    p.add_tools(hover)
+#     # Hover tool 추가
+#     hover = HoverTool()
+#     hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
+#                       ("True Value", "@True_Value"),
+#                       ("Predicted Value", "@Predicted_Value"),
+#                       ("Confidence Interval", "(@CI_Lower, @CI_Upper)")
+#     hover.formatters = {"@Time": "datetime"}
+#     p.add_tools(hover)
     
-    # Hide the legend
-    p.legend.visible = False
+#     # Hide the legend
+#     p.legend.visible = False
 
-    return p
+#     return p
