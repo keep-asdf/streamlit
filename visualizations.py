@@ -9,7 +9,7 @@ def visualize_moving_averages_with_bokeh(dataframe):
     dataframe = dataframe.copy()  # 캐싱된 데이터프레임을 수정하기 전에 복사본을 만듭니다.
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
 
-    p = figure(x_axis_type="datetime", width=1600, height=400, 
+    p = figure(x_axis_type="datetime", width=1800, height=400, 
                title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines",
                min_border_left=0,   min_border_right=0,
                min_border_top=0, min_border_bottom=0)
@@ -59,7 +59,7 @@ def create_individual_graphs(dataframe):
 
    
     for feature in features:
-        p = figure(width=500, height=250, title=feature, 
+        p = figure(width=600, height=250, title=feature, 
                    min_border_left=0, min_border_right=0, 
                    min_border_top=0, min_border_bottom=0) 
         
