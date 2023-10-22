@@ -154,8 +154,25 @@ def main():
     update_button = st.sidebar.button("Update Data")
 
     # 사이드바를 사용하여 그래프 선택
-    graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
+    # graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
+    
+    # 사이드바를 사용하여 그래프 선택
+    with st.sidebar:
+        choice = option_menu("Menu", ["Moving Averages", "True vs Predicted with CI"])
+    
+    if choice == "Moving Averages":
+        data = pd.read_csv('water_data.csv')
+        
+        # 이동 평균선 그래프 생성 및 표시
+        st.bokeh_chart(visualize_moving_averages_with_bokeh(data))
+        
+        # 각 feature에 대한 그래프 생성
+        graphs = create_individual_graphs(data)
+        
+        # 2x3 그리드로 그래프 표시
+        grid = gridplot([graphs[:3], graphs[3:]])
+        st.bokeh_chart(grid)
     
     
     if graph_selection == "Moving Averages":
