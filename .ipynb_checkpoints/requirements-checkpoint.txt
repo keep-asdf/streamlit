@@ -5,4 +5,4 @@ pandas
 bokeh==2.4.3
 numpy
 
-
+streamlit-option-menu
