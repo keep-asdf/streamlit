@@ -59,7 +59,7 @@ def create_individual_graphs(dataframe):
                    min_border_left=1, min_border_right=1, 
                    min_border_top=1, min_border_bottom=1) 
         
-        p.line(dataframe.index, dataframe[feature], line_width=2)
+        p.line(dataframe['time'], dataframe[feature], line_width=2)
         p.xaxis.axis_label = 'Time'
         p.yaxis.axis_label = feature
         graphs.append(p)
