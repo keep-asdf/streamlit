@@ -143,4 +143,7 @@ def visualize_last_6h_moving_averages(data):
     hover.formatters = {"@Time": "datetime"}
     p.add_tools(hover)
 
+    # Hide the legend
+    p.legend.visible = False
+    
     return p
