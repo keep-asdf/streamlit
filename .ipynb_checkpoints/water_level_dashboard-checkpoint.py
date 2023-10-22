@@ -154,9 +154,9 @@ def main():
     # graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
     
-#     # 사이드바를 사용하여 그래프 선택
-#     with st.sidebar:
-#         choice = option_menu("Menu", ["Moving Averages", "True vs Predicted with CI"])
+    # 사이드바를 사용하여 그래프 선택
+    with st.sidebar:
+        choice = option_menu("Menu", ["Moving Averages", "True vs Predicted with CI"])
     
 #     if choice == "Moving Averages":
 #         data = pd.read_csv('data/water_data.csv')
