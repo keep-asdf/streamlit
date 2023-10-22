@@ -184,7 +184,14 @@ def main():
                 return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
 
             data_moving_averages = load_data_moving_averages()
-            last_6h_data = data_moving_averages.last('6H')  # 마지막 6시간의 데이터 선택
+            # last_6h_data = data_moving_averages.last('6H')  # 마지막 6시간의 데이터 선택
+            
+            # Convert the 'Time' column to datetime format and set it as the index
+            data_moving_averages['Time'] = pd.to_datetime(data_moving_averages['Time'])
+            data_moving_averages.set_index('Time', inplace=True)
+
+            # Select the last 6 hours of data
+            last_6h_data = data_moving_averages.loc[data_moving_averages.index[-1] - pd.Timedelta(hours=6):]
 
             st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages))
              # 데이터 프레임과 그래프를 나란히 표시
