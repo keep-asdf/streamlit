@@ -152,7 +152,8 @@ def main():
 
     # 사이드바에 버튼을 추가합니다.
     update_button = st.sidebar.button("Update Data")
-
+    
+    
     # 사이드바를 사용하여 그래프 선택
     # graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
