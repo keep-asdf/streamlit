@@ -113,47 +113,6 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
     return p
 
 
-
-# def visualize_last_6h_moving_averages(data):
-#     # 데이터를 ColumnDataSource로 변환
-#     source = ColumnDataSource(data)
-
-#     # y축 범위 설정: 최소값과 최대값을 기반으로 약간의 여유를 둠
-#     y_min = 0
-#     y_max = 9.5
-
-#     # 그래프 생성 with adjusted y_range
-#     p = figure(title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines for Last 6H", 
-#                x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
-#               width=750, height=430, )
-    
-#     # 그래프에 데이터 추가
-#     p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, legend_label="Predicted Water Level", color="blue", alpha=0.6)
-#     p.line(x='Time', y='12H_MA', source=source, legend_label="12H Moving Average", color="red", alpha=0.6)
-#     p.line(x='Time', y='72H_MA', source=source, legend_label="72H Moving Average", color="green", alpha=0.6)
-#     p.line(x='Time', y='96H_MA', source=source, legend_label="96H Moving Average", color="purple", alpha=0.6)
-#     p.line(x='Time', y='120H_MA', source=source, legend_label="120H Moving Average", color="orange", alpha=0.6)
-    
-
-#     # Plot confidence intervals
-#     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
-#     p.add_layout(band)
-    
-#     # Hover tool 추가
-#     hover = HoverTool()
-#     hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
-#                       ("Predicted Level", "@Predicted_MHC_Water_Level"),
-#                       ("12H MA", "@12H_MA"), 
-#                       ("72H MA", "@72H_MA"),
-#                       ("96H MA", "@96H_MA"),
-#                       ("120H MA", "@120H_MA")]
-#     hover.formatters = {"@Time": "datetime"}
-#     p.add_tools(hover)
-    
-#     # Hide the legend
-#     p.legend.visible = False
-
-#     return p
 def visualize_last_6h_moving_averages(data):
     # 데이터를 ColumnDataSource로 변환
     source = ColumnDataSource(data)
@@ -199,3 +158,43 @@ def visualize_last_6h_moving_averages(data):
     p.legend.visible = False
 
     return p
+
+
+
+from bokeh.models import ColumnDataSource, HoverTool, Band
+from bokeh.plotting import figure
+
+def visualize_true_vs_predicted_last_6h(data):
+    # 데이터를 ColumnDataSource로 변환
+    source = ColumnDataSource(data)
+
+    # y축 범위 설정
+    y_min = data[["True_Value", "Predicted_Value", "CI_Lower", "CI_Upper"]].min().min() - 0.5
+    y_max = data[["True_Value", "Predicted_Value", "CI_Upper"]].max().max() + 0.5
+
+    # 그래프 생성 with adjusted y_range
+    p = figure(title="True vs Predicted MHC Water Level with Confidence Intervals for Last 6H", 
+               x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level", y_range=(y_min, y_max),
+               width=750, height=430)
+    
+    # 그래프에 데이터 추가
+    p.line(x='Time', y='True_Value', source=source, color="green", alpha=0.6, legend_label="True Value")
+    p.line(x='Time', y='Predicted_Value', source=source, color="blue", alpha=0.6, legend_label="Predicted Value")
+    
+    # Plot confidence intervals
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
+    p.add_layout(band)
+    
+    # Hover tool 추가
+    hover = HoverTool()
+    hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
+                      ("True Value", "@True_Value"),
+                      ("Predicted Value", "@Predicted_Value")]
+    hover.formatters = {"@Time": "datetime"}
+    p.add_tools(hover)
+    
+    # Hide the legend
+    p.legend.visible = False
+
+    return p
+
