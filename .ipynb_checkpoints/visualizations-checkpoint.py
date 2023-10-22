@@ -9,7 +9,7 @@ def visualize_moving_averages_with_bokeh(dataframe):
     dataframe = dataframe.copy()  # 캐싱된 데이터프레임을 수정하기 전에 복사본을 만듭니다.
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
 
-    p = figure(x_axis_type="datetime", width=1500, height=400, 
+    p = figure(x_axis_type="datetime", width=1600, height=400, 
                title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines",
                min_border_left=0,   min_border_right=0,
                min_border_top=0, min_border_bottom=0)
@@ -76,7 +76,7 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
     source = ColumnDataSource(dataframe)
 
-    p = figure(x_axis_type="datetime", width=1500, height=400, 
+    p = figure(x_axis_type="datetime", width=1600, height=400, 
                title="True vs Predicted Values with Confidence Intervals and Status Lines")
 
     # Plot the True Values
