@@ -184,18 +184,22 @@ def main():
                 return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
 
             data_moving_averages = load_data_moving_averages()
+            last_6h_data = data_moving_averages.last('6H')  # 마지막 6시간의 데이터 선택
 
             st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages))
-        
+             # 데이터 프레임과 그래프를 나란히 표시
+            col1, col2 = st.columns(2)
+            with col1:
+                st.write(data_moving_averages.sort_values(by='Time', ascending=False))
+            with col2:
+                st.bokeh_chart(visualize_last_6h_moving_averages(last_6h_data))
+
+            
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_water_data():
                 return pd.read_csv('data/water_data.csv').copy()
        
-            data_water_data = load_water_data()
-         
-            data_moving_averages_reverse = data_moving_averages.sort_values(by = 'Time', ascending = False)
-            st.write(data_moving_averages_reverse)
-            
+
             # 각 feature에 대한 그래프 생성
             graphs = create_individual_graphs(data_water_data)
         

@@ -111,3 +111,32 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
     p.add_tools(hover)
 
     return p
+
+
+
+def visualize_last_6h_moving_averages(data):
+    # 데이터를 ColumnDataSource로 변환
+    source = ColumnDataSource(data)
+
+    # 그래프 생성
+    p = figure(title="Moving Averages for Last 6H", x_axis_type="datetime", x_axis_label="Time", y_axis_label="Water Level")
+    
+    # Predicted_MHC_Water_Level와 이동 평균들을 그래프에 추가
+    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, legend_label="Predicted Water Level", color="blue", alpha=0.6)
+    p.line(x='Time', y='12H_MA', source=source, legend_label="12H Moving Average", color="red", alpha=0.6)
+    p.line(x='Time', y='72H_MA', source=source, legend_label="72H Moving Average", color="green", alpha=0.6)
+    p.line(x='Time', y='96H_MA', source=source, legend_label="96H Moving Average", color="purple", alpha=0.6)
+    p.line(x='Time', y='120H_MA', source=source, legend_label="120H Moving Average", color="orange", alpha=0.6)
+    
+    # Hover tool 추가
+    hover = HoverTool()
+    hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
+                      ("Predicted Level", "@Predicted_MHC_Water_Level"),
+                      ("12H MA", "@12H_MA"), 
+                      ("72H MA", "@72H_MA"),
+                      ("96H MA", "@96H_MA"),
+                      ("120H MA", "@120H_MA")]
+    hover.formatters = {"@Time": "datetime"}
+    p.add_tools(hover)
+
+    return p
