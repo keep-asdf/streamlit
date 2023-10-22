@@ -174,7 +174,7 @@ def main():
 #         grid = gridplot([graphs[:3], graphs[3:]])
 #         st.bokeh_chart(grid)
     
-    if choice == "Moving Averages":
+    if choice == "Prediction Result":
         # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
         
         with st.container():
@@ -216,7 +216,7 @@ def main():
         
 
     
-    elif choice == "True vs Predicted with CI":
+    elif choice == "Learning Result":
         
         placeholder = st.empty()
         with placeholder.container():
