@@ -128,6 +128,10 @@ def visualize_last_6h_moving_averages(data):
     p.line(x='Time', y='96H_MA', source=source, legend_label="96H Moving Average", color="purple", alpha=0.6)
     p.line(x='Time', y='120H_MA', source=source, legend_label="120H Moving Average", color="orange", alpha=0.6)
     
+    # Plot confidence intervals
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
+    p.add_layout(band)
+    
     # Hover tool 추가
     hover = HoverTool()
     hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
