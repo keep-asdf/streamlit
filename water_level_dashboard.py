@@ -64,9 +64,10 @@ def main():
                 selected_date1 = st.date_input("Select a date", datetime.date.today())
             
             with col2:
-                selected_time1 =  st.slider("Select an hour", 0, 23, 12)  # 0시부터 23시까지 선택할 수 있으며, 초기값은 12시
-
-            
+                
+                hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
+                selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
+                selected_time1 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
 
                 
             show_blue_line1 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
@@ -130,9 +131,12 @@ def main():
                 selected_date2 = st.date_input("Select a date", datetime.date.today())
             
             with col2:
-                selected_time2 = st.slider("Select an hour", 0, 23, 12)  # 0시부터 23시까지 선택할 수 있으며, 초기값은 12시
+                                
+                hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
+                selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
+                selected_time2 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
 
-
+                
             show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
 
             
