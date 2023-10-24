@@ -4,13 +4,19 @@ import pandas as pd
 import numpy as np
 from streamlit_option_menu import option_menu
 
+import datetime
+
 
 
 st.set_page_config(layout="wide")
 
 # Streamlit app
 def main():
-    st.title("💧❕ 미호천교 3시간 후 수위 예측 Dashboard")
+    
+    # 현재 시간을 가져옵니다.
+    current_hour = datetime.datetime.now().hour
+    
+    st.title(f"💧❕ 미호천교 {current_hour}기준, 3시간 후 수위 예측 Dashboard")
 
     # 사이드바에 버튼을 추가합니다.
     update_button = st.sidebar.button("Update Data")
