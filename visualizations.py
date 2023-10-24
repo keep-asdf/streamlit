@@ -131,7 +131,7 @@ def visualize_last_6h_moving_averages(data):
               width=750, height=430)
     
     # 그래프에 데이터 추가
-    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, color="darkred", alpha=0.6)
+    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, color="darkred", line_width = 3)
     p.line(x='Time', y='12H_MA', source=source, color="red", alpha=0.6)
     p.line(x='Time', y='72H_MA', source=source, color="green", alpha=0.6)
     p.line(x='Time', y='96H_MA', source=source, color="purple", alpha=0.6)
@@ -182,7 +182,7 @@ def visualize_true_vs_predicted_last_6h(data):
     
     # 그래프에 데이터 추가
     p.line(x='Time', y='True_Value', source=source, color="green", alpha=0.6, legend_label="True Value")
-    p.line(x='Time', y='Predicted_Value', source=source, color="darkred", alpha=0.6, legend_label="Predicted Value",  line_width = 3)
+    p.line(x='Time', y='Predicted_Value', source=source, color="darkred", legend_label="Predicted Value",  line_width = 3)
     
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
