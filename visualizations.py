@@ -143,11 +143,17 @@ def visualize_last_6h_moving_averages(data):
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
     p.add_layout(band)
     
-    # Adding the status lines using fixed values
-    p.line(x=dataframe['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)", alpha=0.9)
-    p.line(x=dataframe['Time'], y=8.0, color='red', line_dash="dashed", legend_label="경계(8.0m)", alpha=0.9)
-    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)", alpha=0.9)
-    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)", alpha=0.9)
+    # # Adding the status lines
+    # p.line([data['Time'].min(), data['Time'].max()], [9.2, 9.2], color='red', line_dash="dashed")
+    # p.line([data['Time'].min(), data['Time'].max()], [8.0, 8.0], color='orange', line_dash="dashed")
+    # p.line([data['Time'].min(), data['Time'].max()], [7.0, 7.0], color='yellow', line_dash="dashed")
+    # p.line([data['Time'].min(), data['Time'].max()], [5.0, 5.0], color='green', line_dash="dashed")
+    
+        # Adding the status lines using fixed values
+    p.line(x=data['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)", alpha=0.9)
+    p.line(x=data['Time'], y=8.0, color='red', line_dash="dashed", legend_label="경계(8.0m)", alpha=0.9)
+    p.line(x=data['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)", alpha=0.9)
+    p.line(x=data['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)", alpha=0.9)
     
     # Hover tool 추가
     hover = HoverTool()
