@@ -85,10 +85,10 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
     p.line('Time', 'True_Value', source=source, color="green", legend_label="True Value")
 
     # Plot the Predicted Values
-    p.line('Time', 'Predicted_Value', source=source, color="blue", legend_label="Predicted Value")
+    p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="Predicted Value")
 
     # Plot confidence intervals
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
     p.add_layout(band)
 
     # Adding the status lines
@@ -129,14 +129,14 @@ def visualize_last_6h_moving_averages(data):
               width=750, height=430)
     
     # 그래프에 데이터 추가
-    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, color="blue", alpha=0.6)
+    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, color="darkred", alpha=0.6)
     p.line(x='Time', y='12H_MA', source=source, color="red", alpha=0.6)
     p.line(x='Time', y='72H_MA', source=source, color="green", alpha=0.6)
     p.line(x='Time', y='96H_MA', source=source, color="purple", alpha=0.6)
     p.line(x='Time', y='120H_MA', source=source, color="orange", alpha=0.6)
     
     # Plot confidence intervals
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
     p.add_layout(band)
     
     # Adding the status lines
@@ -180,10 +180,10 @@ def visualize_true_vs_predicted_last_6h(data):
     
     # 그래프에 데이터 추가
     p.line(x='Time', y='True_Value', source=source, color="green", alpha=0.6, legend_label="True Value")
-    p.line(x='Time', y='Predicted_Value', source=source, color="blue", alpha=0.6, legend_label="Predicted Value")
+    p.line(x='Time', y='Predicted_Value', source=source, color="darkred", alpha=0.6, legend_label="Predicted Value")
     
     # Plot confidence intervals
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
     p.add_layout(band)
     
     # Hover tool 추가
