@@ -65,7 +65,7 @@ def create_individual_graphs(dataframe):
     dataframe = dataframe.copy()  # 캐싱된 데이터프레임을 수정하기 전에 복사본을 만듭니다.
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])  # Convert 'Time' column to datetime
     dataframe = dataframe.iloc[10368:, :]
-    features = ['MHC_Water_Level', 'MH_Water_Level', 'PG_Water_Level', 'HH_Water_Level', 'GG_Water_Level']
+    features = ['미호천교 수위', '미호교 수위', '팔결교 수위', '환희교 수위', '금곡교 수위']
     graphs = []
 
    
