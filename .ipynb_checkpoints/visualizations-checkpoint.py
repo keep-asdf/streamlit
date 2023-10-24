@@ -117,6 +117,11 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
     p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
     p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
     
+    
+##################################################################
+    p.line(x=[selected_datetime, selected_datetime], y=[dataframe['True_Value'].min(), 
+                                                            dataframe['True_Value'].max()], color='blue', line_dash="dotted")
+##################################################################
 
 
     # Hover tool

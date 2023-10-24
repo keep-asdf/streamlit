@@ -95,8 +95,17 @@ def main():
                 return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
             data_true_pred = load_data_true_pred()
+            
+            ##################################################################
+            # Streamlit에서 날짜와 시간을 입력받습니다.
+            selected_date = st.date_input("Select a date", datetime.date.today())
+            selected_time = st.time_input("Select a time", datetime.time(12, 0))
+            selected_datetime = datetime.datetime.combine(selected_date, selected_time)  # 날짜와 시간 결합
+            ##################################################################
+            
+            st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred, selected_datetime))
 
-            st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
+            #st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
 
             
             data_true_pred = load_data_true_pred()
