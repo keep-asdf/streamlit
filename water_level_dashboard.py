@@ -22,7 +22,7 @@ def main():
     # 현재 시간의 "시" 값을 가져옵니다.
     current_hour_seoul = current_time_seoul.hour
     
-    st.title(f"💧❕ 미호천교 {current_hour_seoul}:00 기준(24H), 3시간 후 수위 예측 Dashboard")
+    st.title(f"💧❕ 미호천교 {current_hour_seoul}:00(24H) 기준, 3시간 후 수위 예측 Dashboard")
 
     # 사이드바에 버튼을 추가합니다.
     update_button = st.sidebar.button("Update Data")
