@@ -98,8 +98,14 @@ def main():
             
             ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
-            selected_date = st.date_input("Select a date", datetime.date.today())
-            selected_time = st.time_input("Select a time", datetime.time(12, 0))
+            col1, col2 = st.columns(2)
+            with col1:
+
+                selected_date = st.date_input("Select a date", datetime.date.today())
+            
+            with col2:
+                selected_time = st.time_input("Select a time", datetime.time(12, 0))
+            
             selected_datetime = datetime.datetime.combine(selected_date, selected_time)  # 날짜와 시간 결합
             ##################################################################
             
