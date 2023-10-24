@@ -13,10 +13,16 @@ st.set_page_config(layout="wide")
 # Streamlit app
 def main():
     
-    # 현재 시간을 가져옵니다.
-    current_hour = datetime.datetime.now().hour
+    # UTC 기준의 현재 시간을 얻습니다.
+    current_time_utc = datetime.datetime.utcnow()
+
+    # 서울시간 (UTC+9)을 고려하여 9시간을 더합니다.
+    current_time_seoul = current_time_utc + datetime.timedelta(hours=9)
+
+    # 현재 시간의 "시" 값을 가져옵니다.
+    current_hour_seoul = current_time_seoul.hour
     
-    st.title(f"💧❕ 미호천교 {current_hour}기준, 3시간 후 수위 예측 Dashboard")
+    st.title(f"💧❕ 미호천교 {current_hour_seoul}시 기준, 3시간 후 수위 예측 Dashboard")
 
     # 사이드바에 버튼을 추가합니다.
     update_button = st.sidebar.button("Update Data")
