@@ -64,7 +64,8 @@ def main():
                 selected_date1 = st.date_input("Select a date", datetime.date.today())
             
             with col2:
-                selected_time1 = st.time_input("Select a time", datetime.time(12, 0))
+                selected_time1 =  st.slider("Select an hour", 0, 23, 12)  # 0시부터 23시까지 선택할 수 있으며, 초기값은 12시
+
             
 
                 
@@ -129,8 +130,8 @@ def main():
                 selected_date2 = st.date_input("Select a date", datetime.date.today())
             
             with col2:
-                selected_time2 = st.time_input("Select a time", datetime.time(12, 0))
-            
+                selected_time2 = st.slider("Select an hour", 0, 23, 12)  # 0시부터 23시까지 선택할 수 있으며, 초기값은 12시
+
 
             show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
 
