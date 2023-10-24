@@ -58,7 +58,7 @@ def main():
             
              ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
-            col1, col2, col3 = st.columns(3)
+            col1, col2 = st.columns(3)
             with col1:
 
                 selected_date1 = st.date_input("Select a date", datetime.date.today())
@@ -66,9 +66,9 @@ def main():
             with col2:
                 selected_time1 = st.time_input("Select a time", datetime.time(12, 0))
             
-            with col3:
+
                 
-                show_blue_line1 = st.checkbox("Show blue line at selected time", True)  # 기본값으로 체크 상태
+            show_blue_line1 = st.checkbox("Show blue line at selected time", True)  # 기본값으로 체크 상태
 
             
             selected_datetime1 = datetime.datetime.combine(selected_date1, selected_time1)  # 날짜와 시간 결합
