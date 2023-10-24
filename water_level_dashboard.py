@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 
 # Streamlit app
 def main():
-    st.title("💧⚠️ 미호천교 3시간 후 수위 예측 Dashboard")
+    st.title("💧⚠️미호천교 3시간 후 수위 예측 Dashboard")
 
     # 사이드바에 버튼을 추가합니다.
     update_button = st.sidebar.button("Update Data")
