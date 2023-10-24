@@ -73,7 +73,7 @@ def main():
             show_blue_line1 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
 
             
-            selected_datetime1 = datetime.datetime.combine(selected_date1, selected_time1)  # 날짜와 시간 결합
+            selected_datetime1 = datetime.datetime.combine(selected_date1, datetime.time(selected_time1, 0))  # 날짜와 시간 결합
             
             
             ##################################################################
@@ -140,7 +140,7 @@ def main():
             show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
 
             
-            selected_datetime2 = datetime.datetime.combine(selected_date2, selected_time2)  # 날짜와 시간 결합
+            selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
             
             
             ##################################################################
