@@ -68,7 +68,7 @@ def main():
             
             with col3:
                 
-                show_blue_line11 = st.checkbox("Show blue line at selected time", True)  # 기본값으로 체크 상태
+                show_blue_line1 = st.checkbox("Show blue line at selected time", True)  # 기본값으로 체크 상태
 
             
             selected_datetime1 = datetime.datetime.combine(selected_date1, selected_time1)  # 날짜와 시간 결합
@@ -78,6 +78,9 @@ def main():
             
             
             st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages, selected_datetime1, show_blue_line1))
+            
+            
+            
              # 데이터 프레임과 그래프를 나란히 표시
             col1, col2 = st.columns(2)
             with col1:
