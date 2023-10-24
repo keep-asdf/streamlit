@@ -70,10 +70,10 @@ def create_individual_graphs(dataframe):
 
     legend_mapping = {
         "MHC_Water_Level": "미호천교 관측 수위",
-        "MH_Water_Level": "미호교 관측 수위 수위",
-        "PG_Water_Level": "팔결교 관측 수위 수위",
-        "HH_Water_Level": "환희교 관측 수위 수위",
-        "GG_Water_Level": "금곡교 관측 수위 수위"
+        "MH_Water_Level": "미호교 관측 수위",
+        "PG_Water_Level": "팔결교 관측 수위",
+        "HH_Water_Level": "환희교 관측 수위",
+        "GG_Water_Level": "금곡교 관측 수위"
     }    
     
    
