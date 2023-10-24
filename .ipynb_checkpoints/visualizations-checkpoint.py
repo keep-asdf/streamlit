@@ -16,18 +16,28 @@ def visualize_moving_averages_with_bokeh(dataframe):
     source = ColumnDataSource(dataframe)
 
     # Plot the Predicted Water Level
-    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="darkred", legend_label="Predicted Water Level", line_width = 3)
+    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="darkred", legend_label="미호천교 예측된 수위", line_width = 3)
 
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
     p.add_layout(band)
 
     # Plot the moving averages
+    # Define a mapping from column names to desired legend labels
+    legend_mapping = {
+        "MA_12": "12시간 이동평균",
+        "MA_72": "72시간 이동평균",
+        "MA_96": "96시간 이동평균",
+        "MA_120": "120시간 이동평균"
+    }
+
     ma_colors = iter(Category10[10])
     for column in dataframe.columns:
         if "MA" in column:
             color = next(ma_colors)
-            p.line('Time', column, source=source, color=color, legend_label=column)
+            legend_name = legend_mapping.get(column, column)  # Use the mapped name if it exists, otherwise use the column name
+            p.line('Time', column, source=source, color=color, legend_label=legend_name)
+
 
     # Adding the status lines using fixed values
     p.line(x=dataframe['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)")
