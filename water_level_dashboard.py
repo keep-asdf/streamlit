@@ -58,19 +58,26 @@ def main():
             
              ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
-            col1, col2 = st.columns(2)
+            col1, col2 = st.columns(3)
             with col1:
 
-                selected_date = st.date_input("Select a date", datetime.date.today())
+                selected_date1 = st.date_input("Select a date", datetime.date.today())
             
             with col2:
-                selected_time = st.time_input("Select a time", datetime.time(12, 0))
+                selected_time1 = st.time_input("Select a time", datetime.time(12, 0))
             
-            selected_datetime = datetime.datetime.combine(selected_date, selected_time)  # 날짜와 시간 결합
+            with col3:
+                
+                show_blue_line11 = st.checkbox("Show blue line at selected time", True)  # 기본값으로 체크 상태
+
+            
+            selected_datetime1 = datetime.datetime.combine(selected_date1, selected_time1)  # 날짜와 시간 결합
+            
+            
             ##################################################################
             
             
-            st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages, selected_datetime))
+            st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages, selected_datetime1, show_blue_line1))
              # 데이터 프레임과 그래프를 나란히 표시
             col1, col2 = st.columns(2)
             with col1:
@@ -111,20 +118,27 @@ def main():
 
             data_true_pred = load_data_true_pred()
             
-            ##################################################################
+             ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
-            col1, col2 = st.columns(2)
+            col1, col2 = st.columns(3)
             with col1:
 
-                selected_date = st.date_input("Select a date", datetime.date.today())
+                selected_date2 = st.date_input("Select a date", datetime.date.today())
             
             with col2:
-                selected_time = st.time_input("Select a time", datetime.time(12, 0))
+                selected_time2 = st.time_input("Select a time", datetime.time(12, 0))
             
-            selected_datetime = datetime.datetime.combine(selected_date, selected_time)  # 날짜와 시간 결합
+            with col3:
+                
+                show_blue_line2 = st.checkbox("Show blue line at selected time", True)  # 기본값으로 체크 상태
+
+            
+            selected_datetime2 = datetime.datetime.combine(selected_date2, selected_time2)  # 날짜와 시간 결합
+            
+            
             ##################################################################
             
-            st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred, selected_datetime))
+            st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred, selected_datetime2, show_blue_line2))
 
             #st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred))
 

@@ -5,7 +5,7 @@ from bokeh.models import ColumnDataSource, Band, Legend, HoverTool
 from bokeh.palettes import Category10
 from bokeh.layouts import column, gridplot
 
-def visualize_moving_averages_with_bokeh(dataframe, selected_datetime):
+def visualize_moving_averages_with_bokeh(dataframe, selected_datetime, show_blue_line):
     dataframe = dataframe.copy()  # 캐싱된 데이터프레임을 수정하기 전에 복사본을 만듭니다.
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
 
@@ -57,9 +57,11 @@ def visualize_moving_averages_with_bokeh(dataframe, selected_datetime):
     )
     p.add_tools(hover)
 
-    p.line(x=[selected_datetime, selected_datetime], y=[dataframe['Predicted_MHC_Water_Level'].min(), 
-                                                            dataframe['Predicted_MHC_Water_Level'].max()], color='blue', line_dash="dotted")
-    
+
+    if show_blue_line:  # show_blue_line 값이 True인 경우만 파란선을 그림
+        p.line(x=[selected_datetime, selected_datetime], y=[dataframe['Predicted_MHC_Water_Level'].min(), dataframe['Predicted_MHC_Water_Level'].max()], 
+               color='blue', line_dash="dotted")
+
     
     return p
 
@@ -96,7 +98,7 @@ def create_individual_graphs(dataframe):
 
 
 
-def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datetime):
+def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datetime, show_blue_line):
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
     source = ColumnDataSource(dataframe)
 
@@ -121,11 +123,10 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datet
     p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
     p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
     
-    
-##################################################################
-    p.line(x=[selected_datetime, selected_datetime], y=[dataframe['True_Value'].min(), 
-                                                            dataframe['True_Value'].max()], color='blue', line_dash="dotted")
-##################################################################
+
+    if show_blue_line:  # show_blue_line 값이 True인 경우만 파란선을 그림
+        p.line(x=[selected_datetime, selected_datetime], y=[dataframe['True_Value'].min(), dataframe['True_Value'].max()], 
+               color='blue', line_dash="dotted")
 
 
     # Hover tool
