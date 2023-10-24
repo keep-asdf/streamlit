@@ -60,7 +60,7 @@ def visualize_moving_averages_with_bokeh(dataframe, selected_datetime, show_blue
 
     if show_blue_line:  # show_blue_line 값이 True인 경우만 파란선을 그림
         p.line(x=[selected_datetime, selected_datetime], y=[dataframe['Predicted_MHC_Water_Level'].min(), dataframe['Predicted_MHC_Water_Level'].max()], 
-               color='blue', line_dash="dotted")
+               color='#000080', line_dash="dotted", line_width = 3)
 
     
     return p
