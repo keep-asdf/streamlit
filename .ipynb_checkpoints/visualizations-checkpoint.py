@@ -78,14 +78,14 @@ def create_individual_graphs(dataframe):
     
    
     for feature in features:
-        p = figure(width=500, height=250, title=feature,
+        p = figure(width=500, height=250, legend_mapping[feature], 
                    x_axis_type="datetime",
                    min_border_left=0, min_border_right=0, 
                    min_border_top=0, min_border_bottom=0) 
         
         p.line(dataframe['Time'][-7:], dataframe[feature][-7:], line_width=2)
         p.xaxis.axis_label = 'Time'
-        p.yaxis.axis_label = feature
+        p.yaxis.axis_label = legend_mapping[feature]  # Use the mapped y-axis label
         graphs.append(p)
 
     return graphs
