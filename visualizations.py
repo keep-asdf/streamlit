@@ -126,7 +126,7 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datet
 
     if show_blue_line:  # show_blue_line 값이 True인 경우만 파란선을 그림
         p.line(x=[selected_datetime, selected_datetime], y=[dataframe['True_Value'].min(), dataframe['True_Value'].max()], 
-               color='blue', line_dash="dotted")
+               color='#000080', line_dash="dotted", line_width = 3)
 
 
     # Hover tool
