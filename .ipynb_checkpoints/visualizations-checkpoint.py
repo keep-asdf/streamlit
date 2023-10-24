@@ -202,7 +202,7 @@ def visualize_true_vs_predicted_last_6h(data):
                width=750, height=430)
     
     # 그래프에 데이터 추가
-    p.line(x='Time', y='True_Value', source=source, color="green", alpha=0.6, legend_label="True Value")
+    p.line(x='Time', y='True_Value', source=source, color="#464646", alpha=0.6, legend_label="True Value")
     p.line(x='Time', y='Predicted_Value', source=source, color="darkred", legend_label="Predicted Value",  line_width = 3)
     
     # Plot confidence intervals
