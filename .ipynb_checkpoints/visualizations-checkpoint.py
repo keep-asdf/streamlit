@@ -92,7 +92,7 @@ def create_individual_graphs(dataframe):
 
 
 
-def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
+def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datetime):
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
     source = ColumnDataSource(dataframe)
 
