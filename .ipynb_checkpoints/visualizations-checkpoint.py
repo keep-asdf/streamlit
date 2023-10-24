@@ -30,10 +30,10 @@ def visualize_moving_averages_with_bokeh(dataframe):
             p.line('Time', column, source=source, color=color, legend_label=column)
 
     # Adding the status lines using fixed values
-    p.line(x=dataframe['Time'], y=9.2, color='red', line_dash="dashed", legend_label="Severe")
-    p.line(x=dataframe['Time'], y=8.0, color='orange', line_dash="dashed", legend_label="Alert")
-    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="Caution")
-    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="Attention")
+    p.line(x=dataframe['Time'], y=9.2, color='red', line_dash="dashed", legend_label="Severe", fill_alpha=0.8)
+    p.line(x=dataframe['Time'], y=8.0, color='orange', line_dash="dashed", legend_label="Alert", fill_alpha=0.8)
+    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="Caution", fill_alpha=0.8)
+    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="Attention", fill_alpha=0.8)
 
     # Modify the hover tool to display information for each status line
     hover = HoverTool(
