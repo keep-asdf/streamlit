@@ -107,7 +107,7 @@ def main():
             true_pred_last_6h_data = data_true_pred.loc[data_true_pred['Time'] >= data_true_pred['Time'].iloc[-1] - pd.Timedelta(hours=6)]
 
              # 데이터 프레임과 그래프를 나란히 표시
-            col1, col2 = st.columns(2)
+            col1, col2 = st.columns([2,1])
             with col1:
                 st.write(data_true_pred.sort_values(by='Time', ascending=False))
             with col2:
