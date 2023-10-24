@@ -16,7 +16,7 @@ def visualize_moving_averages_with_bokeh(dataframe):
     source = ColumnDataSource(dataframe)
 
     # Plot the Predicted Water Level
-    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="darkred", legend_label="미호천교 예측된 수위", line_width = 3)
+    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="darkred", legend_label="예측된 미호천교 수위", line_width = 3)
 
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
@@ -100,10 +100,10 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
                title="True vs Predicted Values with Confidence Intervals and Status Lines")
 
     # Plot the True Values
-    p.line('Time', 'True_Value', source=source, color="#464646", legend_label="True Value")
+    p.line('Time', 'True_Value', source=source, color="#464646", legend_label="실제 미호천교 수위")
 
     # Plot the Predicted Values
-    p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="Predicted Value" , line_width = 3)
+    p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="예측된 미호천교 수위" , line_width = 3)
 
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
