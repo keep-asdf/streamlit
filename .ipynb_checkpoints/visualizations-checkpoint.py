@@ -10,7 +10,7 @@ def visualize_moving_averages_with_bokeh(dataframe):
     dataframe['Time'] = pd.to_datetime(dataframe['Time'])
 
     p = figure(x_axis_type="datetime", width=1600, height=400, 
-               title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines",
+               # title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines",
                min_border_left=0,   min_border_right=0,
                min_border_top=0, min_border_bottom=0)
     source = ColumnDataSource(dataframe)

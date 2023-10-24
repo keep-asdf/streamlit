@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 
 # Streamlit app
 def main():
-    st.title("Water Level Dashboard")
+    st.title("미호천교 3시간 후 수위 예측 Dashboard")
 
     # 사이드바에 버튼을 추가합니다.
     update_button = st.sidebar.button("Update Data")
@@ -52,7 +52,7 @@ def main():
                 st.bokeh_chart(visualize_last_6h_moving_averages(last_6h_data))
 
             
-            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            @st.cache_data(ttl=3600)  # 3600 sㅊeconds = 1 hour
             def load_water_data():
                 return pd.read_csv('data/water_data.csv').copy()
        
