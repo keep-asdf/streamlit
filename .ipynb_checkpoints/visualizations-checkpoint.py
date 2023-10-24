@@ -25,10 +25,10 @@ def visualize_moving_averages_with_bokeh(dataframe):
     # Plot the moving averages
     # Define a mapping from column names to desired legend labels
     legend_mapping = {
-        "MA_12": "12시간 이동평균",
-        "MA_72": "72시간 이동평균",
-        "MA_96": "96시간 이동평균",
-        "MA_120": "120시간 이동평균"
+        "MA_12H": "12시간 이동평균",
+        "MA_72H": "72시간 이동평균",
+        "MA_96H": "96시간 이동평균",
+        "MA_120H": "120시간 이동평균"
     }
 
     ma_colors = iter(Category10[10])
