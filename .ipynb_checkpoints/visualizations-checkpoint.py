@@ -69,11 +69,11 @@ def create_individual_graphs(dataframe):
     graphs = []
 
     legend_mapping = {
-        "MHC_Water_Level": "미호천교 수위",
-        "MH_Water_Level": "미호교 수위",
-        "PG_Water_Level": "팔결교 수위",
-        "HH_Water_Level": "환희교 수위",
-        "GG_Water_Level": "금곡교 수위"
+        "MHC_Water_Level": "미호천교 관측 수위",
+        "MH_Water_Level": "미호교 관측 수위 수위",
+        "PG_Water_Level": "팔결교 관측 수위 수위",
+        "HH_Water_Level": "환희교 관측 수위 수위",
+        "GG_Water_Level": "금곡교 관측 수위 수위"
     }    
     
    
@@ -100,7 +100,7 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
                title="True vs Predicted Values with Confidence Intervals and Status Lines")
 
     # Plot the True Values
-    p.line('Time', 'True_Value', source=source, color="#464646", legend_label="실제 미호천교 수위")
+    p.line('Time', 'True_Value', source=source, color="#464646", legend_label="관측된 미호천교 수위")
 
     # Plot the Predicted Values
     p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="예측된 미호천교 수위" , line_width = 3)
