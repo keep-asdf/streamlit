@@ -57,8 +57,8 @@ def visualize_moving_averages_with_bokeh(dataframe, selected_datetime):
     )
     p.add_tools(hover)
 
-    p.line(x=[selected_datetime, selected_datetime], y=[dataframe['True_Value'].min(), 
-                                                            dataframe['True_Value'].max()], color='blue', line_dash="dotted")
+    p.line(x=[selected_datetime, selected_datetime], y=[dataframe['Predicted_MHC_Water_Level'].min(), 
+                                                            dataframe['Predicted_MHC_Water_Level'].max()], color='blue', line_dash="dotted")
     
     
     return p
