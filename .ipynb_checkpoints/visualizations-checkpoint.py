@@ -85,7 +85,7 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
     p.line('Time', 'True_Value', source=source, color="green", legend_label="True Value")
 
     # Plot the Predicted Values
-    p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="Predicted Value")
+    p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="Predicted Value" , line_width = 3)
 
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
@@ -138,7 +138,7 @@ def visualize_last_6h_moving_averages(data):
     p.line(x='Time', y='120H_MA', source=source, color="orange", alpha=0.6)
     
     # Plot confidence intervals
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred', , line_width = 3)
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
     p.add_layout(band)
     
     # Adding the status lines
