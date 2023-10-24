@@ -16,7 +16,7 @@ def visualize_moving_averages_with_bokeh(dataframe):
     source = ColumnDataSource(dataframe)
 
     # Plot the Predicted Water Level
-    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="darkred", legend_label="Predicted Water Level")
+    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="darkred", legend_label="Predicted Water Level", line_width = 3)
 
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
@@ -30,10 +30,10 @@ def visualize_moving_averages_with_bokeh(dataframe):
             p.line('Time', column, source=source, color=color, legend_label=column)
 
     # Adding the status lines using fixed values
-    p.line(x=dataframe['Time'], y=9.2, color='red', line_dash="dashed", legend_label="Severe", alpha=0.2)
-    p.line(x=dataframe['Time'], y=8.0, color='orange', line_dash="dashed", legend_label="Alert", alpha=0.8)
-    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="Caution", alpha=0.8)
-    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="Attention", alpha=0.8)
+    p.line(x=dataframe['Time'], y=9.2, color='red', line_dash="dashed", legend_label="Severe", alpha=0.9)
+    p.line(x=dataframe['Time'], y=8.0, color='orange', line_dash="dashed", legend_label="Alert", alpha=0.9)
+    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="Caution", alpha=0.9)
+    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="Attention", alpha=0.9)
 
     # Modify the hover tool to display information for each status line
     hover = HoverTool(
