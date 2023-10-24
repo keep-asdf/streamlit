@@ -55,7 +55,22 @@ def main():
             # Check the last 6 hours of data
             last_6h_data = data_moving_averages.loc[data_moving_averages['Time'] >= data_moving_averages['Time'].iloc[-1] - pd.Timedelta(hours=6)]
 
-            st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages))
+            
+             ##################################################################
+            # Streamlit에서 날짜와 시간을 입력받습니다.
+            col1, col2 = st.columns(2)
+            with col1:
+
+                selected_date = st.date_input("Select a date", datetime.date.today())
+            
+            with col2:
+                selected_time = st.time_input("Select a time", datetime.time(12, 0))
+            
+            selected_datetime = datetime.datetime.combine(selected_date, selected_time)  # 날짜와 시간 결합
+            ##################################################################
+            
+            
+            st.bokeh_chart(visualize_moving_averages_with_bokeh(data_moving_averages, selected_datetime))
              # 데이터 프레임과 그래프를 나란히 표시
             col1, col2 = st.columns(2)
             with col1:
