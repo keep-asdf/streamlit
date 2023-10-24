@@ -199,7 +199,7 @@ def visualize_true_vs_predicted_last_6h(data):
                x_axis_type="datetime", x_axis_label="Time", y_range=(y_min, y_max),
                min_border_left=0,   min_border_right=0,
                min_border_top=0, min_border_bottom=0,
-               width=750, height=430)
+               width=1000, height=430)
     
     # 그래프에 데이터 추가
     p.line(x='Time', y='True_Value', source=source, color="green", alpha=0.6, legend_label="True Value")
