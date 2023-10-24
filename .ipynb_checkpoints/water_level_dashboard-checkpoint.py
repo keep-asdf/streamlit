@@ -58,7 +58,7 @@ def main():
             
              ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
-            col1, col2 = st.columns(3)
+            col1, col2 = st.columns(2)
             with col1:
 
                 selected_date1 = st.date_input("Select a date", datetime.date.today())
