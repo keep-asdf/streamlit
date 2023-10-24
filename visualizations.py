@@ -129,11 +129,11 @@ def visualize_last_6h_moving_averages(data):
               width=750, height=430)
     
     # 그래프에 데이터 추가
-    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, color="blue", alpha=0.6)
-    p.line(x='Time', y='12H_MA', source=source, color="red", alpha=0.6)
-    p.line(x='Time', y='72H_MA', source=source, color="green", alpha=0.6)
-    p.line(x='Time', y='96H_MA', source=source, color="purple", alpha=0.6)
-    p.line(x='Time', y='120H_MA', source=source, color="orange", alpha=0.6)
+    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source[-6:], color="blue", alpha=0.6)
+    p.line(x='Time', y='12H_MA', source=source[-6:], color="red", alpha=0.6)
+    p.line(x='Time', y='72H_MA', source=source[-6:], color="green", alpha=0.6)
+    p.line(x='Time', y='96H_MA', source=source[-6:], color="purple", alpha=0.6)
+    p.line(x='Time', y='120H_MA', source=source[-6:], color="orange", alpha=0.6)
     
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
