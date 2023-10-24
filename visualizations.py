@@ -16,10 +16,10 @@ def visualize_moving_averages_with_bokeh(dataframe):
     source = ColumnDataSource(dataframe)
 
     # Plot the Predicted Water Level
-    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="blue", legend_label="Predicted Water Level")
+    p.line('Time', 'Predicted_MHC_Water_Level', source=source, color="darkred", legend_label="Predicted Water Level")
 
     # Plot confidence intervals
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='blue')
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
     p.add_layout(band)
 
     # Plot the moving averages
