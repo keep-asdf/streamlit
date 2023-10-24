@@ -92,10 +92,17 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe):
     p.add_layout(band)
 
     # Adding the status lines
-    p.line([dataframe.Time.min(), dataframe.Time.max()], [9.2, 9.2], color='red', line_dash="dashed", legend_label="Severe")
-    p.line([dataframe.Time.min(), dataframe.Time.max()], [8.0, 8.0], color='orange', line_dash="dashed", legend_label="Alert")
-    p.line([dataframe.Time.min(), dataframe.Time.max()], [7.0, 7.0], color='yellow', line_dash="dashed", legend_label="Caution")
-    p.line([dataframe.Time.min(), dataframe.Time.max()], [5.0, 5.0], color='green', line_dash="dashed", legend_label="Attention")
+    # p.line([dataframe.Time.min(), dataframe.Time.max()], [9.2, 9.2], color='red', line_dash="dashed", legend_label="Severe")
+    # p.line([dataframe.Time.min(), dataframe.Time.max()], [8.0, 8.0], color='orange', line_dash="dashed", legend_label="Alert")
+    # p.line([dataframe.Time.min(), dataframe.Time.max()], [7.0, 7.0], color='yellow', line_dash="dashed", legend_label="Caution")
+    # p.line([dataframe.Time.min(), dataframe.Time.max()], [5.0, 5.0], color='green', line_dash="dashed", legend_label="Attention")
+    
+    
+    # Adding the status lines using fixed values
+    p.line(x=dataframe['Time'], y=9.2, color='red', line_dash="dashed", legend_label="Severe", alpha=0.9)
+    p.line(x=dataframe['Time'], y=8.0, color='orange', line_dash="dashed", legend_label="Alert", alpha=0.9)
+    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="Caution", alpha=0.9)
+    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="Attention", alpha=0.9)
 
     # Hover tool
     hover = HoverTool(
@@ -136,7 +143,7 @@ def visualize_last_6h_moving_averages(data):
     p.line(x='Time', y='120H_MA', source=source, color="orange", alpha=0.6)
     
     # Plot confidence intervals
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred', , line_width = 3)
     p.add_layout(band)
     
     # Adding the status lines
@@ -180,7 +187,7 @@ def visualize_true_vs_predicted_last_6h(data):
     
     # 그래프에 데이터 추가
     p.line(x='Time', y='True_Value', source=source, color="green", alpha=0.6, legend_label="True Value")
-    p.line(x='Time', y='Predicted_Value', source=source, color="darkred", alpha=0.6, legend_label="Predicted Value")
+    p.line(x='Time', y='Predicted_Value', source=source, color="darkred", alpha=0.6, legend_label="Predicted Value",  line_width = 3)
     
     # Plot confidence intervals
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
