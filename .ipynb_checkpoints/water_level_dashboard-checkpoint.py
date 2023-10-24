@@ -69,7 +69,7 @@ def main():
                 return pd.read_csv('data/traffic_data.csv').copy()
 
             traffic_data = traffic_data()
-            st.write("실시간 미호천교 근방 교통 이벤트 데이터(empty = 현재 이벤트 없음")
+            st.subheader("실시간 미호천교 근방 교통 이벤트 데이터(empty = 현재 이벤트 없음")
             st.write(traffic_data)
     
     elif choice == "Learning Result":
