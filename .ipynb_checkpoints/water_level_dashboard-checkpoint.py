@@ -13,7 +13,7 @@ import pydeck as pdk
 st.set_page_config(layout="wide")
 
 # Streamlit app
-def main():
+def main):
     
     # UTC 기준의 현재 시간을 얻습니다.
     current_time_utc = datetime.datetime.utcnow()
