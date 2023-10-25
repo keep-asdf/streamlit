@@ -292,18 +292,36 @@ def visualize_true_vs_predicted_last_6h(data):
 
 
 
-def plot_predicted_volatility(data):
+def plot_predicted_volatility_bokeh(data):
     """
-    Plot the predicted volatility.
+    Plot the predicted volatility using Bokeh.
     
     Args:
-    - forecasts (ARCHModelForecast): Forecasted variance from the GARCH model
+    - data (DataFrame): Data containing timestamps and predicted volatility
     
     Returns:
-    - None
+    - p: Bokeh plot object
     """
-    plt.figure(figsize=(12, 6))
-    plt.plot(data.index, data['Predicted_Volatility_1hr_Ahead'], label='Predicted Volatility')
-    plt.legend()
-    plt.title('GARCH Predicted Volatility')
-    plt.show()
+    # 데이터를 ColumnDataSource로 변환
+    source = ColumnDataSource(data)
+
+    # 그래프 생성
+    p = figure(title="GARCH Predicted Volatility", 
+               x_axis_type="datetime", x_axis_label="Time",
+               y_axis_label="Predicted Volatility",
+               plot_width=750, plot_height=430)
+    
+    # 그래프에 데이터 추가
+    p.line(x='Time', y='Predicted_Volatility_1hr_Ahead', source=source, color="darkred", legend_label="Predicted Volatility")
+    
+    # Hover tool 추가
+    hover = HoverTool()
+    hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
+                      ("Predicted Volatility", "@Predicted_Volatility_1hr_Ahead")]
+    hover.formatters = {"@Time": "datetime"}
+    p.add_tools(hover)
+    
+    # Hide the legend
+    p.legend.visible = False
+
+    return p
