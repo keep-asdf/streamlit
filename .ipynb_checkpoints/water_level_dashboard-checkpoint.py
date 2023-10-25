@@ -193,7 +193,7 @@ def main():
             for_test_data_true_pred = load_data_true_pred()
             
             columns_to_shift = ['True_Value', 'CI_Lower', 'CI_Upper']
-            for_test_data_true_pred[columns_to_shift] = for_test_data_true_pred[columns_to_shift].shift(3)
+            for_test_data_true_pred[columns_to_shift] = for_test_data_true_pred[columns_to_shift].shift(-3)
 
             ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
