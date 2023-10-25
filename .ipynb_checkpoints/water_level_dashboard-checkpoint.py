@@ -126,15 +126,14 @@ def main():
             traffic_data = traffic_data()
             
             
-            # 기준 좌표를 traffic_data 데이터 프레임에 추가합니다.
+            # 기준 좌표를 데이터 프레임에 추가하는 다른 방법을 시도합니다.
             new_data = {
-                'eventType' : '미호천교 기준점',
                 'coordX': 36.6230541816206,
-                'coordY': 127.35070148286204,
-                # 나머지 컬럼들에 대해서는 NaN 값이나 적절한 기본값을 설정할 수 있습니다.
+                'coordY': 127.35070148286204
             }
 
-            traffic_data = pd.concat([traffic_data, new_data], ignore_index=True)
+            # 데이터 프레임에 새로운 행을 추가합니다.
+            traffic_data = traffic_data.append(new_data, ignore_index=True)
 
             
             col1, col2 = st.columns(2)
