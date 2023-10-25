@@ -330,7 +330,7 @@ import matplotlib.pyplot as plt
 
 def plot_predicted_volatility(data):
     """
-    Plot the predicted volatility using Matplotlib.
+    Plot the predicted volatility using Matplotlib with cleaner x-axis.
     
     Args:
     - data (DataFrame): Data containing timestamps and predicted volatility
@@ -350,7 +350,8 @@ def plot_predicted_volatility(data):
     ax.set_ylabel("Predicted Volatility")
     ax.legend()
     
-    # Format the x-axis for better readability
+    # Format the x-axis for better readability and reduce the number of ticks
+    ax.xaxis.set_major_locator(plt.MaxNLocator(10))
     ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: pd.Timestamp(x).strftime('%Y-%m-%d %H:%M')))
     plt.xticks(rotation=45)
     
