@@ -302,9 +302,8 @@ def plot_predicted_volatility(data):
     Returns:
     - None
     """
-    predicted_volatility = data.variance / 100
     plt.figure(figsize=(12, 6))
-    plt.plot(predicted_volatility.index, predicted_volatility['h.01'], label='Predicted Volatility')
+    plt.plot(data.index, data['Predicted_Volatility_1hr_Ahead'], label='Predicted Volatility')
     plt.legend()
     plt.title('GARCH Predicted Volatility')
     plt.show()
