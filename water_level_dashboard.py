@@ -177,8 +177,8 @@ def main():
     elif choice == "Test":
 
         with st.container():
-        st.write("This is inside the container")
-        st.button("Click me!")
+            st.write("This is inside the container")
+            st.button("Click me!")
         
 if __name__ == '__main__':
     main()
