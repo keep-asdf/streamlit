@@ -254,6 +254,7 @@ def main():
             
             # pydeck 지도 생성
             deck = pdk.Deck(initial_view_state=view_state, layers=[layer],
+                            mapbox_key = 'pk.eyJ1IjoibnVzbnVnZWh5IiwiYSI6ImNsZjR1ZnFlejBhMjEzeHMycmJwMG5mdWIifQ.eAJCIX5OERNVHyKNwCq-PA',
                            map_style="mapbox://styles/mapbox/streets-v11"  # 밝은 스타일
                             )
 
