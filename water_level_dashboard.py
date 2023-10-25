@@ -6,6 +6,7 @@ from streamlit_option_menu import option_menu
 
 import datetime
 
+import pydeck as pdk
 
 
 st.set_page_config(layout="wide")
