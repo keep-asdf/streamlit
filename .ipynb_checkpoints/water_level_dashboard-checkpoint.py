@@ -34,7 +34,7 @@ def main():
     
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
-        choice = option_menu("Menu", ["Prediction Result", "Learning Result"])
+        choice = option_menu("Menu", ["Prediction Result", "Learning Result", "Test"])
     
 
     
@@ -172,7 +172,13 @@ def main():
             with col1:
                 st.write(data_true_pred.sort_values(by='Time', ascending=False))
             with col2:
-                st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))
+                st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))\
 
+    elif choice == "Test":
+
+        with st.container():
+        st.write("This is inside the container")
+        st.button("Click me!")
+        
 if __name__ == '__main__':
     main()
