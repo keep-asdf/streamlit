@@ -254,6 +254,7 @@ def main():
             volatility = load_data_volatility()
 
             st.bokeh_chart(plot_predicted_volatility(volatility))
+            st.write(volatility)
 
 
 if __name__ == '__main__':
