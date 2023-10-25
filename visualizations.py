@@ -293,71 +293,71 @@ def visualize_true_vs_predicted_last_6h(data):
 
 
 
-# def plot_predicted_volatility(data):
-#     """
-#     Plot the predicted volatility using Bokeh.
-    
-#     Args:
-#     - data (DataFrame): Data containing timestamps and predicted volatility
-    
-#     Returns:
-#     - p: Bokeh plot object
-#     """
-#     # 데이터를 ColumnDataSource로 변환
-#     source = ColumnDataSource(data)
-
-#     # 그래프 생성
-#     p = figure(title="GARCH Predicted Volatility", 
-#                x_axis_type="datetime", x_axis_label="Time",
-#                y_axis_label="Predicted Volatility",
-#                plot_width=750, plot_height=430)
-    
-#     # 그래프에 데이터 추가
-#     p.line(x='Time', y='Predicted_Volatility_1hr_Ahead', source=source, color="darkred", legend_label="Predicted Volatility")
-    
-#     # Hover tool 추가
-#     hover = HoverTool()
-#     hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
-#                       ("Predicted Volatility", "@Predicted_Volatility_1hr_Ahead")]
-#     hover.formatters = {"@Time": "datetime"}
-#     p.add_tools(hover)
-    
-#     # Hide the legend
-#     p.legend.visible = False
-
-#     return p
-import matplotlib.pyplot as plt
-
 def plot_predicted_volatility(data):
     """
-    Plot the predicted volatility using Matplotlib with cleaner x-axis.
+    Plot the predicted volatility using Bokeh.
     
     Args:
     - data (DataFrame): Data containing timestamps and predicted volatility
     
     Returns:
-    - fig: Matplotlib figure object
+    - p: Bokeh plot object
     """
-    # Create the figure and axis
-    fig, ax = plt.subplots(figsize=(10, 6))
+    # 데이터를 ColumnDataSource로 변환
+    source = ColumnDataSource(data)
+
+    # 그래프 생성
+    p = figure(title="GARCH Predicted Volatility", 
+               x_axis_type="datetime", x_axis_label="Time",
+               y_axis_label="Predicted Volatility",
+               plot_width=750, plot_height=430)
     
-    # Plot the data
-    ax.plot(data['Time'], data['Predicted_Volatility_1hr_Ahead'], color="darkred", label="Predicted Volatility")
+    # 그래프에 데이터 추가
+    p.line(x='Time', y='Predicted_Volatility_1hr_Ahead', source=source, color="darkred", legend_label="Predicted Volatility")
     
-    # Set the title and labels
-    ax.set_title("GARCH Predicted Volatility")
-    ax.set_xlabel("Time")
-    ax.set_ylabel("Predicted Volatility")
-    ax.legend()
+    # Hover tool 추가
+    hover = HoverTool()
+    hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
+                      ("Predicted Volatility", "@Predicted_Volatility_1hr_Ahead")]
+    hover.formatters = {"@Time": "datetime"}
+    p.add_tools(hover)
     
-    # Format the x-axis for better readability and reduce the number of ticks
-    ax.xaxis.set_major_locator(plt.MaxNLocator(10))
-    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: pd.Timestamp(x).strftime('%Y-%m-%d %H:%M')))
-    plt.xticks(rotation=45)
+    # Hide the legend
+    p.legend.visible = False
+
+    return p
+# import matplotlib.pyplot as plt
+
+# def plot_predicted_volatility(data):
+#     """
+#     Plot the predicted volatility using Matplotlib with cleaner x-axis.
     
-    # Add a grid
-    ax.grid(True, which='both', linestyle='--', linewidth=0.5)
+#     Args:
+#     - data (DataFrame): Data containing timestamps and predicted volatility
     
-    plt.tight_layout()
-    return fig
+#     Returns:
+#     - fig: Matplotlib figure object
+#     """
+#     # Create the figure and axis
+#     fig, ax = plt.subplots(figsize=(10, 6))
+    
+#     # Plot the data
+#     ax.plot(data['Time'], data['Predicted_Volatility_1hr_Ahead'], color="darkred", label="Predicted Volatility")
+    
+#     # Set the title and labels
+#     ax.set_title("GARCH Predicted Volatility")
+#     ax.set_xlabel("Time")
+#     ax.set_ylabel("Predicted Volatility")
+#     ax.legend()
+    
+#     # Format the x-axis for better readability and reduce the number of ticks
+#     ax.xaxis.set_major_locator(plt.MaxNLocator(10))
+#     ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: pd.Timestamp(x).strftime('%Y-%m-%d %H:%M')))
+#     plt.xticks(rotation=45)
+    
+#     # Add a grid
+#     ax.grid(True, which='both', linestyle='--', linewidth=0.5)
+    
+#     plt.tight_layout()
+#     return fig
 
