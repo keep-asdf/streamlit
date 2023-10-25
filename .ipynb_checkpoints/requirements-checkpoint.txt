@@ -4,10 +4,8 @@ seaborn
 pandas
 bokeh==2.4.3
 numpy
-
-
 streamlit-option-menu
-
-
-tkinter
 pyparsing 
+
+
+pydeck
