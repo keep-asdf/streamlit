@@ -127,7 +127,7 @@ def main():
             
             
             # 기준 좌표를 traffic_data 데이터 프레임에 추가합니다.
-            new_row = {
+            new_data = {
                 'eventType' : '미호천교 기준점',
                 'coordX': 36.6230541816206,
                 'coordY': 127.35070148286204,
