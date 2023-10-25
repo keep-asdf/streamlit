@@ -254,10 +254,10 @@ def main():
 
             volatility = load_data_volatility()
 
-            st.bokeh_chart(plot_predicted_volatility(volatility))
-            # st.write(volatility)
+            # st.bokeh_chart(plot_predicted_volatility(volatility))
+            st.write(volatility)
             fig = plot_predicted_volatility_matplotlib(volatility)
-            plt.show()
+            st.pyplot(fig)
 
 
 if __name__ == '__main__':
