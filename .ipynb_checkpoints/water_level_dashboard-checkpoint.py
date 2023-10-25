@@ -120,10 +120,10 @@ def main():
         
             #traffic data 표시 및 지도 표시
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-            def traffic_data():
+            def load_traffic_data():
                 return pd.read_csv('data/traffic_data.csv').copy()
 
-            traffic_df = traffic_data()
+            traffic_df = load_traffic_data()
             
             
             # 기준 좌표를 데이터 프레임에 추가하는 다른 방법을 시도합니다.
@@ -133,7 +133,7 @@ def main():
             }
 
             # 데이터 프레임에 새로운 행을 추가합니다.
-            traffic_df = traffic_data.append(new_data, ignore_index=True)
+            traffic_df = traffic_df.append(new_data, ignore_index=True)
 
             
             col1, col2 = st.columns(2)
