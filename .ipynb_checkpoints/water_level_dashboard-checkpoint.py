@@ -218,5 +218,50 @@ def main():
             
             ##################################################################
             
+            
+            
+            #지도 
+            
+            # 예제 데이터프레임 생성
+            data = {
+                'lat': [37.5665, 37.5770, 37.5550],
+                'lon': [126.9780, 126.9784, 126.9745],
+                'label': ['A', 'B', 'C']
+            }
+
+            df = pd.DataFrame(data)
+  
+
+            # 중심 좌표와 줌 레벨 설정
+            view_state = pdk.ViewState(
+                latitude=37.5665,
+                longitude=126.9780,
+                zoom=13,
+                pitch=0
+                        )
+
+            # Layer 추가
+            layer = pdk.Layer(
+                'ScatterplotLayer',  # 사용할 레이어 타입
+                df,  # 데이터프레임
+                get_position='[lon, lat]',  # 좌표 정보
+                get_radius=200,  # 원의 반지름 설정
+                get_fill_color=[255, 0, 0],  # 원의 색상 설정
+                pickable=True,  # 클릭 가능하게 설정
+                auto_highlight=True  # 강조 효과 설정
+                        )
+
+            # Streamlit에 지도 표시
+            st.pydeck_chart(pdk.Deck(initial_view_state=view_state, layers=[layer]))
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     main()
