@@ -251,9 +251,13 @@ def main():
                 pickable=True,  # 클릭 가능하게 설정
                 auto_highlight=True  # 강조 효과 설정
                         )
-
+            
+            deck = pdk.Deck(initial_view_state=view_state, layers=[layer])
+            deck.to_html('map.html')
+            
             # Streamlit에 지도 표시
-            st.pydeck_chart(pdk.Deck(initial_view_state=view_state, layers=[layer]))
+            st.write(f'<iframe src="map.html" width="800" height="400"></iframe>', unsafe_allow_html=True)
+
 
 
 
