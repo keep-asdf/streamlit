@@ -123,7 +123,7 @@ def main():
             def traffic_data():
                 return pd.read_csv('data/traffic_data.csv').copy()
 
-            traffic_data = traffic_data()
+            traffic_df = traffic_data()
             
             
             # 기준 좌표를 데이터 프레임에 추가하는 다른 방법을 시도합니다.
@@ -133,16 +133,16 @@ def main():
             }
 
             # 데이터 프레임에 새로운 행을 추가합니다.
-            traffic_data = traffic_data.append(new_data, ignore_index=True)
+            traffic_df = traffic_data.append(new_data, ignore_index=True)
 
             
             col1, col2 = st.columns(2)
             with col1:
                 st.subheader("실시간 미호천교 근방 교통 이벤트 데이터(empty = 현재 이벤트 없음)")
-                st.write(traffic_data)
+                st.write(traffic_df)
             
             with col2:
-                st.map(traffic_data,latitude = 'coordX', longitude = 'coordY', color = 'darkred')
+                st.map(traffic_df,latitude = 'coordX', longitude = 'coordY', color = 'darkred')
                 
 #             st.subheader("실시간 미호천교 근방 교통 이벤트 데이터(empty = 현재 이벤트 없음)")
 #             st.write(traffic_data)
