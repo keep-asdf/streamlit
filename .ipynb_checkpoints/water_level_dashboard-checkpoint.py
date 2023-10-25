@@ -126,14 +126,15 @@ def main():
             traffic_df = load_traffic_data()
             
             
-            # 기준 좌표를 데이터 프레임에 추가하는 다른 방법을 시도합니다.
+            # 기준 좌표를 데이터 프레임에 추가
             new_data = {
-                'coordX': 36.6230541816206,
-                'coordY': 127.35070148286204
+                'coordX': [36.6230541816206],
+                'coordY': [127.35070148286204]
             }
+            new_df = pd.DataFrame(new_data)
 
-            # 데이터 프레임에 새로운 행을 추가합니다.
-            traffic_df = traffic_df.append(new_data, ignore_index=True)
+            # 데이터 프레임에 새로운 행을 추가
+            traffic_df = pd.concat([traffic_df, new_df], ignore_index=True)
 
             
             col1, col2 = st.columns(2)
