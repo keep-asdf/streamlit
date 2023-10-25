@@ -143,7 +143,7 @@ def main():
                 st.write(traffic_df)
             
             with col2:
-                st.map(traffic_df,latitude = 'coordX', longitude = 'coordY', color = 'darkred')
+                st.map(traffic_df,latitude = 'coordX', longitude = 'coordY', color = '#00ff00')
                 
 #             st.subheader("실시간 미호천교 근방 교통 이벤트 데이터(empty = 현재 이벤트 없음)")
 #             st.write(traffic_data)
