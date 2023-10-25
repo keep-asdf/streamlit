@@ -214,6 +214,7 @@ def main():
             
             selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
             
+            st.bokeh_chart(test_visualize_true_pred_with_CI_and_status_lines_bokeh(for_test_data_true_pred, selected_datetime2, show_blue_line2))
             
             ##################################################################
             

@@ -150,6 +150,55 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datet
     return p
 
 
+def test_visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datetime, show_blue_line):
+    dataframe['Time'] = pd.to_datetime(dataframe['Time'])
+    source = ColumnDataSource(dataframe)
+
+    p = figure(x_axis_type="datetime", width=1600, height=400, 
+               title="True vs Predicted Values with Confidence Intervals and Status Lines")
+
+    # Plot the True Values
+    p.line('Time', 'True_Value', source=source, color="#464646", legend_label="관측된 미호천교 수위")
+
+    # Plot the Predicted Values
+    p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="예측된 미호천교 수위" , line_width = 3)
+
+    # Plot confidence intervals
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
+    p.add_layout(band)
+
+
+    
+    # Adding the status lines using fixed values
+    p.line(x=dataframe['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)")
+    p.line(x=dataframe['Time'], y=8.0, color='red', line_dash="dashed", legend_label="경계(8.0m)")
+    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
+    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
+    
+
+    if show_blue_line:  # show_blue_line 값이 True인 경우만 파란선을 그림
+        p.line(x=[selected_datetime, selected_datetime], y=[dataframe['True_Value'].min(), dataframe['True_Value'].max()], 
+               color='#000080', line_dash="dotted", line_width = 3)
+
+
+    # Hover tool
+    hover = HoverTool(
+        tooltips=[
+            ("Time", "@Time{%F %T}"),
+            ("True Value", "@True_Value"),
+            ("Predicted Value", "@Predicted_Value"),
+            ("Confidence Interval", "(@CI_Lower, @CI_Upper)")
+        ],
+        formatters={
+            "@Time": "datetime"
+        },
+        mode='mouse'
+    )
+    p.add_tools(hover)
+
+    return p
+
+
 def visualize_last_6h_moving_averages(data):
     # 데이터를 ColumnDataSource로 변환
     source = ColumnDataSource(data)
