@@ -36,7 +36,7 @@ def main():
     
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
-        choice = option_menu("Menu", ["Prediction Result", "Learning Result", "Test"])
+        choice = option_menu("Menu", ["Prediction Result", "Learning Result"])#, "Test"])
     
 
     ####################################################################################
@@ -204,60 +204,60 @@ def main():
                 st.write(data_true_pred.sort_values(by='Time', ascending=False))
             with col2:
                 st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))\
-    ####################################################################################
-    ####################################################################################
-    ####################################################################################
-    elif choice == "Test":
+#     ####################################################################################
+#     ####################################################################################
+#     ####################################################################################
+#     elif choice == "Test":
 
-        with st.container():
+#         with st.container():
                         
-            # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
-            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-            def load_data_true_pred():
-                return pd.read_csv('data/true_pred_with_CI.csv').copy()
+#             # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+#             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+#             def load_data_true_pred():
+#                 return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
-            for_test_data_true_pred = load_data_true_pred()
+#             for_test_data_true_pred = load_data_true_pred()
             
-            columns_to_shift = ['True_Value', 'CI_Lower', 'CI_Upper']
-            for_test_data_true_pred[columns_to_shift] = for_test_data_true_pred[columns_to_shift].shift(-3)
+#             columns_to_shift = ['True_Value', 'CI_Lower', 'CI_Upper']
+#             for_test_data_true_pred[columns_to_shift] = for_test_data_true_pred[columns_to_shift].shift(-3)
 
-            ##################################################################
-            # Streamlit에서 날짜와 시간을 입력받습니다.
-            col1, col2 = st.columns(2)
-            with col1:
+#             ##################################################################
+#             # Streamlit에서 날짜와 시간을 입력받습니다.
+#             col1, col2 = st.columns(2)
+#             with col1:
 
-                selected_date2 = st.date_input("Select a date", datetime.date.today())
+#                 selected_date2 = st.date_input("Select a date", datetime.date.today())
             
-            with col2:
+#             with col2:
                                 
-                hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
-                selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
-                selected_time2 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
+#                 hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
+#                 selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
+#                 selected_time2 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
 
                 
-            show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
+#             show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
 
             
-            selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
+#             selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
             
-            st.bokeh_chart(test_visualize_true_pred_with_CI_and_status_lines_bokeh(for_test_data_true_pred, selected_datetime2, show_blue_line2))
+#             st.bokeh_chart(test_visualize_true_pred_with_CI_and_status_lines_bokeh(for_test_data_true_pred, selected_datetime2, show_blue_line2))
             
             
             
-            ##################################################################
+#             ##################################################################
 
    
-            # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
-            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-            def load_data_volatility():
-                return pd.read_csv('data/volatility.csv').copy()
+#             # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+#             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+#             def load_data_volatility():
+#                 return pd.read_csv('data/volatility.csv').copy()
 
-            volatility = load_data_volatility()
+#             volatility = load_data_volatility()
 
-            st.bokeh_chart(plot_predicted_volatility_bokeh_cleaned(volatility))
-            st.write(volatility)
-            # fig = plot_predicted_volatility(volatility)
-            # st.pyplot(fig)
+#             st.bokeh_chart(plot_predicted_volatility_bokeh_cleaned(volatility))
+#             st.write(volatility)
+#             # fig = plot_predicted_volatility(volatility)
+#             # st.pyplot(fig)
 
 
 if __name__ == '__main__':
