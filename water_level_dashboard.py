@@ -117,11 +117,25 @@ def main():
             grid = gridplot([graphs[:3], graphs[3:]])
             st.bokeh_chart(grid)       
         
+        
+            #traffic data 표시 및 지도 표시
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def traffic_data():
                 return pd.read_csv('data/traffic_data.csv').copy()
 
             traffic_data = traffic_data()
+            
+            
+            # 기준 좌표를 데이터 프레임에 추가합니다.
+            center_data = pd.DataFrame({
+                'lat': [36.6230541816206],
+                'lon': [127.35070148286204]
+            })
+
+            # 원래의 데이터와 기준 좌표 데이터를 합칩니다.
+            map_data = pd.concat([traffic_data.rename(columns={'coordX': 'lat', 'coordY': 'lon'}), center_data])
+
+            
             
             col1, col2 = st.columns(2)
             with col1:
@@ -227,61 +241,8 @@ def main():
             st.bokeh_chart(test_visualize_true_pred_with_CI_and_status_lines_bokeh(for_test_data_true_pred, selected_datetime2, show_blue_line2))
             
             ##################################################################
-            
-            
-            
-            #지도 
-            
-            # 예제 데이터프레임 생성
-            data = {
-                'lat': [37.5665, 37.5770, 37.5550],
-                'lon': [126.9780, 126.9784, 126.9745],
-                'label': ['A', 'B', 'C']
-            }
 
-            df = pd.DataFrame(data)
-              
-
-            # 중심 좌표와 줌 레벨 설정
-            view_state = pdk.ViewState(
-                latitude=36.6230541816206,
-                longitude=127.35070148286204 ,
-                zoom=14,
-                pitch=0
-                        )
-
-            # Layer 추가
-            layer = pdk.Layer(
-                'ScatterplotLayer',  # 사용할 레이어 타입
-                df,  # 데이터프레임
-                get_position='[lon, lat]',  # 좌표 정보
-                get_radius=10,  # 원의 반지름 설정
-                get_fill_color='darkred',  # 원의 색상 설정
-                pickable=True,  # 클릭 가능하게 설정
-                auto_highlight=True  # 강조 효과 설정
-                        )
-            
-            import os
-            os.environ["MAPBOX_API_KEY"] = "pk.eyJ1IjoibnVzbnVnZWh5IiwiYSI6ImNsZjR1ZnFlejBhMjEzeHMycmJwMG5mdWIifQ.eAJCIX5OERNVHyKNwCq-PA"
-            
-            # pydeck 지도 생성
-            deck = pdk.Deck(initial_view_state=view_state, layers=[layer],
-                            # mapbox_key = 'pk.eyJ1IjoibnVzbnVnZWh5IiwiYSI6ImNsZjR1ZnFlejBhMjEzeHMycmJwMG5mdWIifQ.eAJCIX5OERNVHyKNwCq-PA',
-                           map_style="mapbox://styles/mapbox/streets-v11"  # 밝은 스타일
-                            )
-
-            # 지도를 HTML 문자열로 변환
-            map_html = deck.to_html(as_string=True)
-
-            # Streamlit에 지도 표시
-            st.components.v1.html(map_html, width=800, height=400)
-
-
-
-
-
-
-
+   
 
 
 
