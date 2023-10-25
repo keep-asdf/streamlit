@@ -252,11 +252,14 @@ def main():
                 auto_highlight=True  # 강조 효과 설정
                         )
             
-            deck = pdk.Deck(initial_view_state=view_state, layers=[layer])
-            deck.to_html('map.html')
-            
-            # Streamlit에 지도 표시
-            st.write(f'<iframe src="map.html" width="800" height="400"></iframe>', unsafe_allow_html=True)
+                # pydeck 지도 생성
+                deck = pdk.Deck(initial_view_state=view_state, layers=[layer])
+
+                # 지도를 HTML 문자열로 변환
+                map_html = deck.to_html(as_string=True)
+
+                # Streamlit에 지도 표시
+                st.components.v1.html(map_html, width=800, height=400)
 
 
 
