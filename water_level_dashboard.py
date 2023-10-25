@@ -235,9 +235,9 @@ def main():
 
             # 중심 좌표와 줌 레벨 설정
             view_state = pdk.ViewState(
-                latitude=37.5665,
-                longitude=126.9780,
-                zoom=13,
+                latitude=36.6230541816206,
+                longitude=127.35070148286204 ,
+                zoom=10,
                 pitch=0
                         )
 
@@ -246,8 +246,8 @@ def main():
                 'ScatterplotLayer',  # 사용할 레이어 타입
                 df,  # 데이터프레임
                 get_position='[lon, lat]',  # 좌표 정보
-                get_radius=200,  # 원의 반지름 설정
-                get_fill_color=[255, 0, 0],  # 원의 색상 설정
+                get_radius=10,  # 원의 반지름 설정
+                get_fill_color='darkred',  # 원의 색상 설정
                 pickable=True,  # 클릭 가능하게 설정
                 auto_highlight=True  # 강조 효과 설정
                         )
