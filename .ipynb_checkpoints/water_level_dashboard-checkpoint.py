@@ -134,7 +134,7 @@ def main():
                 # 나머지 컬럼들에 대해서는 NaN 값이나 적절한 기본값을 설정할 수 있습니다.
             }
 
-            traffic_data = traffic_data.append(new_row, ignore_index=True)
+            traffic_data = pd.concat([traffic_data, new_data], ignore_index=True)
 
             
             col1, col2 = st.columns(2)
