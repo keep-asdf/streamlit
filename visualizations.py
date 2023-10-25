@@ -5,6 +5,7 @@ from bokeh.models import ColumnDataSource, Band, Legend, HoverTool
 from bokeh.palettes import Category10
 from bokeh.layouts import column, gridplot
 import matplotlib.pyplot as plt
+from bokeh.models import DatetimeTicker
 
 def visualize_moving_averages_with_bokeh(dataframe, selected_datetime, show_blue_line):
     dataframe = dataframe.copy()  # 캐싱된 데이터프레임을 수정하기 전에 복사본을 만듭니다.
@@ -293,9 +294,10 @@ def visualize_true_vs_predicted_last_6h(data):
 
 
 
-def plot_predicted_volatility(data):
+
+def plot_predicted_volatility_bokeh_cleaned(data):
     """
-    Plot the predicted volatility using Bokeh.
+    Plot the predicted volatility using Bokeh with cleaner x-axis.
     
     Args:
     - data (DataFrame): Data containing timestamps and predicted volatility
@@ -315,6 +317,9 @@ def plot_predicted_volatility(data):
     # 그래프에 데이터 추가
     p.line(x='Time', y='Predicted_Volatility_1hr_Ahead', source=source, color="darkred", legend_label="Predicted Volatility")
     
+    # x-axis ticker configuration for cleaner display
+    p.xaxis.ticker = DatetimeTicker(desired_num_ticks=10)
+    
     # Hover tool 추가
     hover = HoverTool()
     hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
@@ -326,6 +331,9 @@ def plot_predicted_volatility(data):
     p.legend.visible = False
 
     return p
+
+# Create the plot using Bokeh with cleaned x
+
 # import matplotlib.pyplot as plt
 
 # def plot_predicted_volatility(data):
