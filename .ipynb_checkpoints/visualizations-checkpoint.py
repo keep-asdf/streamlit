@@ -292,7 +292,7 @@ def visualize_true_vs_predicted_last_6h(data):
 
 
 
-def plot_predicted_volatility_bokeh(data):
+def plot_predicted_volatility(data):
     """
     Plot the predicted volatility using Bokeh.
     
