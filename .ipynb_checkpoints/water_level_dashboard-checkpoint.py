@@ -237,7 +237,7 @@ def main():
             view_state = pdk.ViewState(
                 latitude=36.6230541816206,
                 longitude=127.35070148286204 ,
-                zoom=13,
+                zoom=15,
                 pitch=0
                         )
 
