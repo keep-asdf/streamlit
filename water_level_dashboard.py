@@ -126,16 +126,16 @@ def main():
             traffic_data = traffic_data()
             
             
-            # 기준 좌표를 데이터 프레임에 추가합니다.
-            center_data = pd.DataFrame({
-                'lat': [36.6230541816206],
-                'lon': [127.35070148286204]
-            })
+            # 기준 좌표를 traffic_data 데이터 프레임에 추가합니다.
+            new_row = {
+                'eventType' : '미호천교 기준점'
+                'coordX': 36.6230541816206,
+                'coordY': 127.35070148286204,
+                # 나머지 컬럼들에 대해서는 NaN 값이나 적절한 기본값을 설정할 수 있습니다.
+            }
 
-            # 원래의 데이터와 기준 좌표 데이터를 합칩니다.
-            map_data = pd.concat([traffic_data.rename(columns={'coordX': 'lat', 'coordY': 'lon'}), center_data])
+            traffic_data = traffic_data.append(new_row, ignore_index=True)
 
-            
             
             col1, col2 = st.columns(2)
             with col1:
