@@ -60,8 +60,19 @@ def main():
             # Streamlit에서 날짜와 시간을 입력받습니다.
             col1, col2 = st.columns(2)
             with col1:
+                
+                # 월, 일, 년을 각각 별도의 선택 상자로 제공
+                months = list(range(1, 13))
+                days = list(range(1, 32))
+                years = list(range(2000, 2031))
 
-                selected_date1 = st.date_input("Select a date", datetime.date.today())
+                selected_month = st.selectbox("Select a month", months)
+                selected_day = st.selectbox("Select a day", days)
+                selected_year = st.selectbox("Select a year", years)
+                
+                selected_date1 = datetime.date(selected_year, selected_month, selected_day)
+
+                # selected_date1 = st.date_input("Select a date", datetime.date.today())
             
             with col2:
                 
