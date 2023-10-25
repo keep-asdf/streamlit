@@ -109,7 +109,7 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datet
                title="True vs Predicted Values with Confidence Intervals and Status Lines")
 
     # Plot the True Values
-    p.line('Time', 'True_Value', source=source, color="#464646", legend_label="관측된 미호천교 수위")
+    p.line('Time', 'True_Value', source=source, color="#464646", legend_label="관측된 미호천교 수위", line_width = 2)
 
     # Plot the Predicted Values
     p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="예측된 미호천교 수위" , line_width = 3)
