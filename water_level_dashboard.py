@@ -253,7 +253,9 @@ def main():
                         )
             
             # pydeck 지도 생성
-            deck = pdk.Deck(initial_view_state=view_state, layers=[layer])
+            deck = pdk.Deck(initial_view_state=view_state, layers=[layer],
+                           map_style="mapbox://styles/mapbox/light-v10"  # 밝은 스타일
+                            )
 
             # 지도를 HTML 문자열로 변환
             map_html = deck.to_html(as_string=True)
