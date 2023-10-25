@@ -252,9 +252,12 @@ def main():
                 auto_highlight=True  # 강조 효과 설정
                         )
             
+            import os
+            os.environ["MAPBOX_API_KEY"] = "pk.eyJ1IjoibnVzbnVnZWh5IiwiYSI6ImNsZjR1ZnFlejBhMjEzeHMycmJwMG5mdWIifQ.eAJCIX5OERNVHyKNwCq-PA"
+            
             # pydeck 지도 생성
             deck = pdk.Deck(initial_view_state=view_state, layers=[layer],
-                            mapbox_key = 'pk.eyJ1IjoibnVzbnVnZWh5IiwiYSI6ImNsZjR1ZnFlejBhMjEzeHMycmJwMG5mdWIifQ.eAJCIX5OERNVHyKNwCq-PA',
+                            # mapbox_key = 'pk.eyJ1IjoibnVzbnVnZWh5IiwiYSI6ImNsZjR1ZnFlejBhMjEzeHMycmJwMG5mdWIifQ.eAJCIX5OERNVHyKNwCq-PA',
                            map_style="mapbox://styles/mapbox/streets-v11"  # 밝은 스타일
                             )
 
