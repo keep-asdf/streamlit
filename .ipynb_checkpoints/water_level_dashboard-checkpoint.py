@@ -241,11 +241,19 @@ def main():
             
             st.bokeh_chart(test_visualize_true_pred_with_CI_and_status_lines_bokeh(for_test_data_true_pred, selected_datetime2, show_blue_line2))
             
+            
+            
             ##################################################################
 
    
+            # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            def load_data_volatility():
+                return pd.read_csv('data/volatility.csv').copy()
 
+            volatility = load_data_volatility()
 
+            st.bokeh_chart(plot_predicted_volatility(volatility))
 
 
 if __name__ == '__main__':

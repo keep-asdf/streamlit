@@ -290,3 +290,21 @@ def visualize_true_vs_predicted_last_6h(data):
 
     return p
 
+
+
+def plot_predicted_volatility(data):
+    """
+    Plot the predicted volatility.
+    
+    Args:
+    - forecasts (ARCHModelForecast): Forecasted variance from the GARCH model
+    
+    Returns:
+    - None
+    """
+    predicted_volatility = data.variance / 100
+    plt.figure(figsize=(12, 6))
+    plt.plot(predicted_volatility.index, predicted_volatility['h.01'], label='Predicted Volatility')
+    plt.legend()
+    plt.title('GARCH Predicted Volatility')
+    plt.show()
