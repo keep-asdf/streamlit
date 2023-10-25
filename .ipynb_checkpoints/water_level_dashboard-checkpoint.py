@@ -37,11 +37,14 @@ def main():
         choice = option_menu("Menu", ["Prediction Result", "Learning Result", "Test"])
     
 
-    
+    ####################################################################################
+    ####################################################################################
+    ####################################################################################
     if choice == "Prediction Result":
-        # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
         
         with st.container():
+            
+           # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
             
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_data_moving_averages():
@@ -120,7 +123,9 @@ def main():
             traffic_data = traffic_data()
             st.subheader("실시간 미호천교 근방 교통 이벤트 데이터(empty = 현재 이벤트 없음)")
             st.write(traffic_data)
-    
+    ####################################################################################
+    ####################################################################################
+    ####################################################################################
     elif choice == "Learning Result":
         
         placeholder = st.empty()
@@ -173,12 +178,44 @@ def main():
                 st.write(data_true_pred.sort_values(by='Time', ascending=False))
             with col2:
                 st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))\
-
+    ####################################################################################
+    ####################################################################################
+    ####################################################################################
     elif choice == "Test":
 
         with st.container():
-            st.write("This is inside the container")
-            st.button("Click me!")
-        
+                        
+            # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            def load_data_true_pred():
+                return pd.read_csv('data/true_pred_with_CI.csv').copy()
+
+            for_test_data_true_pred = load_data_true_pred()
+            
+            columns_to_shift = ['pred', 'CI_lower', 'CI_upper']
+            for_test_data_true_pred[columns_to_shift] = for_test_data_true_pred[columns_to_shift].shift(3)
+
+            ##################################################################
+            # Streamlit에서 날짜와 시간을 입력받습니다.
+            col1, col2 = st.columns(2)
+            with col1:
+
+                selected_date3 = st.date_input("Select a date", datetime.date.today())
+            
+            with col2:
+                                
+                hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
+                selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
+                selected_time2 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
+
+                
+            show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
+
+            
+            selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
+            
+            
+            ##################################################################
+            
 if __name__ == '__main__':
     main()
