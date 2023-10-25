@@ -200,7 +200,7 @@ def main():
             col1, col2 = st.columns(2)
             with col1:
 
-                selected_date3 = st.date_input("Select a date", datetime.date.today())
+                selected_date2 = st.date_input("Select a date", datetime.date.today())
             
             with col2:
                                 
