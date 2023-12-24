@@ -25,7 +25,7 @@ def main():
     current_hour_seoul = current_time_seoul.hour
     
     st.title(f"💧❕ 미호천교 {current_hour_seoul}:00(24H) 기준, 3시간 후 수위 예측 Dashboard")
-    st.title("(‼‼현재, 미호천교 재방 공사로 인해, 데이터")
+    st.title("(‼‼현재, 미호천교 재방 공사로 인해, 수위 데이터 공급 끊킴. 따라서 수위 데이터 복구 전까지 예측을 일시 중단합니다.")
 
     # 사이드바에 버튼을 추가합니다.
     update_button = st.sidebar.button("Update Data")

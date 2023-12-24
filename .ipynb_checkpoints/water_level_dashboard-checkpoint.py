@@ -25,6 +25,7 @@ def main():
     current_hour_seoul = current_time_seoul.hour
     
     st.title(f"💧❕ 미호천교 {current_hour_seoul}:00(24H) 기준, 3시간 후 수위 예측 Dashboard")
+    st.title("(‼‼현재, 미호천교 재방 공사로 인해, 수위 데이터 공급 끊킴. 따라서 수위 데이터 복구 전까지 예측을 일시 중단합니다.")
 
     # 사이드바에 버튼을 추가합니다.
     update_button = st.sidebar.button("Update Data")
@@ -36,7 +37,7 @@ def main():
     
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
-        choice = option_menu("Menu", ["Prediction Result", "Learning Result"])#, "Test"])
+        choice = option_menu("Menu", ["Prediction Result"])#, "Learning Result"])#, "Test"])
     
 
     ####################################################################################
@@ -139,62 +140,61 @@ def main():
             with col2:
                 st.map(traffic_df,latitude = 'coordX', longitude = 'coordY', color = '#8B0000', size = 10)
                 
-#             st.subheader("실시간 미호천교 근방 교통 이벤트 데이터(empty = 현재 이벤트 없음)")
-#             st.write(traffic_data)
+
     ####################################################################################
     ####################################################################################
     ####################################################################################
-    elif choice == "Learning Result":
+#     elif choice == "Learning Result":
         
-        placeholder = st.empty()
-        with placeholder.container():
+#         placeholder = st.empty()
+#         with placeholder.container():
             
-            # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
-            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-            def load_data_true_pred():
-                return pd.read_csv('data/true_pred_with_CI.csv').copy()
+#             # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+#             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+#             def load_data_true_pred():
+#                 return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
-            data_true_pred = load_data_true_pred()
+#             data_true_pred = load_data_true_pred()
             
-             ##################################################################
-            # Streamlit에서 날짜와 시간을 입력받습니다.
-            col1, col2 = st.columns(2)
-            with col1:
+#              ##################################################################
+#             # Streamlit에서 날짜와 시간을 입력받습니다.
+#             col1, col2 = st.columns(2)
+#             with col1:
 
-                selected_date2 = st.date_input("Select a date", datetime.date.today())
+#                 selected_date2 = st.date_input("Select a date", datetime.date.today())
             
-            with col2:
+#             with col2:
                                 
-                hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
-                selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
-                selected_time2 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
+#                 hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
+#                 selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
+#                 selected_time2 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
 
                 
-            show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
+#             show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
 
             
-            selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
+#             selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
             
             
-            ##################################################################
+#             ##################################################################
             
-            st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred, selected_datetime2, show_blue_line2))
+#             st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred, selected_datetime2, show_blue_line2))
 
 
             
-            data_true_pred = load_data_true_pred()
+#             data_true_pred = load_data_true_pred()
 
-            data_true_pred['Time'] = pd.to_datetime(data_true_pred['Time'])
+#             data_true_pred['Time'] = pd.to_datetime(data_true_pred['Time'])
 
-            # Check the last 6 hours of data
-            true_pred_last_6h_data = data_true_pred.loc[data_true_pred['Time'] >= data_true_pred['Time'].iloc[-1] - pd.Timedelta(hours=6)]
+#             # Check the last 6 hours of data
+#             true_pred_last_6h_data = data_true_pred.loc[data_true_pred['Time'] >= data_true_pred['Time'].iloc[-1] - pd.Timedelta(hours=6)]
 
-             # 데이터 프레임과 그래프를 나란히 표시
-            col1, col2 = st.columns(2)
-            with col1:
-                st.write(data_true_pred.sort_values(by='Time', ascending=False))
-            with col2:
-                st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))\
+#              # 데이터 프레임과 그래프를 나란히 표시
+#             col1, col2 = st.columns(2)
+#             with col1:
+#                 st.write(data_true_pred.sort_values(by='Time', ascending=False))
+#             with col2:
+#                 st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))\
 
 
 
