@@ -23,7 +23,7 @@ def main():
 
     # 현재 시간의 "시" 값을 가져옵니다.
     current_hour_seoul = current_time_seoul.hour
-    current_hour_seoul_full = current_time_seoul
+    current_hour_seoul_full = current_time_seoul.strftime("%Y-%m-%d %H")
     st.title(f"💧❕ 미호천교 {current_hour_seoul}:00(24H) 기준, 3시간 후 수위 예측 Dashboard")
     st.title(f"(❗현재{current_hour_seoul_full}, 미호천교 재방 공사로 인해, 수위 데이터 공급 끊킴❗)")
     st.title("(❗따라서 수위 데이터 측정 재개 전까지 예측을 일시 중단합니다❗)")
