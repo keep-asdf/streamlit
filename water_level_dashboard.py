@@ -38,7 +38,7 @@ def main():
     
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
-        choice = option_menu("Menu", ["Prediction Result", "Learning Result"])
+        choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI"])
     
 
     ####################################################################################
@@ -145,7 +145,7 @@ def main():
     ###################################################################################
     ###################################################################################
     ###################################################################################
-    elif choice == "Learning Result":
+    elif choice == "True vs Predicted with CI":
         
         placeholder = st.empty()
         with placeholder.container():
