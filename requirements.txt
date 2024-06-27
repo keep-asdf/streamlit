@@ -3,20 +3,14 @@ matplotlib
 seaborn
 pandas
 
-
-#Jinja2 >=2.9
-
-
-
 streamlit-option-menu
 pyparsing 
-
 
 pydeck
 
 bokeh==2.4.3
 Jinja2 >=2.9
-numpy >=1.11.3
+numpy >=1.20.0
 packaging >=16.8
 pillow >=7.1.0
 PyYAML >=3.10
