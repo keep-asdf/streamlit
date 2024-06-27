@@ -33,12 +33,12 @@ def main():
     
     
     # 사이드바를 사용하여 그래프 선택
-    graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
+    # graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
 
     
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
-        choice = option_menu("Menu", ["Prediction Result"]), "Learning Result"]), "Test"])
+        choice = option_menu("Menu", ["Prediction Result", "Learning Result"])
     
 
     ####################################################################################
