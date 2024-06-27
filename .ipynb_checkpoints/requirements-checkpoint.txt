@@ -5,10 +5,10 @@ pandas
 
 
 #Jinja2 >=2.9
-#numpy >=1.11.3
+numpy >=1.11.3
 
 jinja2
-numpy
+#numpy
 bokeh==2.4.3
 
 
