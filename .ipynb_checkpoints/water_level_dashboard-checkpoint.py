@@ -195,7 +195,17 @@ def main():
             with col1:
                 st.write(data_true_pred.sort_values(by='Time', ascending=False))
             with col2:
-                st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))\
+                st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))
+                
+            ##################################################################
+                
+            @st.cache_data(ttl=3600)
+            def load_data_predicted_volatility():
+                return pd.read_csv('data/predicted_volatility.csv').copy()
+
+            data_predicted_volatility = load_data_predicted_volatility()
+            fig = plot_predicted_volatility(data_predicted_volatility)
+            st.pyplot(fig)
 
 
 
