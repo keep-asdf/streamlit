@@ -245,22 +245,20 @@ def main():
             ##################################################################
             
             st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred, selected_datetime2, show_blue_line2))
-
-
             
             data_true_pred = load_data_true_pred()
 
             data_true_pred['Time'] = pd.to_datetime(data_true_pred['Time'])
 
-            # Check the last 6 hours of data
-            true_pred_last_6h_data = data_true_pred.loc[data_true_pred['Time'] >= data_true_pred['Time'].iloc[-1] - pd.Timedelta(hours=6)]
+#             # Check the last 6 hours of data
+#             true_pred_last_6h_data = data_true_pred.loc[data_true_pred['Time'] >= data_true_pred['Time'].iloc[-1] - pd.Timedelta(hours=6)]
 
-             # 데이터 프레임과 그래프를 나란히 표시
-            col1, col2 = st.columns(2)
-            with col1:
-                st.write(data_true_pred.sort_values(by='Time', ascending=False))
-            with col2:
-                st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))
+#              # 데이터 프레임과 그래프를 나란히 표시
+#             col1, col2 = st.columns(2)
+#             with col1:
+#                 st.write(data_true_pred.sort_values(by='Time', ascending=False))
+#             with col2:
+#                 st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))
 
 
 if __name__ == '__main__':
