@@ -50,8 +50,9 @@ def main():
     # st.title("(❗따라서 수위 데이터 측정 재개 전까지 예측을 일시 중단합니다.)")
 
     # 사이드바에 버튼을 추가합니다.
-    update_button = st.sidebar.button("Update Data")
-    
+    # update_button = st.sidebar.button("Update Data")
+    update_button = st.sidebar.button("Update Data", key="update_button")
+
     
     # 사이드바를 사용하여 그래프 선택
     # graph_selection = st.sidebar.selectbox("Choose a Graph", ["Moving Averages", "True vs Predicted with CI"])
@@ -60,8 +61,9 @@ def main():
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
         # choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test", "Kakao Notification"])
-        choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test", "Kakao Notification", "Admin Page"])
-    
+        # choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test", "Kakao Notification", "Admin Page"])
+        choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test", "Kakao Notification", "Admin Page"], key="menu")
+
 
     ####################################################################################
     ####################################################################################
@@ -309,56 +311,58 @@ def main():
     ###################################################################################
     elif choice == "Kakao Notification":
         st.subheader("KakaoTalk Notification System")
+    
+        kakao_id = st.text_input('Enter KakaoTalk ID:', key="kakao_id_input")
+        condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100, key="condition_value_input")
 
-        kakao_id = st.text_input('Enter KakaoTalk ID:')
-        condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100)
+            if st.button('Add/Update User', key="add_update_user"):
+                result = add_user(kakao_id, condition_value)
+                st.success(result) if 'successfully' in result else st.warning(result)
 
-        if st.button('Add/Update User'):
-            result = add_user(kakao_id, condition_value)
-            st.success(result) if 'successfully' in result else st.warning(result)
+            if st.button('Remove User', key="remove_user"):
+                result = remove_user(kakao_id)
+                st.success(result) if 'removed successfully' in result else st.warning(result)
 
-        if st.button('Remove User'):
-            result = remove_user(kakao_id)
-            st.success(result) if 'removed successfully' in result else st.warning(result)
+            if st.button('Check Conditions and Notify', key="check_conditions"):
+                check_conditions_and_notify()
 
-        if st.button('Check Conditions and Notify'):
-            check_conditions_and_notify()
 
     ###################################################################################
     ###################################################################################
     ###################################################################################
-#     elif choice == "Admin Page":
-#         st.subheader("Admin Page")
+    elif choice == "Admin Page":
+        st.subheader("Admin Page")
 
-#         # 관리자 인증
-#         if 'authenticated' not in st.session_state:
-#             st.session_state['authenticated'] = False
+        # 관리자 인증
+        if 'authenticated' not in st.session_state:
+            st.session_state['authenticated'] = False
 
-#         if not st.session_state['authenticated']:
-#             password = st.text_input("Enter admin password:", type="password")
-#             if st.button("Login"):
-#                 if password == ADMIN_PASSWORD:
-#                     st.session_state['authenticated'] = True
-#                     st.success("Login successful")
-#                 else:
-#                     st.error("Invalid password")
-#             return
+        if not st.session_state['authenticated']:
+            password = st.text_input("Enter admin password:", type="password", key="admin_password_input")
+                
+            if st.button("Login", key="admin_login_button"):
+                if password == ADMIN_PASSWORD:
+                    st.session_state['authenticated'] = True
+                    st.success("Login successful")
+                else:
+                    st.error("Invalid password")
+            return
 
-#         # 관리자 인증 후 표시할 내용
-#         if st.session_state['authenticated']:
-#             st.subheader('Registered Users')
-#             data = load_data()
-#             st.write(data)
+        # 관리자 인증 후 표시할 내용
+        if st.session_state['authenticated']:
+            st.subheader('Registered Users')
+            data = load_data()
+            st.write(data)
 
-#             # 로그 파일 읽기
-#             log_file = 'logs/app.log'
-#             st.subheader('Application Logs')
-#             try:
-#                 with open(log_file, 'r') as f:
-#                     log_content = f.read()
-#                     st.text(log_content)
-#             except FileNotFoundError:
-#                 st.error("Log file not found")
+            # 로그 파일 읽기
+            log_file = 'logs/app.log'
+            st.subheader('Application Logs')
+            try:
+                with open(log_file, 'r') as f:
+                    log_content = f.read()
+                    st.text(log_content)
+            except FileNotFoundError:
+                st.error("Log file not found")
 
 if __name__ == '__main__':
     main()
