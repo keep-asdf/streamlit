@@ -38,7 +38,7 @@ def main():
     
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
-        choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test"])
+        choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test", "Kakao Notification"])
     
 
     ####################################################################################
