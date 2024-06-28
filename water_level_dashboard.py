@@ -310,11 +310,11 @@ def main():
     ###################################################################################
     ###################################################################################
     # Kakao Notification 페이지
-#     elif choice == "Kakao Notification":
-#         st.subheader("KakaoTalk Notification System")
+    elif choice == "Kakao Notification":
+        st.subheader("KakaoTalk Notification System")
         
-#         kakao_id = st.text_input('Enter KakaoTalk ID:', key="kakao_id_input")
-#         condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100, key="condition_value_input")
+        kakao_id = st.text_input('Enter KakaoTalk ID:', key="kakao_id_input")
+        condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100, key="condition_value_input")
     
 #         if st.button('Add/Update User', key="add_update_user"):
 #             result = add_user(kakao_id, condition_value)
@@ -327,24 +327,26 @@ def main():
 #         if st.button('Check Conditions and Notify', key="check_conditions"):
 #             check_conditions_and_notify()
 
-    if st.button('Add/Update User', key="add_update_user_button"):
-        result = add_user(kakao_id, condition_value)
-        if 'successfully' in result:
-            st.success(result)
-        else:
-            st.warning(result)
+        if st.button('Add/Update User', key="add_update_user_button"):
+            result = add_user(kakao_id, condition_value)
+            if 'successfully' in result:
+                st.success(result)
+            else:
+                st.warning(result)
+        
+        if st.button('Remove User', key="remove_user_button"):
+            result = remove_user(kakao_id)
+            if 'removed successfully' in result:
+                st.success(result)
+            else:
+                st.warning(result)
+        
+        if st.button('Check Conditions and Notify', key="check_conditions_button"):
+            check_conditions_and_notify()
+            st.success("Checked conditions and sent notifications if any.")
+        
     
-    if st.button('Remove User', key="remove_user_button"):
-        result = remove_user(kakao_id)
-        if 'removed successfully' in result:
-            st.success(result)
-        else:
-            st.warning(result)
-    
-    if st.button('Check Conditions and Notify', key="check_conditions_button"):
-        check_conditions_and_notify()
-        st.success("Checked conditions and sent notifications if any.")
-    
+
 
 
 #     ###################################################################################
