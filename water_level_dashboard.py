@@ -11,6 +11,10 @@ from kakao_notify import *
 
 st.set_page_config(layout="wide")
 
+# 관리자 비밀번호 설정
+ADMIN_PASSWORD = "1234"
+
+
 # Streamlit app
 def main():
 
@@ -55,7 +59,8 @@ def main():
     
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
-        choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test", "Kakao Notification"])
+        # choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test", "Kakao Notification"])
+        choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test", "Kakao Notification", "Admin Page"])
     
 
     ####################################################################################
@@ -269,14 +274,44 @@ def main():
 #             fig = plot_predicted_volatility(data_predicted_volatility)
 #             st.pyplot(fig)
 
+#     ###################################################################################
+#     ###################################################################################
+#     ###################################################################################
+#     elif choice == "Kakao Notification":
+#         st.subheader("KakaoTalk Notification System")
+        
+#         kakao_id = st.text_input('Enter KakaoTalk ID:')
+#         condition_value = st.number_input('Enter condition value:', min_value=0, max_value=100)
+
+#         if st.button('Add/Update User'):
+#             result = add_user(kakao_id, condition_value)
+#             st.success(result) if 'successfully' in result else st.warning(result)
+
+#         if st.button('Remove User'):
+#             result = remove_user(kakao_id)
+#             st.success(result) if 'removed successfully' in result else st.warning(result)
+
+#         if st.button('Check Conditions and Notify'):
+#             check_conditions_and_notify()
+
+#         # # 등록된 사용자 목록을 관리자만 볼 수 있도록 설정
+#         # if st.session_state['authenticated']:
+#         #     st.subheader('Registered Users')
+#         #     data = load_data()
+#         #     st.write(data)
+        
+#        # 등록된 사용자 목록을 표시합니다.
+#         st.subheader('Registered Users')
+#         data = load_data()
+#         st.write(data)
     ###################################################################################
     ###################################################################################
     ###################################################################################
     elif choice == "Kakao Notification":
         st.subheader("KakaoTalk Notification System")
-        
+
         kakao_id = st.text_input('Enter KakaoTalk ID:')
-        condition_value = st.number_input('Enter condition value:', min_value=0, max_value=100)
+        condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100)
 
         if st.button('Add/Update User'):
             result = add_user(kakao_id, condition_value)
@@ -289,16 +324,43 @@ def main():
         if st.button('Check Conditions and Notify'):
             check_conditions_and_notify()
 
-        # # 등록된 사용자 목록을 관리자만 볼 수 있도록 설정
-        # if st.session_state['authenticated']:
-        #     st.subheader('Registered Users')
-        #     data = load_data()
-        #     st.write(data)
-        
-       # 등록된 사용자 목록을 표시합니다.
-        st.subheader('Registered Users')
-        data = load_data()
-        st.write(data)
+    ###################################################################################
+    ###################################################################################
+    ###################################################################################
+    elif choice == "Admin Page":
+        st.subheader("Admin Page")
 
+        # 관리자 인증
+        if 'authenticated' not in st.session_state:
+            st.session_state['authenticated'] = False
+
+        if not st.session_state['authenticated']:
+            password = st.text_input("Enter admin password:", type="password")
+            if st.button("Login"):
+                if password == ADMIN_PASSWORD:
+                    st.session_state['authenticated'] = True
+                    st.success("Login successful")
+                else:
+                    st.error("Invalid password")
+            return
+
+        # 관리자 인증 후 표시할 내용
+        if st.session_state['authenticated']:
+            st.subheader('Registered Users')
+            data = load_data()
+            st.write(data)
+
+            # 로그 파일 읽기
+            log_file = 'logs/app.log'
+            st.subheader('Application Logs')
+            try:
+                with open(log_file, 'r') as f:
+                    log_content = f.read()
+                    st.text(log_content)
+            except FileNotFoundError:
+                st.error("Log file not found")
+
+if __name__ == '__main__':
+    main()
 if __name__ == '__main__':
     main()
