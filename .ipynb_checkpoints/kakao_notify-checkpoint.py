@@ -15,12 +15,11 @@ CSV_FILE = 'data/kakao_users.csv'
 
 def load_data():
     try:
-        return pd.read_csv(CSV_FILE, encoding='utf-8', error_bad_lines=False, warn_bad_lines=True)
+        return pd.read_csv(CSV_FILE, encoding='utf-8', on_bad_lines='skip')
     except UnicodeDecodeError:
-        return pd.read_csv(CSV_FILE, encoding='cp949', error_bad_lines=False, warn_bad_lines=True)
+        return pd.read_csv(CSV_FILE, encoding='cp949', on_bad_lines='skip')
     except FileNotFoundError:
         return pd.DataFrame(columns=['kakao_id', 'condition_value'])
-
 
 def save_data(data):
     data.to_csv(CSV_FILE, index=False)
