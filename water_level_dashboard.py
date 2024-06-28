@@ -309,22 +309,23 @@ def main():
     ###################################################################################
     ###################################################################################
     ###################################################################################
+    # Kakao Notification 페이지
     elif choice == "Kakao Notification":
         st.subheader("KakaoTalk Notification System")
-    
+        
         kakao_id = st.text_input('Enter KakaoTalk ID:', key="kakao_id_input")
         condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100, key="condition_value_input")
-
-            if st.button('Add/Update User', key="add_update_user"):
-                result = add_user(kakao_id, condition_value)
-                st.success(result) if 'successfully' in result else st.warning(result)
-
-            if st.button('Remove User', key="remove_user"):
-                result = remove_user(kakao_id)
-                st.success(result) if 'removed successfully' in result else st.warning(result)
-
-            if st.button('Check Conditions and Notify', key="check_conditions"):
-                check_conditions_and_notify()
+    
+        if st.button('Add/Update User', key="add_update_user"):
+            result = add_user(kakao_id, condition_value)
+            st.success(result) if 'successfully' in result else st.warning(result)
+    
+        if st.button('Remove User', key="remove_user"):
+            result = remove_user(kakao_id)
+            st.success(result) if 'removed successfully' in result else st.warning(result)
+    
+        if st.button('Check Conditions and Notify', key="check_conditions"):
+            check_conditions_and_notify()
 
 
     ###################################################################################
