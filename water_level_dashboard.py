@@ -252,6 +252,31 @@ def main():
 #             fig = plot_predicted_volatility(data_predicted_volatility)
 #             st.pyplot(fig)
 
+    ###################################################################################
+    ###################################################################################
+    ###################################################################################
+    elif choice == "Kakao Notification":
+        st.subheader("KakaoTalk Notification System")
+        
+        kakao_id = st.text_input('Enter KakaoTalk ID:')
+        condition_value = st.number_input('Enter condition value:', min_value=0, max_value=100)
+
+        if st.button('Add/Update User'):
+            result = add_user(kakao_id, condition_value)
+            st.success(result) if 'successfully' in result else st.warning(result)
+
+        if st.button('Remove User'):
+            result = remove_user(kakao_id)
+            st.success(result) if 'removed successfully' in result else st.warning(result)
+
+        if st.button('Check Conditions and Notify'):
+            check_conditions_and_notify()
+
+        # 등록된 사용자 목록을 표시합니다.
+        st.subheader('Registered Users')
+        data = load_data()
+        st.write(data)
+
 
 
 if __name__ == '__main__':
