@@ -291,9 +291,9 @@ def main():
 
         # 등록된 사용자 목록을 관리자만 볼 수 있도록 설정
         if st.session_state['authenticated']:
-        st.subheader('Registered Users')
-        data = load_data()
-        st.write(data)
+            st.subheader('Registered Users')
+            data = load_data()
+            st.write(data)
 
 
 if __name__ == '__main__':
