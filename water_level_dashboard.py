@@ -38,7 +38,7 @@ def main():
     
     # 사이드바를 사용하여 그래프 선택
     with st.sidebar:
-        choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI"])
+        choice = option_menu("Menu", ["Prediction Result", "True vs Predicted with CI", "Test"])
     
 
     ####################################################################################
@@ -207,6 +207,60 @@ def main():
 #             fig = plot_predicted_volatility(data_predicted_volatility)
 #             st.pyplot(fig)
 
+   ###################################################################################
+    ###################################################################################
+    ###################################################################################
+    elif choice == "Test":
+        
+        placeholder = st.empty()
+        with placeholder.container():
+            
+            # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            def load_data_true_pred():
+                return pd.read_csv('data/true_pred_with_CI.csv').copy()
+
+            data_true_pred = load_data_true_pred()
+            
+             ##################################################################
+            # Streamlit에서 날짜와 시간을 입력받습니다.
+            col1, col2 = st.columns(2)
+            with col1:
+
+                selected_date2 = st.date_input("Select a date", datetime.date.today())
+            
+            with col2:
+                                
+                hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
+                selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
+                selected_time2 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
+
+                
+            show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
+
+            
+            selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
+            
+            
+            ##################################################################
+            
+            st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred, selected_datetime2, show_blue_line2))
+
+
+            
+            data_true_pred = load_data_true_pred()
+
+            data_true_pred['Time'] = pd.to_datetime(data_true_pred['Time'])
+
+            # Check the last 6 hours of data
+            true_pred_last_6h_data = data_true_pred.loc[data_true_pred['Time'] >= data_true_pred['Time'].iloc[-1] - pd.Timedelta(hours=6)]
+
+             # 데이터 프레임과 그래프를 나란히 표시
+            col1, col2 = st.columns(2)
+            with col1:
+                st.write(data_true_pred.sort_values(by='Time', ascending=False))
+            with col2:
+                st.bokeh_chart(visualize_true_vs_predicted_last_6h(true_pred_last_6h_data))
 
 
 if __name__ == '__main__':
