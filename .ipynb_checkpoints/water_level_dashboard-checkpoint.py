@@ -244,13 +244,13 @@ def main():
             
             
             
-            @st.cache_data(ttl=3600)
-            def load_data_predicted_volatility():
-                return pd.read_csv('data/volatility.csv').copy()
+#             @st.cache_data(ttl=3600)
+#             def load_data_predicted_volatility():
+#                 return pd.read_csv('data/volatility.csv').copy()
 
-            data_predicted_volatility = load_data_predicted_volatility()
-            fig = plot_predicted_volatility(data_predicted_volatility)
-            st.pyplot(fig)
+#             data_predicted_volatility = load_data_predicted_volatility()
+#             fig = plot_predicted_volatility(data_predicted_volatility)
+#             st.pyplot(fig)
 
 
 
