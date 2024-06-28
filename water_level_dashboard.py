@@ -51,7 +51,7 @@ def main():
 
     # 사이드바에 버튼을 추가합니다.
     # update_button = st.sidebar.button("Update Data")
-    update_button = st.sidebar.button("Update Data", key="update_button")
+    update_button = st.sidebar.button("Update Data", key="update_data_button")
 
     
     # 사이드바를 사용하여 그래프 선택
