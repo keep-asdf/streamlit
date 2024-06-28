@@ -4,11 +4,20 @@ import requests
 
 CSV_FILE = 'data/kakao_users.csv'
 
+# def load_data():
+#     try:
+#         return pd.read_csv(CSV_FILE, encoding='utf-8')
+#     except UnicodeDecodeError:
+#         return pd.read_csv(CSV_FILE, encoding='cp949')
+#     except FileNotFoundError:
+#         return pd.DataFrame(columns=['kakao_id', 'condition_value'])
+
+
 def load_data():
     try:
-        return pd.read_csv(CSV_FILE, encoding='utf-8')
+        return pd.read_csv(CSV_FILE, encoding='utf-8', error_bad_lines=False, warn_bad_lines=True)
     except UnicodeDecodeError:
-        return pd.read_csv(CSV_FILE, encoding='cp949')
+        return pd.read_csv(CSV_FILE, encoding='cp949', error_bad_lines=False, warn_bad_lines=True)
     except FileNotFoundError:
         return pd.DataFrame(columns=['kakao_id', 'condition_value'])
 
