@@ -369,3 +369,57 @@ def plot_predicted_volatility(data):
     plt.tight_layout()
     return fig
 
+
+
+def test_visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datetime, show_blue_line):
+    dataframe['Time'] = pd.to_datetime(dataframe['Time'])
+    
+    # 신뢰 구간을 벗어나는 값 확인
+    dataframe['Out_Of_CI'] = (dataframe['True_Value'] < dataframe['CI_Lower']) | (dataframe['True_Value'] > dataframe['CI_Upper'])
+    
+    source = ColumnDataSource(dataframe)
+
+    p = figure(x_axis_type="datetime", width=1600, height=400, 
+               title="True vs Predicted Values with Confidence Intervals and Status Lines")
+
+    # 관측된 값 그리기
+    p.line('Time', 'True_Value', source=source, color="#464646", legend_label="관측된 미호천교 수위", line_width=2)
+
+    # 예측된 값 그리기
+    p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="예측된 미호천교 수위", line_width=3)
+
+    # 신뢰 구간 그리기
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
+    p.add_layout(band)
+
+    # 상태 선 추가 (고정된 값 사용)
+    p.line(x=dataframe['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)")
+    p.line(x=dataframe['Time'], y=8.0, color='red', line_dash="dashed", legend_label="경계(8.0m)")
+    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
+    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
+
+    # 파란색 선 추가 (show_blue_line 값이 True인 경우에만)
+    if show_blue_line:
+        p.line(x=[selected_datetime, selected_datetime], y=[dataframe['True_Value'].min(), dataframe['True_Value'].max()], 
+               color='#000080', line_dash="dotted", line_width=3)
+
+    # 신뢰 구간을 벗어난 값들을 톤 다운된 파란색으로 표시
+    out_of_ci_source = ColumnDataSource(dataframe[dataframe['Out_Of_CI']])
+    p.scatter('Time', 'True_Value', source=out_of_ci_source, color='lightblue', size=8, legend_label="신뢰 구간을 벗어난 값")
+
+    # Hover tool 추가
+    hover = HoverTool(
+        tooltips=[
+            ("Time", "@Time{%F %T}"),
+            ("True Value", "@True_Value"),
+            ("Predicted Value", "@Predicted_Value"),
+            ("Confidence Interval", "(@CI_Lower, @CI_Upper)")
+        ],
+        formatters={
+            "@Time": "datetime"
+        },
+        mode='mouse'
+    )
+    p.add_tools(hover)
+
+    return p
