@@ -333,14 +333,13 @@ def main():
     ###################################################################################
     elif choice == "Admin Page":
         st.subheader("Admin Page")
-
+    
         # 관리자 인증
         if 'authenticated' not in st.session_state:
             st.session_state['authenticated'] = False
-
+    
         if not st.session_state['authenticated']:
             password = st.text_input("Enter admin password:", type="password", key="admin_password_input")
-                
             if st.button("Login", key="admin_login_button"):
                 if password == ADMIN_PASSWORD:
                     st.session_state['authenticated'] = True
@@ -348,13 +347,13 @@ def main():
                 else:
                     st.error("Invalid password")
             return
-
+    
         # 관리자 인증 후 표시할 내용
         if st.session_state['authenticated']:
             st.subheader('Registered Users')
             data = load_data()
             st.write(data)
-
+    
             # 로그 파일 읽기
             log_file = 'logs/app.log'
             st.subheader('Application Logs')
@@ -364,6 +363,7 @@ def main():
                     st.text(log_content)
             except FileNotFoundError:
                 st.error("Log file not found")
+    
 
 if __name__ == '__main__':
     main()
