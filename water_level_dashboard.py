@@ -13,6 +13,24 @@ st.set_page_config(layout="wide")
 
 # Streamlit app
 def main():
+
+    
+################################################
+    # 관리자 인증
+    if 'authenticated' not in st.session_state:
+        st.session_state['authenticated'] = False
+
+    if not st.session_state['authenticated']:
+        password = st.text_input("Enter admin password:", type="password")
+        if st.button("Login"):
+            if password == ADMIN_PASSWORD:
+                st.session_state['authenticated'] = True
+                st.success("Login successful")
+            else:
+                st.error("Invalid password")
+        return
+################################################
+    
     
     # UTC 기준의 현재 시간을 얻습니다.
     current_time_utc = datetime.datetime.utcnow()
@@ -271,11 +289,11 @@ def main():
         if st.button('Check Conditions and Notify'):
             check_conditions_and_notify()
 
-        # 등록된 사용자 목록을 표시합니다.
+        # 등록된 사용자 목록을 관리자만 볼 수 있도록 설정
+        if st.session_state['authenticated']:
         st.subheader('Registered Users')
         data = load_data()
         st.write(data)
-
 
 
 if __name__ == '__main__':
