@@ -6,9 +6,12 @@ CSV_FILE = 'data/kakao_users.csv'
 
 def load_data():
     try:
-        return pd.read_csv(CSV_FILE)
+        return pd.read_csv(CSV_FILE, encoding='utf-8')
+    except UnicodeDecodeError:
+        return pd.read_csv(CSV_FILE, encoding='cp949')
     except FileNotFoundError:
         return pd.DataFrame(columns=['kakao_id', 'condition_value'])
+
 
 def save_data(data):
     data.to_csv(CSV_FILE, index=False)
