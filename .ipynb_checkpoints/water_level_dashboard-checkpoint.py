@@ -344,6 +344,7 @@ def main():
                 if password == ADMIN_PASSWORD:
                     st.session_state['authenticated'] = True
                     st.success("Login successful")
+                    st.experimental_rerun()  # 로그인 성공 시 페이지 새로고침
                 else:
                     st.error("Invalid password")
             return
