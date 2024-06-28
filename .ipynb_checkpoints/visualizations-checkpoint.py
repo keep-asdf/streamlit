@@ -336,36 +336,36 @@ def plot_predicted_volatility_bokeh_cleaned(data):
 
 # import matplotlib.pyplot as plt
 
-# def plot_predicted_volatility(data):
-#     """
-#     Plot the predicted volatility using Matplotlib with cleaner x-axis.
+def plot_predicted_volatility(data):
+    """
+    Plot the predicted volatility using Matplotlib with cleaner x-axis.
     
-#     Args:
-#     - data (DataFrame): Data containing timestamps and predicted volatility
+    Args:
+    - data (DataFrame): Data containing timestamps and predicted volatility
     
-#     Returns:
-#     - fig: Matplotlib figure object
-#     """
-#     # Create the figure and axis
-#     fig, ax = plt.subplots(figsize=(10, 6))
+    Returns:
+    - fig: Matplotlib figure object
+    """
+    # Create the figure and axis
+    fig, ax = plt.subplots(figsize=(10, 6))
     
-#     # Plot the data
-#     ax.plot(data['Time'], data['Predicted_Volatility_1hr_Ahead'], color="darkred", label="Predicted Volatility")
+    # Plot the data
+    ax.plot(data['Time'], data['Predicted_Volatility_1hr_Ahead'], color="darkred", label="Predicted Volatility")
     
-#     # Set the title and labels
-#     ax.set_title("GARCH Predicted Volatility")
-#     ax.set_xlabel("Time")
-#     ax.set_ylabel("Predicted Volatility")
-#     ax.legend()
+    # Set the title and labels
+    ax.set_title("GARCH Predicted Volatility")
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Predicted Volatility")
+    ax.legend()
     
-#     # Format the x-axis for better readability and reduce the number of ticks
-#     ax.xaxis.set_major_locator(plt.MaxNLocator(10))
-#     ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: pd.Timestamp(x).strftime('%Y-%m-%d %H:%M')))
-#     plt.xticks(rotation=45)
+    # Format the x-axis for better readability and reduce the number of ticks
+    ax.xaxis.set_major_locator(plt.MaxNLocator(10))
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: pd.Timestamp(x).strftime('%Y-%m-%d %H:%M')))
+    plt.xticks(rotation=45)
     
-#     # Add a grid
-#     ax.grid(True, which='both', linestyle='--', linewidth=0.5)
+    # Add a grid
+    ax.grid(True, which='both', linestyle='--', linewidth=0.5)
     
-#     plt.tight_layout()
-#     return fig
+    plt.tight_layout()
+    return fig
 
