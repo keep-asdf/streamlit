@@ -145,6 +145,17 @@ def get_db_connection():
         cursorclass=pymysql.cursors.DictCursor
     )
 
+def load_changes():
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM user_changes ORDER BY change_time DESC")
+            changes = cursor.fetchall()
+            return pd.DataFrame(changes)
+    finally:
+        connection.close()
+
+
 def load_data():
     connection = get_db_connection()
     try:

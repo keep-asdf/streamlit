@@ -375,10 +375,19 @@ def main():
             st.subheader('Registered Users')
             
             ##
-            if st.button("Load KakaoTalk User List", key="load_kakao_user_list"):
-                data = load_data()
-                st.write(data)
+            # if st.button("Load KakaoTalk User List", key="load_kakao_user_list"):
+            #     data = load_data()
+            #     st.write(data)
             ##
+            
+            if st.button("Load Data and Changes", key="load_data_and_changes"):
+                data = load_data()
+                st.write("Current Data:")
+                st.write(data)
+                
+                changes = load_changes()
+                st.write("Change Log:")
+                st.write(changes)
             
             
             # 로그 파일 읽기
