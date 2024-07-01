@@ -30,3 +30,6 @@ pydeck
 bokeh==2.4.3
 Jinja2>=2.9
 numpy==1.21.0
+
+pymysql
+requests

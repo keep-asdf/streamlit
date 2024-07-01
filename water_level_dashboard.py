@@ -373,9 +373,14 @@ def main():
         # 관리자 인증 후 표시할 내용
         if st.session_state['authenticated']:
             st.subheader('Registered Users')
-            data = load_data()
-            st.write(data)
-    
+            
+            ##
+            if st.button("Load KakaoTalk User List", key="load_kakao_user_list"):
+                data = load_data()
+                st.write(data)
+            ##
+            
+            
             # 로그 파일 읽기
             log_file = 'logs/app.log'
             st.subheader('Application Logs')
