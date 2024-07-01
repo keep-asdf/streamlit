@@ -127,9 +127,9 @@ import requests
 
 
 # MySQL 데이터베이스 연결 설정
-DB_HOST = 'your-ec2-instance-public-dns'
+DB_HOST = 'ec2-54-84-14-253.compute-1.amazonaws.com'
 DB_USER = 'streamlit_user'
-DB_PASSWORD = 'StrongPassw0rd!'
+DB_PASSWORD = 'Streamlit_user1!'
 DB_NAME = 'kakao_db'
 
 # 로그 설정
