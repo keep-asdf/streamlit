@@ -137,8 +137,11 @@ DB_NAME = 'kakao_db'
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='app.log', filemode='a')
 logger = logging.getLogger()
 
+
+    
 def get_db_connection():
     try:
+        logger.debug(f"Attempting to connect to MySQL database at {DB_HOST} with user {DB_USER}")
         connection = pymysql.connect(
             host=DB_HOST,
             user=DB_USER,
@@ -153,7 +156,7 @@ def get_db_connection():
         logger.error(f"Database connection failed: {e}")
         st.error("Failed to connect to the database. Check the logs for more details.")
         return None
-
+    
 def load_changes():
     connection = get_db_connection()
     if connection is None:
