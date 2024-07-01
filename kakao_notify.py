@@ -215,9 +215,11 @@ def remove_user(kakao_id):
         return 'Failed to connect to the database.'
     try:
         with connection.cursor() as cursor:
+            logger.debug(f"Attempting to find user with kakao_id: {kakao_id}")
             cursor.execute("SELECT * FROM users WHERE kakao_id = %s", (kakao_id,))
             result = cursor.fetchone()
             if result:
+                logger.debug(f"User found: {result}")
                 cursor.execute("DELETE FROM users WHERE kakao_id = %s", (kakao_id,))
                 connection.commit()
                 logger.info(f"User removed successfully: {kakao_id}")
@@ -227,10 +229,11 @@ def remove_user(kakao_id):
                 return 'KakaoTalk ID not found.'
     except Exception as e:
         logger.error(f"Failed to remove user: {e}")
-        return 'Failed to remove user.'
+        return f'Failed to remove user: {e}'
     finally:
         if connection is not None:
             connection.close()
+
 
 def send_kakao_message(kakao_id, message):
     url = 'https://kapi.kakao.com/v2/api/talk/memo/default/send'
