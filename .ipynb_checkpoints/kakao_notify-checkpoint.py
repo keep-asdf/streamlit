@@ -119,18 +119,17 @@
 ##################################
 
 
-
 import pymysql
-import pandas as pd
-import requests
 import logging
-import streamlit as st  # 추가
+import pandas as pd
+import streamlit as st
+import requests 
 
 
 # MySQL 데이터베이스 연결 설정
-DB_HOST = '172.31.16.64'
+DB_HOST = 'your-ec2-instance-public-dns'
 DB_USER = 'streamlit_user'
-DB_PASSWORD = 'Streamlit_user1!'
+DB_PASSWORD = 'StrongPassw0rd!'
 DB_NAME = 'kakao_db'
 
 # 로그 설정
@@ -164,7 +163,8 @@ def load_changes():
             changes = cursor.fetchall()
             return pd.DataFrame(changes)
     finally:
-        connection.close()
+        if connection is not None:
+            connection.close()
 
 def load_data():
     connection = get_db_connection()
@@ -176,10 +176,13 @@ def load_data():
             data = cursor.fetchall()
             return pd.DataFrame(data)
     finally:
-        connection.close()
+        if connection is not None:
+            connection.close()
 
 def add_user(kakao_id, condition_value):
     connection = get_db_connection()
+    if connection is None:
+        return 'Failed to connect to the database.'
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM users WHERE kakao_id = %s", (kakao_id,))
@@ -199,10 +202,13 @@ def add_user(kakao_id, condition_value):
         logger.error(f"Failed to add user: {e}")
         return 'Failed to add user.'
     finally:
-        connection.close()
+        if connection is not None:
+            connection.close()
 
 def remove_user(kakao_id):
     connection = get_db_connection()
+    if connection is None:
+        return 'Failed to connect to the database.'
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM users WHERE kakao_id = %s", (kakao_id,))
@@ -219,7 +225,8 @@ def remove_user(kakao_id):
         logger.error(f"Failed to remove user: {e}")
         return 'Failed to remove user.'
     finally:
-        connection.close()
+        if connection is not None:
+            connection.close()
 
 def send_kakao_message(kakao_id, message):
     url = 'https://kapi.kakao.com/v2/api/talk/memo/default/send'
