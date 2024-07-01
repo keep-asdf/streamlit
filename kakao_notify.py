@@ -124,6 +124,8 @@ import pymysql
 import pandas as pd
 import requests
 import logging
+import streamlit as st  # 추가
+
 
 # MySQL 데이터베이스 연결 설정
 DB_HOST = '172.31.16.64'
