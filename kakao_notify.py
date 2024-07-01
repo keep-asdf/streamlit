@@ -136,17 +136,16 @@ DB_PASSWORD = 'Streamlit_user1!'
 DB_NAME = 'kakao_db'
 
 def get_db_connection():
-    return pymysql.connect(
-        host=DB_HOST,
-        user=DB_USER,
-        password=DB_PASSWORD,
-        database=DB_NAME,
-        charset='utf8mb4',
-        cursorclass=pymysql.cursors.DictCursor
-    )
-
-
-    logger.info("Database connection successful")
+    try:
+        connection = pymysql.connect(
+            host=DB_HOST,
+            user=DB_USER,
+            password=DB_PASSWORD,
+            database=DB_NAME,
+            charset='utf8mb4',
+            cursorclass=pymysql.cursors.DictCursor
+        )
+        logger.info("Database connection successful")
         return connection
     except pymysql.MySQLError as e:
         logger.error(f"Database connection failed: {e}")
