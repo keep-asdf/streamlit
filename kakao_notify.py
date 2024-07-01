@@ -145,6 +145,15 @@ def get_db_connection():
         cursorclass=pymysql.cursors.DictCursor
     )
 
+
+    logger.info("Database connection successful")
+        return connection
+    except pymysql.MySQLError as e:
+        logger.error(f"Database connection failed: {e}")
+        st.error("Failed to connect to the database. Check the logs for more details.")
+        return None
+
+
 def load_changes():
     connection = get_db_connection()
     try:
