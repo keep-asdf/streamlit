@@ -125,15 +125,15 @@ import pandas as pd
 import requests
 import logging
 
-# 로그 설정
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='app.log', filemode='a')
-logger = logging.getLogger()
-
 # MySQL 데이터베이스 연결 설정
 DB_HOST = '172.31.16.64'
 DB_USER = 'streamlit_user'
 DB_PASSWORD = 'Streamlit_user1!'
 DB_NAME = 'kakao_db'
+
+# 로그 설정
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='app.log', filemode='a')
+logger = logging.getLogger()
 
 def get_db_connection():
     try:
@@ -152,9 +152,10 @@ def get_db_connection():
         st.error("Failed to connect to the database. Check the logs for more details.")
         return None
 
-
 def load_changes():
     connection = get_db_connection()
+    if connection is None:
+        return pd.DataFrame()
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM user_changes ORDER BY change_time DESC")
@@ -163,29 +164,15 @@ def load_changes():
     finally:
         connection.close()
 
-
 def load_data():
     connection = get_db_connection()
+    if connection is None:
+        return pd.DataFrame()
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM users")
             data = cursor.fetchall()
             return pd.DataFrame(data)
-    finally:
-        connection.close()
-
-def save_data(data):
-    connection = get_db_connection()
-    try:
-        with connection.cursor() as cursor:
-            cursor.executemany(
-                "INSERT INTO users (kakao_id, condition_value) VALUES (%s, %s)",
-                [(row['kakao_id'], row['condition_value']) for _, row in data.iterrows()]
-            )
-        connection.commit()
-        logger.info("Data saved successfully.")
-    except Exception as e:
-        logger.error(f"Failed to save data: {e}")
     finally:
         connection.close()
 
