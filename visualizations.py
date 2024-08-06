@@ -495,7 +495,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer):
         'Prediction': pred_uncer['Prediction'],
         #uncertainty 값 자체를 시각화하기에는 그 값이 매우 작기 때문에, 아래와 같이 보정하였다. 
         #경향성만 판단하면 될 일이므로 아래와 같이 보정하여도 큰 문제는 없다고 판단.
-        'Uncertainty': pred_uncer['Uncertainty'] + 5,
+        'Uncertainty': pred_uncer['Uncertainty'] + 3,
         'Lower_Bound': pred_uncer['Prediction'] - 1.96 * pred_uncer['Uncertainty'],
         'Upper_Bound': pred_uncer['Prediction'] + 1.96 * pred_uncer['Uncertainty'],
         'True_Values': pred_uncer['True_Value']
@@ -517,7 +517,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer):
     p.line('Time', 'Prediction', source=source, legend_label='Predictions', line_width=2, color='red', alpha = 0.5)
 
     # Uncertainty 라인 추가
-    p.line('Time', 'Uncertainty', source=source, legend_label='Uncertainty', line_width=2, color='green', line_dash='dashed')
+    p.line('Time', 'Uncertainty', source=source, legend_label='Uncertainty', line_width=2, color='black')
 
     
     # 95% Prediction Interval 밴드 추가
@@ -534,11 +534,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer):
     p.line(x=pred_uncer['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
     p.line(x=pred_uncer['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
     
-    
-    
-    
-    
-    
+
 
     # 레전드 설정
     p.legend.location = "top_left"
