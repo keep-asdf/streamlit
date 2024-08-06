@@ -1,11 +1,13 @@
 import pandas as pd
-from bokeh.plotting import figure, show, output_notebook
+from bokeh.plotting import figure, show, output_notebook, output_file
 from bokeh.io import push_notebook
 from bokeh.models import ColumnDataSource, Band, Legend, HoverTool
 from bokeh.palettes import Category10
-from bokeh.layouts import column, gridplot
+from bokeh.layouts import column, gridplot, layout
 import matplotlib.pyplot as plt
 from bokeh.models import DatetimeTicker
+from scipy.stats import gaussian_kde
+
 
 def visualize_moving_averages_with_bokeh(dataframe, selected_datetime, show_blue_line):
     dataframe = dataframe.copy()  # 캐싱된 데이터프레임을 수정하기 전에 복사본을 만듭니다.
@@ -423,3 +425,110 @@ def test_visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_
     p.add_tools(hover)
 
     return p
+
+
+
+#--- 베이지안 관련 시각화 ---#
+
+# Bokeh를 사용한 시각화 함수 1 : posterior predictive dist
+def plot_predictive_distribution_bokeh(df, time_points):
+    """
+    Bokeh를 이용해 예측 분포를 시각화하는 함수
+    
+    매개변수:
+    - df: CSV 파일에서 불러온 예측 결과 데이터프레임
+    - time_points: 시각화할 시간대 리스트
+    """
+    
+    time_points = time_points[-3:]
+    
+    plots = []
+    for time_point in time_points:
+        # 특정 시간대의 예측 값들 추출
+        predictions = df[df['Time'] == time_point].iloc[:, 1:].values.flatten()
+
+        # KDE를 위해 커널 밀도 추정 생성
+        kde = gaussian_kde(predictions)
+        x = np.linspace(predictions.min(), predictions.max(), 1000)
+        y = kde(x)
+
+        # Bokeh Figure 생성
+        p = figure(title=f'Predictive Posterior Distribution at Time {time_point}',
+                   x_axis_label='Predicted Value', y_axis_label='Density',
+                   width=600, height=400)
+
+        # KDE 플롯 추가 (실선)
+        p.line(x, y, line_width=2, color='navy', alpha=1.0)
+
+        # 실선 아래 영역 채우기
+        p.patch(np.append(x, x[::-1]), np.append(y, np.zeros_like(y)), 
+                color='navy', alpha=0.8)
+
+        plots.append(p)
+    
+    # 플롯을 그리드 레이아웃으로 배치
+    grid = gridplot(plots, ncols=2)
+    
+    return grid
+
+
+
+# Bokeh를 사용한 시각화 함수 2 : 전체 test_data에 대한 prediction vs true value
+
+
+def plot_predictions_with_uncertainty_bokeh(pred_uncer):
+    """
+    Bokeh를 이용한 시간대별 예측 분포 시각화 함수
+
+    매개변수:
+    - pred_uncer: 예측 및 불확실성 데이터를 포함한 DataFrame
+    """
+
+    # 시간 데이터를 datetime 형태로 변환
+    pred_uncer['Time'] = pd.to_datetime(pred_uncer['Time'])
+
+    # DataFrame 생성
+    data = {
+        'Time': pred_uncer['Time'],
+        'Prediction': pred_uncer['Prediction'],
+        #uncertainty 값 자체를 시각화하기에는 그 값이 매우 작기 때문에, 아래와 같이 보정하였다. 
+        #경향성만 판단하면 될 일이므로 아래와 같이 보정하여도 큰 문제는 없다고 판단.
+        'Uncertainty': pred_uncer['Uncertainty'] + 5,
+        'Lower_Bound': pred_uncer['Prediction'] - 1.96 * pred_uncer['Uncertainty'],
+        'Upper_Bound': pred_uncer['Prediction'] + 1.96 * pred_uncer['Uncertainty'],
+        'True_Values': pred_uncer['True_Value']
+    }
+
+    df = pd.DataFrame(data)
+
+    # ColumnDataSource 생성
+    source = ColumnDataSource(df)
+
+    # Figure 생성
+    p = figure(x_axis_type='datetime', width=800, height=400, title="Predictions with Uncertainty",
+               x_axis_label='Time', y_axis_label='MHC Water Level')
+
+    # True Values 라인 추가
+    p.line('Time', 'True_Values', source=source, legend_label='True Values', line_width=2, color='blue')
+
+    # Predictions 라인 추가
+    p.line('Time', 'Prediction', source=source, legend_label='Predictions', line_width=2, color='red')
+
+    # Uncertainty 라인 추가
+    p.line('Time', 'Uncertainty', source=source, legend_label='Uncertainty', line_width=2, color='green', line_dash='dashed')
+
+    
+    # 95% Prediction Interval 밴드 추가
+    band = Band(base='Time', lower='Lower_Bound', upper='Upper_Bound', source=source, level='underlay',
+                fill_alpha=0.3, line_width=1, line_color='red', fill_color='red')
+
+    p.add_layout(band)
+
+    # 레전드 설정
+    p.legend.location = "top_left"
+    p.legend.click_policy = "hide"
+
+    # 레이아웃 설정
+    layout_obj = layout([[p]])
+
+    return layout_obj

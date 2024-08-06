@@ -233,10 +233,10 @@ def main():
             
             # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-            def load_data_true_pred():
-                return pd.read_csv('data/true_pred_with_CI.csv').copy()
+            def load_data_pred_uncer():
+                return pd.read_csv('data/bayes_pred_uncer.csv').copy()
 
-            data_true_pred = load_data_true_pred()
+            pred_uncer = load_data_pred_uncer()
             
              ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
@@ -253,14 +253,16 @@ def main():
 
                 
             show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
-
+            
             
             selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
+                  
+            
             
             
             ##################################################################
             
-            st.bokeh_chart(test_visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred, selected_datetime2, show_blue_line2))
+            st.bokeh_chart(plot_predictions_with_uncertainty_bokeh(pred_uncer)
             
             data_true_pred = load_data_true_pred()
 
