@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from bokeh.plotting import figure, show, output_notebook, output_file
 from bokeh.io import push_notebook
 from bokeh.models import ColumnDataSource, Band, Legend, HoverTool
