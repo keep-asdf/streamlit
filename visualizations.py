@@ -529,10 +529,10 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer):
     
     
     # Adding the status lines using fixed values
-    p.line(x=dataframe['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)")
-    p.line(x=dataframe['Time'], y=8.0, color='red', line_dash="dashed", legend_label="경계(8.0m)")
-    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
-    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
+    p.line(x=pred_uncer['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)")
+    p.line(x=pred_uncer['Time'], y=8.0, color='red', line_dash="dashed", legend_label="경계(8.0m)")
+    p.line(x=pred_uncer['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
+    p.line(x=pred_uncer['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
     
     
     
