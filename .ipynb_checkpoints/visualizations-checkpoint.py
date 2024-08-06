@@ -431,7 +431,7 @@ def test_visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_
 #--- 베이지안 관련 시각화 ---#
 
 # Bokeh를 사용한 시각화 함수 1 : posterior predictive dist
-def plot_posterior_predictive_distribution_bokeh(df):
+def plot_posterior_predictive_distribution_bokeh(df, time_points):
     """
     Bokeh를 이용해 예측 분포를 시각화하는 함수
     
@@ -441,7 +441,7 @@ def plot_posterior_predictive_distribution_bokeh(df):
     """
     
     # time_points = time_points[-3:]
-    time_points = df.columns[0].values
+    
     plots = []
     for time_point in time_points:
         # 특정 시간대의 예측 값들 추출
