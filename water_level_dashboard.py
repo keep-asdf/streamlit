@@ -266,9 +266,9 @@ def main():
             
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_ppd_data():
-                return pd.read_csv('data/bayesian_visual_predictions.csv').copy()
+                return pd.read_csv('data/bayesian_ppd_visual.csv').copy()
        
-            ppd_data = load_ppd_data.copy()
+            ppd_data = load_ppd_data
             
             
             st.bokeh_chart(plot_posterior_predictive_distribution_bokeh(ppd_data))
