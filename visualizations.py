@@ -493,7 +493,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer):
         'Prediction': pred_uncer['Prediction'],
         #uncertainty 값 자체를 시각화하기에는 그 값이 매우 작기 때문에, 아래와 같이 보정하였다. 
         #경향성만 판단하면 될 일이므로 아래와 같이 보정하여도 큰 문제는 없다고 판단.
-        'Uncertainty': pred_uncer['uncertainty'] + 5,
+        'Uncertainty': pred_uncer['Uncertainty'] + 5,
         'Lower_Bound': pred_uncer['Prediction'] - 1.96 * pred_uncer['Uncertainty'],
         'Upper_Bound': pred_uncer['Prediction'] + 1.96 * pred_uncer['Uncertainty'],
         'True_Values': pred_uncer['True_Value']
