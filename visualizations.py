@@ -506,7 +506,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer):
     source = ColumnDataSource(df)
 
     # Figure 생성
-    p = figure(x_axis_type='datetime', width=1600, height=400, title="Predictions with Uncertainty",
+    p = figure(x_axis_type='datetime', width=1900, height=400, title="Predictions with Uncertainty",
                x_axis_label='Time', y_axis_label='MHC Water Level')
 
     # True Values 라인 추가
