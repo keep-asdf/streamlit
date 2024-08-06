@@ -124,7 +124,7 @@ def main():
                 st.bokeh_chart(visualize_last_6h_moving_averages(last_6h_data))
 
             
-            @st.cache_data(ttl=3600)  # 3600 sㅊeconds = 1 hour
+            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_water_data():
                 return pd.read_csv('data/water_data.csv').copy()
        
@@ -236,7 +236,7 @@ def main():
             def load_data_pred_uncer():
                 return pd.read_csv('data/bayes_pred_uncer.csv').copy()
 
-            pred_uncer = load_data_pred_uncer()
+            pred_uncer = load_data_pred_uncer().copy()
             
              ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
@@ -258,11 +258,20 @@ def main():
             selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
                   
             
-            
+                        
+            st.bokeh_chart(plot_predictions_with_uncertainty_bokeh(pred_uncer))
             
             ##################################################################
+
             
-            st.bokeh_chart(plot_predictions_with_uncertainty_bokeh(pred_uncer))
+            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            def load_ppd_data():
+                return pd.read_csv('data/bayesian_visual_predictions.csv').copy()
+       
+            ppd_data = load_ppd_data.copy()
+            
+            
+            st.bokeh_chart(plot_posterior_predictive_distribution_bokeh(ppd_data))
             
 #             data_true_pred = load_data_pred_uncer()
 

@@ -440,8 +440,8 @@ def plot_posterior_predictive_distribution_bokeh(df, time_points):
     - time_points: 시각화할 시간대 리스트
     """
     
-    time_points = time_points[-3:]
-    
+    # time_points = time_points[-3:]
+    time_points = df['Time']
     plots = []
     for time_point in time_points:
         # 특정 시간대의 예측 값들 추출
