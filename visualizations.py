@@ -69,6 +69,7 @@ def visualize_moving_averages_with_bokeh(dataframe, selected_datetime, show_blue
     p.add_tools(hover)
 
 
+    p.legend.location = "top_left"
 
     
     return p
@@ -524,6 +525,20 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer):
                 fill_alpha=0.3, line_width=1, line_color='red', fill_color='red')
 
     p.add_layout(band)
+    
+    
+    
+    # Adding the status lines using fixed values
+    p.line(x=dataframe['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)")
+    p.line(x=dataframe['Time'], y=8.0, color='red', line_dash="dashed", legend_label="경계(8.0m)")
+    p.line(x=dataframe['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
+    p.line(x=dataframe['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
+    
+    
+    
+    
+    
+    
 
     # 레전드 설정
     p.legend.location = "top_left"
