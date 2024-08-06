@@ -264,9 +264,9 @@ def main():
             
             st.bokeh_chart(plot_predictions_with_uncertainty_bokeh(pred_uncer)
             
-            data_true_pred = load_data_pred_uncer()
+#             data_true_pred = load_data_pred_uncer()
 
-            data_true_pred['Time'] = pd.to_datetime(data_true_pred['Time'])
+#             data_true_pred['Time'] = pd.to_datetime(data_true_pred['Time'])
             
             
             
