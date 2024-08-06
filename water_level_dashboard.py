@@ -271,7 +271,7 @@ def main():
             ppd_data = load_ppd_data
             time_points_to_plot = ppd_data['Time'].unique() 
             
-            st.bokeh_chart(plot_posterior_predictive_distribution_bokeh(ppd_data, time_points_to_plot)
+            st.bokeh_chart(plot_posterior_predictive_distribution_bokeh(ppd_data, time_points_to_plot))
             
 #             data_true_pred = load_data_pred_uncer()
 
