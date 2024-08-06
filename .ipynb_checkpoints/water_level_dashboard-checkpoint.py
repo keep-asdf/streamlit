@@ -268,7 +268,7 @@ def main():
             def load_ppd_data():
                 return pd.read_csv('data/bayesian_ppd_visual.csv').copy()
        
-            ppd_data = load_ppd_data
+            ppd_data = load_ppd_data()
             time_points_to_plot = ppd_data['Time'].unique() 
             
             st.bokeh_chart(plot_posterior_predictive_distribution_bokeh(ppd_data, time_points_to_plot))
