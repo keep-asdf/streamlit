@@ -506,14 +506,14 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer):
     source = ColumnDataSource(df)
 
     # Figure 생성
-    p = figure(x_axis_type='datetime', width=800, height=400, title="Predictions with Uncertainty",
+    p = figure(x_axis_type='datetime', width=2000, height=400, title="Predictions with Uncertainty",
                x_axis_label='Time', y_axis_label='MHC Water Level')
 
     # True Values 라인 추가
     p.line('Time', 'True_Values', source=source, legend_label='True Values', line_width=2, color='blue')
 
     # Predictions 라인 추가
-    p.line('Time', 'Prediction', source=source, legend_label='Predictions', line_width=2, color='red')
+    p.line('Time', 'Prediction', source=source, legend_label='Predictions', line_width=2, color='red', alpha = 0.5)
 
     # Uncertainty 라인 추가
     p.line('Time', 'Uncertainty', source=source, legend_label='Uncertainty', line_width=2, color='green', line_dash='dashed')
