@@ -239,23 +239,23 @@ def main():
             pred_uncer = load_data_pred_uncer()
             
              ##################################################################
-            # Streamlit에서 날짜와 시간을 입력받습니다.
-            col1, col2 = st.columns(2)
-            with col1:
+#             # Streamlit에서 날짜와 시간을 입력받습니다.
+#             col1, col2 = st.columns(2)
+#             with col1:
 
-                selected_date2 = st.date_input("Select a date", datetime.date.today())
+#                 selected_date2 = st.date_input("Select a date", datetime.date.today())
             
-            with col2:
+#             with col2:
                                 
-                hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
-                selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
-                selected_time2 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
+#                 hours_list = [f"{i:02d}:00" for i in range(24)]  # ["00:00", "01:00", ... , "23:00"]
+#                 selected_hour_str = st.selectbox("Select an hour", hours_list, index=12)  # 초기값은 "12:00"
+#                 selected_time2 = int(selected_hour_str.split(":")[0])  # 문자열에서 시간 부분만 추출하여 정수로 변환
 
                 
-            show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
+#             show_blue_line2 = st.checkbox("Show blue guide line at selected time", True)  # 기본값으로 체크 상태
             
             
-            selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
+#             selected_datetime2 = datetime.datetime.combine(selected_date2, datetime.time(selected_time2, 0))  # 날짜와 시간 결합
                   
             
             
