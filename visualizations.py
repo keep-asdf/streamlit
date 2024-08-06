@@ -463,12 +463,12 @@ def plot_posterior_predictive_distribution_bokeh(df, time_points):
 
         # 실선 아래 영역 채우기
         p.patch(np.append(x, x[::-1]), np.append(y, np.zeros_like(y)), 
-                color='navy', alpha=0.8)
+                color='navy', alpha=0.5)
 
         plots.append(p)
     
     # 플롯을 그리드 레이아웃으로 배치
-    grid = gridplot(plots, ncols=2)
+    grid = gridplot(plots, ncols=3)
     
     return grid
 
