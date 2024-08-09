@@ -153,6 +153,11 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe, selected_datet
     )
     p.add_tools(hover)
 
+    
+
+    p.legend.location = "top_left"
+
+    
     return p
 
 
