@@ -15,10 +15,16 @@ from email.mime.multipart import MIMEMultipart
 
 
 # MySQL 데이터베이스 연결 설정
-DB_HOST = '54.227.53.73'  # EC2 인스턴스의 퍼블릭 IP 주소
-DB_USER = 'streamlit_user'
-DB_PASSWORD = 'Streamlit_user1!'
-DB_NAME = 'kakao_db'
+# DB_HOST = '54.227.53.73'  # EC2 인스턴스의 퍼블릭 IP 주소
+# DB_USER = 'streamlit_user'
+# DB_PASSWORD = 'Streamlit_user1!'
+# DB_NAME = 'kakao_db'
+
+DB_HOST = st.secrets["database"]["DB_HOST"]
+DB_USER = st.secrets["database"]["DB_USER"]
+DB_PASSWORD = st.secrets["database"]["DB_PASSWORD"]
+DB_NAME = st.secrets["database"]["DB_NAME"]
+
 
 # 로그 설정
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='app.log', filemode='a')
@@ -30,9 +36,6 @@ EMAIL_PORT = 587
 EMAIL_USER = st.secrets["email"]["user"]
 EMAIL_PASSWORD = st.secrets["email"]["password"]
 
-
-# EMAIL_USER = 'nusnugehy@gmail.com'
-# EMAIL_PASSWORD = 'iedeaaqadhylliqa'
 
 # def get_db_connection():
 #     try:
