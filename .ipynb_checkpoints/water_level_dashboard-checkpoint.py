@@ -654,14 +654,17 @@ def main():
         # 이메일 테스트 기능 추가
         if st.button('Test Email', key="test_email_button"):
             
-            test_subject = "Test Notification"
-            test_body = "This is a test email to verify the notification system."
-            test_result = send_email(test_subject, test_body, email_address)
-        
-            if 'successfully' in test_result:
-                st.success(f"Test email sent successfully to {email_address}")
+            if test_email_address:
+                test_subject = "Test Notification"
+                test_body = "This is a test email to verify the notification system."
+                test_result = send_email(test_subject, test_body, test_email_address)
+                
+                if 'successfully' in test_result:
+                    st.success(f"Test email sent successfully to {test_email_address}")
+                else:
+                    st.warning(f"Failed to send test email: {test_result}")
             else:
-                st.warning(f"Failed to send test email: {test_result}")
+                st.warning("Please enter a recipient email address for the test email.")
         
 
 
