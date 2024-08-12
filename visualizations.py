@@ -696,7 +696,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
     # show_blue_line 값이 True인 경우 파란선을 추가
     if show_blue_line: 
         p.line(x=[selected_datetime, selected_datetime], 
-               y=[0, pred_uncer['True_Value'].max()],
+               y=[0, pred_uncer[pred_uncer.columns[1]].max()],
                color='#000080', line_dash="dotted", line_width=3)
 
     # HoverTool 생성 및 True Values 라인에만 적용
