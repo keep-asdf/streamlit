@@ -630,14 +630,14 @@ def main():
     
         email_address = st.text_input('Enter Email Address:', 
                                   key="email_address_input")
-        condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100, key="condition_value_input")
+
 
          # Add/Update User 버튼
         if st.button('Add/Update User', key="add_update_user_button"):
             if not is_valid_email(email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
             else:
-                result = add_user(email_address, condition_value)
+                result = add_user(email_address)
                 if 'successfully' in result:
                     st.success(result)
                 else:
@@ -654,10 +654,10 @@ def main():
                 else:
                     st.warning(result)
 
-        # Check Conditions and Notify 버튼
-        if st.button('Check Conditions and Notify', key="check_conditions_button"):
-            check_conditions_and_notify()
-            st.success("Checked conditions and sent notifications if any.")
+#         # Check Conditions and Notify 버튼
+#         if st.button('Check Conditions and Notify', key="check_conditions_button"):
+#             check_conditions_and_notify()
+#             st.success("Checked conditions and sent notifications if any.")
             
             
 #         # 수신자의 이메일 주소 입력란 추가

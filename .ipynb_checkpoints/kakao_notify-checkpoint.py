@@ -213,7 +213,7 @@ def load_data():
             
             
 
-def add_user(e_mail_address, condition_value):
+def add_user(e_mail_address):
     connection = get_db_connection()
     if connection is None:
         return 'Failed to connect to the database.'
@@ -226,8 +226,8 @@ def add_user(e_mail_address, condition_value):
                 return 'This KakaoTalk ID is already registered.'
             else:
                 cursor.execute(
-                    "INSERT INTO users (e_mail_address, condition_value) VALUES (%s, %s)",
-                    (e_mail_address, condition_value)
+                    "INSERT INTO users (e_mail_address) VALUES (%s, %s)",
+                    (e_mail_address)
                 )
                 connection.commit()
                 logger.info(f"User added successfully: {e_mail_address}")
@@ -315,13 +315,13 @@ def send_email(subject,
 #         logger.error(f"Failed to send message to {kakao_id}: {response.json()}")
 #         return 'Failed to send message'
 
-def check_conditions_and_notify():
-    data = load_data()
-    for _, row in data.iterrows():
-        if row['condition_value'] > 10:  # 조건을 필요에 따라 변경합니다.
-            message = f'Condition met! Your input value is {row["condition_value"]}.'
-            send_kakao_message(row['e_mail_address'], message)
-            logger.info(f"Notification sent to {row['e_mail_address']}")
+# def check_conditions_and_notify():
+#     data = load_data()
+#     for _, row in data.iterrows():
+#         if row['condition_value'] > 10:  # 조건을 필요에 따라 변경합니다.
+#             message = f'Condition met! Your input value is {row["condition_value"]}.'
+#             send_kakao_message(row['e_mail_address'], message)
+#             logger.info(f"Notification sent to {row['e_mail_address']}")
 
             
 def is_valid_email(email):
