@@ -474,11 +474,16 @@ def main():
         with placeholder.container():
             
             # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+            # @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            # def load_data_pred_uncer():
+            #     return pd.read_csv('data/bayes_pred_uncer.csv').copy()
+            
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-            def load_data_pred_uncer():
-                return pd.read_csv('data/bayes_pred_uncer.csv').copy()
-
-            pred_uncer = load_data_pred_uncer().copy()
+            def load_data_total():
+                return pd.read_csv('data/new_new_data.csv').copy()
+            
+            # pred_uncer = load_data_pred_uncer().copy()
+            bayes_data = load_data_total().copy()
             
              ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
@@ -501,7 +506,7 @@ def main():
                   
             
                         
-            st.bokeh_chart(plot_predictions_with_uncertainty_bokeh(pred_uncer, 
+            st.bokeh_chart(plot_predictions_with_uncertainty_bokeh(bayes_data, 
                                                                    selected_datetime=selected_datetime2,
                                                                    show_blue_line = show_blue_line2),
                            use_container_width=True)
@@ -509,13 +514,13 @@ def main():
             ##################################################################
 
             
-            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-            def load_ppd_data():
-                return pd.read_csv('data/bayesian_ppd_visual.csv').copy()
+            # @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            # def load_ppd_data():
+            #     return pd.read_csv('data/bayesian_ppd_visual.csv').copy()
        
-            ppd_data = load_ppd_data()
-            time_points_to_plot = ppd_data['Time'].unique()[-3:]            
-            st.bokeh_chart(plot_posterior_predictive_distribution_bokeh(ppd_data,
+            # ppd_data = load_ppd_data()
+            time_points_to_plot = bayes_data['Time'].unique()[-3:]            
+            st.bokeh_chart(plot_posterior_predictive_distribution_bokeh(bayes_data,
                                                                         time_points_to_plot),
                                                 use_container_width=True,
                           )            
@@ -523,7 +528,11 @@ def main():
             # st.write(pred_uncer.sort_values(by='Time', ascending=False))
             
             # st.dataframe(pred_uncer.sort_values(by='Time', ascending=False), width=1000)   
-            st.dataframe(pred_uncer.sort_values(by='Time', 
+#             st.dataframe(pred_uncer.sort_values(by='Time', 
+#                                                 ascending=False), 
+#                         use_container_width=True)
+            
+            st.dataframe(bayes_data.sort_values(by='Time', 
                                                 ascending=False), 
                         use_container_width=True)
 #             data_true_pred = load_data_pred_uncer()

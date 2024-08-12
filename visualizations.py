@@ -591,7 +591,8 @@ def plot_posterior_predictive_distribution_bokeh(df, time_points):
     plots = []
     for time_point in time_points:
         # 특정 시간대의 예측 값들 추출
-        predictions = df[df['Time'] == time_point].iloc[:, 1:].values.flatten()
+        # predictions = df[df['Time'] == time_point].iloc[:, 1:].values.flatten()
+        predictions = df[df['Time'] == time_point].iloc[:, 6:].values.flatten()
 
         # KDE를 위해 커널 밀도 추정 생성
         kde = gaussian_kde(predictions)
@@ -650,7 +651,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
     # DataFrame 생성
     data = {
         'Time': pred_uncer['Time'],
-        'Prediction': pred_uncer['Prediction'],
+        'Prediction': pred_uncer['Mean_Prediction'],
         'Uncertainty': pred_uncer['Uncertainty']*300,  # 경향성만 판단하면 되므로 보정
         'Lower_Bound': pred_uncer['Prediction'] - 1.96 * pred_uncer['Uncertainty'],
         'Upper_Bound': pred_uncer['Prediction'] + 1.96 * pred_uncer['Uncertainty'],
