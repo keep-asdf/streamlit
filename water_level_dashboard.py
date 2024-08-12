@@ -675,16 +675,16 @@ def main():
 #                 st.warning("Please enter a recipient email address for the test email.")
 
         # 수신자의 이메일 주소 입력란 추가
-        test_email_address = st.text_input('Enter Test Recipient Email Address:', key="test_email_address_input")
+        test_email_address = st.text_input('Enter Test Recipient Email Address:', 
+                                           key="test_email_address_input")
 
-        # 이메일 유효성 검사를 수행합니다.
-        if not test_email_address:
-            st.warning("Please enter a recipient email address for the test email.")
-        elif not is_valid_email(test_email_address):
-            st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
-        else:
-            # 이메일 테스트 기능 추가
-            if st.button('Test Email', key="test_email_button"):
+        # 이메일 테스트 기능 추가
+        if st.button('Test Email', key="test_email_button"):
+            if not test_email_address:
+                st.warning("Please enter a recipient email address for the test email.")
+            elif not is_valid_email(test_email_address):
+                st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
+            else:
                 test_subject = "Test Notification"
                 test_body = "This is a test email to verify the notification system."
                 test_result = send_email(test_subject, test_body, test_email_address)
@@ -693,8 +693,6 @@ def main():
                     st.success(f"Test email sent successfully to {test_email_address}")
                 else:
                     st.warning(f"Failed to send test email: {test_result}")
-
-
 
 
 
