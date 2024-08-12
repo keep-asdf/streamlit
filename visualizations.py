@@ -653,8 +653,8 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
         'Time': pred_uncer['Time'],
         'Prediction': pred_uncer['Mean_Prediction'],
         'Uncertainty': pred_uncer['Uncertainty']*300,  # 경향성만 판단하면 되므로 보정
-        'Lower_Bound': pred_uncer['Prediction'] - 1.96 * pred_uncer['Uncertainty'],
-        'Upper_Bound': pred_uncer['Prediction'] + 1.96 * pred_uncer['Uncertainty'],
+        'Lower_Bound': pred_uncer['Mean_Prediction'] - 1.96 * pred_uncer['Uncertainty'],
+        'Upper_Bound': pred_uncer['Mean_Prediction'] + 1.96 * pred_uncer['Uncertainty'],
         'True_Values': pred_uncer['True_Value']
     }
 
