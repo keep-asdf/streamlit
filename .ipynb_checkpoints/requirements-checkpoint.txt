@@ -36,3 +36,5 @@ requests
 
 scipy
 pillow
+
+cryptography 
