@@ -15,11 +15,6 @@ from email.mime.multipart import MIMEMultipart
 
 
 # MySQL 데이터베이스 연결 설정
-# DB_HOST = '54.227.53.73'  # EC2 인스턴스의 퍼블릭 IP 주소
-# DB_USER = 'streamlit_user'
-# DB_PASSWORD = 'Streamlit_user1!'
-# DB_NAME = 'kakao_db'
-
 DB_HOST = st.secrets["database"]["DB_HOST"]
 DB_USER = st.secrets["database"]["DB_USER"]
 DB_PASSWORD = st.secrets["database"]["DB_PASSWORD"]
