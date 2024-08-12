@@ -12,6 +12,7 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import re  # re 모듈을 임포트합니다.
 
 
 # MySQL 데이터베이스 연결 설정
