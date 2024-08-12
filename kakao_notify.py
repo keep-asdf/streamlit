@@ -275,14 +275,15 @@ def send_email(subject, body, to_email):
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login(EMAIL_USER, EMAIL_PASSWORD)
-        server.sendmail(EMAIL_USER, 'recipient@example.com', 'Test message')
+        server.login("your_email@gmail.com", "your_app_password")
+        message = f"Subject: {subject}\n\n{body}"
+        server.sendmail("your_email@gmail.com", to_email, message)
         server.quit()
-        st.success("Email sent successfully")
+        return 'Email sent successfully'
     except smtplib.SMTPAuthenticationError as e:
-        st.error(f"SMTP Authentication Error: {e}")
+        return f"Failed to authenticate: {e}"
     except Exception as e:
-        st.error(f"An error occurred: {e}")
+        return f"An error occurred: {e}"
             
 # def send_kakao_message(kakao_id, message):
 #     url = 'https://kapi.kakao.com/v2/api/talk/memo/default/send'
