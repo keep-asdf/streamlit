@@ -27,12 +27,12 @@ logger = logging.getLogger()
 # 이메일 설정
 EMAIL_HOST = 'smtp.gmail.com'  # Gmail SMTP 서버
 EMAIL_PORT = 587
-# EMAIL_USER = st.secrets["email"]["user"]
-# EMAIL_PASSWORD = st.secrets["email"]["password"]
+EMAIL_USER = st.secrets["email"]["user"]
+EMAIL_PASSWORD = st.secrets["email"]["password"]
 
 
-EMAIL_USER = 'nusnugehy@gmail.com'
-EMAIL_PASSWORD = 'iedeaaqadhylliqa'
+# EMAIL_USER = 'nusnugehy@gmail.com'
+# EMAIL_PASSWORD = 'iedeaaqadhylliqa'
 
 # def get_db_connection():
 #     try:
