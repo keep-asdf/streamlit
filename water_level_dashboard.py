@@ -532,7 +532,7 @@ def main():
 #                                                 ascending=False), 
 #                         use_container_width=True)
             
-            st.dataframe(bayes_data.sort_values(by='Time', 
+            st.dataframe(bayes_data.iloc[:, 0:6].sort_values(by='Time', 
                                                 ascending=False), 
                         use_container_width=True)
 #             data_true_pred = load_data_pred_uncer()
