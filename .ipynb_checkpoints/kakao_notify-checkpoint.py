@@ -213,24 +213,24 @@ def load_data():
             
             
 
-def add_user(kakao_id, condition_value):
+def add_user(e_mail_address, condition_value):
     connection = get_db_connection()
     if connection is None:
         return 'Failed to connect to the database.'
     try:
         with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM users WHERE kakao_id = %s", (kakao_id,))
+            cursor.execute("SELECT * FROM users WHERE e_mail_address = %s", (e_mail_address,))
             result = cursor.fetchone()
             if result:
-                logger.warning(f"Attempt to add a duplicate KakaoTalk ID: {kakao_id}")
+                logger.warning(f"Attempt to add a duplicate KakaoTalk ID: {e_mail_address}")
                 return 'This KakaoTalk ID is already registered.'
             else:
                 cursor.execute(
-                    "INSERT INTO users (kakao_id, condition_value) VALUES (%s, %s)",
-                    (kakao_id, condition_value)
+                    "INSERT INTO users (e_mail_address, condition_value) VALUES (%s, %s)",
+                    (e_mail_address, condition_value)
                 )
                 connection.commit()
-                logger.info(f"User added successfully: {kakao_id}")
+                logger.info(f"User added successfully: {e_mail_address}")
                 return 'User added successfully!'
     except Exception as e:
         logger.error(f"Failed to add user: {e}")
@@ -239,21 +239,21 @@ def add_user(kakao_id, condition_value):
         if connection is not None:
             connection.close()
 
-def remove_user(kakao_id):
+def remove_user(e_mail_address):
     connection = get_db_connection()
     if connection is None:
         return 'Failed to connect to the database.'
     try:
         with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM users WHERE kakao_id = %s", (kakao_id,))
+            cursor.execute("SELECT * FROM users WHERE e_mail_address = %s", (e_mail_address,))
             result = cursor.fetchone()
             if result:
-                cursor.execute("DELETE FROM users WHERE kakao_id = %s", (kakao_id,))
+                cursor.execute("DELETE FROM users WHERE e_mail_address = %s", (e_mail_address,))
                 connection.commit()
-                logger.info(f"User removed successfully: {kakao_id}")
+                logger.info(f"User removed successfully: {e_mail_address}")
                 return 'User removed successfully!'
             else:
-                logger.warning(f"Attempt to remove a non-existent KakaoTalk ID: {kakao_id}")
+                logger.warning(f"Attempt to remove a non-existent KakaoTalk ID: {e_mail_address}")
                 return 'KakaoTalk ID not found.'
     except Exception as e:
         logger.error(f"Failed to remove user: {e}")
@@ -320,8 +320,8 @@ def check_conditions_and_notify():
     for _, row in data.iterrows():
         if row['condition_value'] > 10:  # 조건을 필요에 따라 변경합니다.
             message = f'Condition met! Your input value is {row["condition_value"]}.'
-            send_kakao_message(row['kakao_id'], message)
-            logger.info(f"Notification sent to {row['kakao_id']}")
+            send_kakao_message(row['e_mail_address'], message)
+            logger.info(f"Notification sent to {row['e_mail_address']}")
 
             
 def is_valid_email(email):
