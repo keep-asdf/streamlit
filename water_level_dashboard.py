@@ -283,7 +283,7 @@ def main():
                       
                            
    
-    # Kakao Notification 페이지
+    # Email Notification 페이지
     elif choice == "Email Notification":
         st.subheader("Email Notification System")
     
