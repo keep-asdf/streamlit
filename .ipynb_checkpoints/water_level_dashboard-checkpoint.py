@@ -650,6 +650,9 @@ def main():
         if st.button('Check Conditions and Notify', key="check_conditions_button"):
             check_conditions_and_notify()
             st.success("Checked conditions and sent notifications if any.")
+       
+        # 수신자의 이메일 주소 입력란 추가
+        test_email_address = st.text_input('Enter Test Recipient Email Address:', key="test_email_address_input")
         
         # 이메일 테스트 기능 추가
         if st.button('Test Email', key="test_email_button"):
