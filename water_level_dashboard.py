@@ -632,16 +632,6 @@ def main():
                                       key="email_address_input")
         condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100, key="condition_value_input")
     
-#         if st.button('Add/Update User', key="add_update_user"):
-#             result = add_user(kakao_id, condition_value)
-#             st.success(result) if 'successfully' in result else st.warning(result)
-    
-#         if st.button('Remove User', key="remove_user"):
-#             result = remove_user(kakao_id)
-#             st.success(result) if 'removed successfully' in result else st.warning(result)
-    
-#         if st.button('Check Conditions and Notify', key="check_conditions"):
-#             check_conditions_and_notify()
 
         if st.button('Add/Update User', key="add_update_user_button"):
             result = add_user(email_address, condition_value)
@@ -661,8 +651,18 @@ def main():
             check_conditions_and_notify()
             st.success("Checked conditions and sent notifications if any.")
         
-    
-
+        # 이메일 테스트 기능 추가
+        if st.button('Test Email', key="test_email_button"):
+            
+            test_subject = "Test Notification"
+            test_body = "This is a test email to verify the notification system."
+            test_result = send_email(test_subject, test_body, email_address)
+        
+            if 'successfully' in test_result:
+                st.success(f"Test email sent successfully to {email_address}")
+            else:
+                st.warning(f"Failed to send test email: {test_result}")
+        
 
 
     ###################################################################################
