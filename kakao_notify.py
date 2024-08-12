@@ -321,3 +321,8 @@ def check_conditions_and_notify():
             message = f'Condition met! Your input value is {row["condition_value"]}.'
             send_kakao_message(row['kakao_id'], message)
             logger.info(f"Notification sent to {row['kakao_id']}")
+
+            
+def is_valid_email(email):
+    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    return re.match(email_regex, email) is not None

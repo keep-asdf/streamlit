@@ -627,63 +627,75 @@ def main():
     # Kakao Notification 페이지
     elif choice == "Email Notification":
         st.subheader("Email Notification System")
-        
-        email_address = st.text_input('Enter Email Address:', 
-                                      key="email_address_input")
-        condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100, key="condition_value_input")
     
+        email_address = st.text_input('Enter Email Address:', 
+                                  key="email_address_input")
+        condition_value = st.number_input('Enter condition value (set the condition to trigger the notification):', min_value=0, max_value=100, key="condition_value_input")
 
-        if st.button('Add/Update User', key="add_update_user_button"):
-            result = add_user(email_address, condition_value)
-            if 'successfully' in result:
-                st.success(result)
-            else:
-                st.warning(result)
+        # 이메일 유효성 검사를 수행합니다.
+        if not is_valid_email(email_address):
+            st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
+        else:
+            if st.button('Add/Update User', key="add_update_user_button"):
+                result = add_user(email_address, condition_value)
+                if 'successfully' in result:
+                    st.success(result)
+                else:
+                    st.warning(result)
         
-        if st.button('Remove User', key="remove_user_button"):
-            result = remove_user(email_address)
-            if 'removed successfully' in result:
-                st.success(result)
-            else:
-                st.warning(result)
+            if st.button('Remove User', key="remove_user_button"):
+                result = remove_user(email_address)
+                if 'removed successfully' in result:
+                    st.success(result)
+                else:
+                    st.warning(result)
         
-        if st.button('Check Conditions and Notify', key="check_conditions_button"):
-            check_conditions_and_notify()
-            st.success("Checked conditions and sent notifications if any.")
-       
-        # 수신자의 이메일 주소 입력란 추가
-        test_email_address = st.text_input('Enter Test Recipient Email Address:', key="test_email_address_input")
+            if st.button('Check Conditions and Notify', key="check_conditions_button"):
+                check_conditions_and_notify()
+                st.success("Checked conditions and sent notifications if any.")
+
+            
+            
+#         # 수신자의 이메일 주소 입력란 추가
+#         test_email_address = st.text_input('Enter Test Recipient Email Address:', key="test_email_address_input")
         
+    
 #         # 이메일 테스트 기능 추가
 #         if st.button('Test Email', key="test_email_button"):
-            
 #             if test_email_address:
 #                 test_subject = "Test Notification"
 #                 test_body = "This is a test email to verify the notification system."
 #                 test_result = send_email(test_subject, test_body, test_email_address)
-                
+            
 #                 if 'successfully' in test_result:
 #                     st.success(f"Test email sent successfully to {test_email_address}")
 #                 else:
 #                     st.warning(f"Failed to send test email: {test_result}")
 #             else:
 #                 st.warning("Please enter a recipient email address for the test email.")
-        
 
-    
-        # 이메일 테스트 기능 추가
-        if st.button('Test Email', key="test_email_button"):
-            if test_email_address:
+        # 수신자의 이메일 주소 입력란 추가
+        test_email_address = st.text_input('Enter Test Recipient Email Address:', key="test_email_address_input")
+
+        # 이메일 유효성 검사를 수행합니다.
+        if not test_email_address:
+            st.warning("Please enter a recipient email address for the test email.")
+        elif not is_valid_email(test_email_address):
+            st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
+        else:
+            # 이메일 테스트 기능 추가
+            if st.button('Test Email', key="test_email_button"):
                 test_subject = "Test Notification"
                 test_body = "This is a test email to verify the notification system."
                 test_result = send_email(test_subject, test_body, test_email_address)
-            
+        
                 if 'successfully' in test_result:
                     st.success(f"Test email sent successfully to {test_email_address}")
                 else:
                     st.warning(f"Failed to send test email: {test_result}")
-            else:
-                st.warning("Please enter a recipient email address for the test email.")
+
+
+
 
 
     ###################################################################################
