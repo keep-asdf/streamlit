@@ -654,10 +654,10 @@ def main():
                 else:
                     st.warning(result)
 
-# Check Conditions and Notify 버튼
-if st.button('Check Conditions and Notify', key="check_conditions_button"):
-    check_conditions_and_notify()
-    st.success("Checked conditions and sent notifications if any.")
+        # Check Conditions and Notify 버튼
+        if st.button('Check Conditions and Notify', key="check_conditions_button"):
+            check_conditions_and_notify()
+            st.success("Checked conditions and sent notifications if any.")
             
             
 #         # 수신자의 이메일 주소 입력란 추가
