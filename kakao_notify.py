@@ -264,7 +264,13 @@ def remove_user(kakao_id):
             connection.close()
 
             
-def send_email(subject, body, to_email):
+# 이메일 전송 함수
+def send_email(subject, 
+               body, 
+               to_email, 
+               EMAIL_USER = EMAIL_USER, 
+               EMAIL_PASSWORD = EMAIL_PASSWORD):
+    
     msg = MIMEMultipart()
     msg['From'] = EMAIL_USER
     msg['To'] = to_email
@@ -275,14 +281,15 @@ def send_email(subject, body, to_email):
     try:
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
-        server.login("your_email@gmail.com", "your_app_password")
-        server.sendmail("your_email@gmail.com", to_email, msg.as_string())
+        server.login(EMAIL_USER, EMAIL_PASSWORD)
+        server.sendmail(EMAIL_USER, to_email, msg.as_string())
         server.quit()
         return 'Email sent successfully'
     except smtplib.SMTPAuthenticationError as e:
         return f"Failed to authenticate: {e}"
     except Exception as e:
         return f"An error occurred: {e}"
+
     
     
 # def send_kakao_message(kakao_id, message):
