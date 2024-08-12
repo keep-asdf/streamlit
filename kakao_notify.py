@@ -9,6 +9,9 @@ import pandas as pd
 import streamlit as st
 import requests 
 import time
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 # MySQL 데이터베이스 연결 설정
@@ -21,7 +24,11 @@ DB_NAME = 'kakao_db'
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='app.log', filemode='a')
 logger = logging.getLogger()
 
-
+# 이메일 설정
+EMAIL_HOST = 'smtp.gmail.com'  # Gmail SMTP 서버
+EMAIL_PORT = 587
+EMAIL_USER = st.secrets["email"]["user"]
+EMAIL_PASSWORD = st.secrets["email"]["password"]
     
 # def get_db_connection():
 #     try:
@@ -262,18 +269,15 @@ def send_email(subject, body, to_email):
     msg.attach(MIMEText(body, 'plain'))
 
     try:
-        server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(EMAIL_USER, EMAIL_PASSWORD)
         text = msg.as_string()
         server.sendmail(EMAIL_USER, to_email, text)
         server.quit()
-        logger.info(f"Email sent successfully to {to_email}")
-        return 'Email sent successfully'
+        st.write(f"Email sent successfully to {to_email}")
     except Exception as e:
-        logger.error(f"Failed to send email: {e}")
-        return f'Failed to send email: {e}'
-
+        st.error(f"Failed to send email: {e}")
             
 # def send_kakao_message(kakao_id, message):
 #     url = 'https://kapi.kakao.com/v2/api/talk/memo/default/send'

@@ -9,6 +9,9 @@ import pandas as pd
 import streamlit as st
 import requests 
 import time
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 # MySQL 데이터베이스 연결 설정
@@ -21,7 +24,11 @@ DB_NAME = 'kakao_db'
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='app.log', filemode='a')
 logger = logging.getLogger()
 
-
+# 이메일 설정
+EMAIL_HOST = 'smtp.gmail.com'  # Gmail SMTP 서버
+EMAIL_PORT = 587
+EMAIL_USER = st.secrets["email"]["user"]
+EMAIL_PASSWORD = st.secrets["email"]["password"]
     
 # def get_db_connection():
 #     try:
@@ -252,29 +259,49 @@ def remove_user(kakao_id):
         if connection is not None:
             connection.close()
 
-def send_kakao_message(kakao_id, message):
-    url = 'https://kapi.kakao.com/v2/api/talk/memo/default/send'
-    headers = {
-        'Authorization': 'Bearer {ACCESS_TOKEN}',  # 발급받은 액세스 토큰을 입력합니다.
-    }
-    data = {
-        'template_object': {
-            'object_type': 'text',
-            'text': message,
-            'link': {
-                'web_url': 'https://yourwebsite.com',
-                'mobile_web_url': 'https://yourwebsite.com'
-            }
-        }
-    }
+            
+def send_email(subject, body, to_email):
+    msg = MIMEMultipart()
+    msg['From'] = EMAIL_USER
+    msg['To'] = to_email
+    msg['Subject'] = subject
 
-    response = requests.post(url, headers=headers, json=data)
-    if response.status_code == 200:
-        logger.info(f"Message sent successfully to {kakao_id}")
-        return 'Message sent successfully'
-    else:
-        logger.error(f"Failed to send message to {kakao_id}: {response.json()}")
-        return 'Failed to send message'
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(EMAIL_USER, EMAIL_PASSWORD)
+        text = msg.as_string()
+        server.sendmail(EMAIL_USER, to_email, text)
+        server.quit()
+        st.write(f"Email sent successfully to {to_email}")
+    except Exception as e:
+        st.error(f"Failed to send email: {e}")
+            
+# def send_kakao_message(kakao_id, message):
+#     url = 'https://kapi.kakao.com/v2/api/talk/memo/default/send'
+#     headers = {
+#         'Authorization': 'Bearer {ACCESS_TOKEN}',  # 발급받은 액세스 토큰을 입력합니다.
+#     }
+#     data = {
+#         'template_object': {
+#             'object_type': 'text',
+#             'text': message,
+#             'link': {
+#                 'web_url': 'https://yourwebsite.com',
+#                 'mobile_web_url': 'https://yourwebsite.com'
+#             }
+#         }
+#     }
+
+#     response = requests.post(url, headers=headers, json=data)
+#     if response.status_code == 200:
+#         logger.info(f"Message sent successfully to {kakao_id}")
+#         return 'Message sent successfully'
+#     else:
+#         logger.error(f"Failed to send message to {kakao_id}: {response.json()}")
+#         return 'Failed to send message'
 
 def check_conditions_and_notify():
     data = load_data()
