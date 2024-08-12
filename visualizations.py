@@ -655,7 +655,8 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
         'Uncertainty': pred_uncer['Uncertainty']*300,  # 경향성만 판단하면 되므로 보정
         'Lower_Bound': pred_uncer['Lower_Bound'],
         'Upper_Bound': pred_uncer['Upper_Bound'],
-        'True_Values': pred_uncer['True_Value']
+        # 'True_Values': pred_uncer['True_Value']
+        'True_Values': pred_uncer[pred_uncer.columns[1]]
     }
 
     df = pd.DataFrame(data)
