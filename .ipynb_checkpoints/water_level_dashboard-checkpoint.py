@@ -396,7 +396,7 @@ def main():
                 # 첫 번째 행이 비어 있는지 확인
                 if  traffic_df.empty :
                     
-                    traffic_df_html = '현재 미호천교 주변 교통 이슈 없음'
+                    traffic_df_html = '-> 현재 미호천교 주변 교통 이슈 없음'
                     
                 else:
                     
