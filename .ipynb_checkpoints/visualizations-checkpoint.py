@@ -219,7 +219,7 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe,
                title="Test 데이터에 대한 예측 값과 실제 값")
 
     # Plot the True Values
-    true_values_renderer = p.line('Time', 'True_Value', source=source, color="#464646", legend_label="관측된 미호천교 수위", line_width=2)
+    p.line('Time', 'True_Value', source=source, color="#464646", legend_label="관측된 미호천교 수위", line_width=2)
 
     # Plot the Predicted Values
     p.line('Time', 'Predicted_Value', source=source, color="darkred", legend_label="예측된 미호천교 수위", line_width=3)
@@ -675,7 +675,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
                sizing_mode="stretch_both")
 
     # True Values 라인 추가
-    true_values_renderer = p.line('Time', '관측된 미호천교 수위', source=source, legend_label='True Values', line_width=2, color='blue')
+    p.line('Time', '관측된 미호천교 수위', source=source, legend_label='True Values', line_width=2, color='blue')
 
     # Predictions 라인 추가
     p.line('Time', 'Prediction', source=source, legend_label='예측된 미호천교 수위', line_width=2, color='red', alpha=0.5)
