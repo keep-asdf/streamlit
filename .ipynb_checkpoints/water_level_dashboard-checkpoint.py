@@ -388,12 +388,10 @@ def main():
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력해주세요")
             else:
                 
-                global data_true_pred
-                global traffic_df
-                
-                data_true_pred_html = data_true_pred.iloc[-4:, :]
+      
+                data_true_pred_html = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :].copy()
 
-                traffic_df_html = traffic_df.iloc[1:, :]
+                traffic_df_html = pd.read_csv('data/traffic_data.csv').iloc[-1:, :].copy()
 
                 test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
                 
