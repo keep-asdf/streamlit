@@ -222,7 +222,7 @@ def main():
 
       
             # Streamlit에서 사용
-            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            # @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_water_data():
                 return pd.read_csv('data/water_data.csv').copy()
 
@@ -240,7 +240,7 @@ def main():
 
         
             #traffic data 표시 및 지도 표시
-            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            # @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_traffic_data():
                 return pd.read_csv('data/traffic_data.csv').copy()
 
@@ -285,7 +285,7 @@ def main():
             # def load_data_pred_uncer():
             #     return pd.read_csv('data/bayes_pred_uncer.csv').copy()
             
-            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            # @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_data_total():
                 return pd.read_csv('data/new_new_data.csv').copy()
             
