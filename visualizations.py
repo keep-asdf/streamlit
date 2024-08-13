@@ -318,56 +318,56 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe,
 ####################################################################################
 ####################################################################################
 
-def visualize_last_6h_moving_averages(data):
-    # 데이터를 ColumnDataSource로 변환
-    source = ColumnDataSource(data)
+# def visualize_last_6h_moving_averages(data):
+#     # 데이터를 ColumnDataSource로 변환
+#     source = ColumnDataSource(data)
 
-    # y축 범위 설정
-    y_min = 0
-    y_max = 9.5
+#     # y축 범위 설정
+#     y_min = 0
+#     y_max = 9.5
 
-    # 그래프 생성 with adjusted y_range
-    p = figure(title="최근 6시간에 대한 예측 값과 실제 값", 
-               x_axis_type="datetime",
-               x_axis_label="Time", 
-               y_range=(y_min, y_max),
-               width=750,
-               height=430, 
-               sizing_mode="stretch_both")
+#     # 그래프 생성 with adjusted y_range
+#     p = figure(title="최근 6시간에 대한 예측 값과 실제 값", 
+#                x_axis_type="datetime",
+#                x_axis_label="Time", 
+#                y_range=(y_min, y_max),
+#                width=750,
+#                height=430, 
+#                sizing_mode="stretch_both")
     
-    # 그래프에 데이터 추가
-    p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, color="darkred", line_width = 3)
-    p.line(x='Time', y='12H_MA', source=source, color="red", alpha=0.6)
-    p.line(x='Time', y='72H_MA', source=source, color="green", alpha=0.6)
-    p.line(x='Time', y='96H_MA', source=source, color="purple", alpha=0.6)
-    p.line(x='Time', y='120H_MA', source=source, color="orange", alpha=0.6)
+#     # 그래프에 데이터 추가
+#     p.line(x='Time', y='Predicted_MHC_Water_Level', source=source, color="darkred", line_width = 3)
+#     p.line(x='Time', y='12H_MA', source=source, color="red", alpha=0.6)
+#     p.line(x='Time', y='72H_MA', source=source, color="green", alpha=0.6)
+#     p.line(x='Time', y='96H_MA', source=source, color="purple", alpha=0.6)
+#     p.line(x='Time', y='120H_MA', source=source, color="orange", alpha=0.6)
     
-    # Plot confidence intervals
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
-    p.add_layout(band)
+#     # Plot confidence intervals
+#     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
+#     p.add_layout(band)
     
 
-    # Adding the status lines using fixed values
-    p.line(x=data['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)")
-    p.line(x=data['Time'], y=8.0, color='red', line_dash="dashed", legend_label="경계(8.0m)")
-    p.line(x=data['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
-    p.line(x=data['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
+#     # Adding the status lines using fixed values
+#     p.line(x=data['Time'], y=9.2, color='purple', line_dash="dashed", legend_label="심각(9.2m)")
+#     p.line(x=data['Time'], y=8.0, color='red', line_dash="dashed", legend_label="경계(8.0m)")
+#     p.line(x=data['Time'], y=7.0, color='yellow', line_dash="dashed", legend_label="주의(7.0m)")
+#     p.line(x=data['Time'], y=5.0, color='green', line_dash="dashed", legend_label="관심(5.0m)")
     
-    # Hover tool 추가
-    hover = HoverTool()
-    hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
-                      ("Predicted Level", "@Predicted_MHC_Water_Level"),
-                      ("12H MA", "@12H_MA"), 
-                      ("72H MA", "@72H_MA"),
-                      ("96H MA", "@96H_MA"),
-                      ("120H MA", "@120H_MA")]
-    hover.formatters = {"@Time": "datetime"}
-    p.add_tools(hover)
+#     # Hover tool 추가
+#     hover = HoverTool()
+#     hover.tooltips = [("Time", "@Time{%F %H:%M}"), 
+#                       ("Predicted Level", "@Predicted_MHC_Water_Level"),
+#                       ("12H MA", "@12H_MA"), 
+#                       ("72H MA", "@72H_MA"),
+#                       ("96H MA", "@96H_MA"),
+#                       ("120H MA", "@120H_MA")]
+#     hover.formatters = {"@Time": "datetime"}
+#     p.add_tools(hover)
     
-    # Hide the legend
-    p.legend.visible = False
+#     # Hide the legend
+#     p.legend.visible = False
 
-    return p
+#     return p
 
 ####################################################################################
 ####################################################################################
@@ -393,10 +393,10 @@ def visualize_true_vs_predicted_last_6h(data):
     
     # 그래프에 데이터 추가
     true_value_renderer = p.line(x='Time', y='True_Value', source=source, color="#464646", alpha=0.6, legend_label="True Value")
-    p.line(x='Time', y='Predicted_Value', source=source, color="darkred", legend_label="Predicted Value", line_width=3)
+    p.line(x='Time', y='Predicted_Value', source=source, color="darkblue", legend_label="Predicted Value", line_width=3)
     
     # 신뢰 구간 추가
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkblue')
     p.add_layout(band)
     
     # 상태선 추가
