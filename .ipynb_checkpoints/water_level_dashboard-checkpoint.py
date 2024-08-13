@@ -97,10 +97,18 @@ def main():
             # 이미지 파일 경로
             image_path = "data/daemoon.jpg"
 
-            # Streamlit의 기본 이미지 표시 기능 사용
-            st.image(image_path, caption="Sample Image", use_column_width=700)
+            # 세 개의 열을 만들고 중앙 열에 이미지를 배치
+            col1, col2, col3 = st.columns([1, 2, 1])  # 중앙 열을 조금 더 넓게 설정
 
+            with col1:
+                st.empty()  # 왼쪽 열을 비워둡니다.
 
+            with col2:
+                st.image(image_path, caption="Sample Image", use_column_width=True)  # 중앙 열에 이미지 표시
+    
+            with col3:
+                st.empty()  # 오른쪽 열을 비워둡니다.
+    
             
             
     
