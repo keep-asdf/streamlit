@@ -430,12 +430,12 @@ def main():
     
         <a href="https://mhc-water-level.streamlit.app/" style="text-decoration:none; color:black;">
         
-            <img src="https://www.google.co.kr/url?sa=i&url=https%3A%2F%2Fuxwing.com%2Fcaution-icon%2F&psig=AOvVaw1GHgl0_JodEz2CW7tTXV2l&ust=1723629091784000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOCVtO_Y8YcDFQAAAAAdAAAAABAE" alt="썸네일 이미지" style="width:100%; height:auto;">
+            <img src="https://i.pinimg.com/564x/a5/ab/81/a5ab81cc6854d75ac3be20a90a22ab7b.jpg" alt="썸네일 이미지" style="width:100%; height:auto;">
             
             <div style="padding-top: 10px;">
             
                 <h3 style="margin: 0;">미호천교 위험 알림 시스템</h3>
-                <p style="margin: 0;">미호천교의 현재 수위 및 교통 상황을 실시간으로 확인하세요.</p>
+                <p style="margin: 0;">미호천교의 현재 수위 및 예측 수위, 교통 상황을 실시간으로 확인하세요.</p>
                 
             </div>
         </a>
