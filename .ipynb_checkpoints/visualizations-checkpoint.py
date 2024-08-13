@@ -604,7 +604,7 @@ def plot_posterior_predictive_distribution_bokeh(df, time_points):
         source = ColumnDataSource(data=dict(x=x, y=y))
 
         # Bokeh Figure 생성
-        p = figure(title=f'Predictive Posterior Distribution at Time {time_point}',
+        p = figure(title=f'{time_point}에서의 사후예측분포',
                    x_axis_label='Predicted Value', 
                    y_axis_label='Density',
                    sizing_mode="stretch_both")  # 크기 자동 조절
@@ -669,7 +669,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
     p = figure(x_axis_type='datetime', 
                width=1900,
                height=700, 
-               title="Predictions with Uncertainty",
+               title="Test 데이터에 대한 예측 값과 실제 값",
                x_axis_label='Time', 
                y_axis_label='MHC Water Level', 
                sizing_mode="stretch_both")
