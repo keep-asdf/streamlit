@@ -73,6 +73,7 @@ def main():
             # HTML과 CSS를 사용하여 이미지를 중앙에 배치
             st.markdown(
                 f"""
+                
                 <div style="display: flex; 
                 justify-content: center; 
                 align-items: center; 
@@ -86,10 +87,10 @@ def main():
                     margin: 0 auto;"> <!-- 이미지 중앙 정렬 -->
 
                 </div>
+                
                 """,
                 unsafe_allow_html=True
             )
-
 
 
 
