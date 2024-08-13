@@ -610,10 +610,10 @@ def plot_posterior_predictive_distribution_bokeh(df, time_points):
                    sizing_mode="stretch_both")  # 크기 자동 조절
 
         # KDE 플롯 추가 (실선)
-        line_renderer = p.line('x', 'y', source=source, line_width=2, color='darkred', alpha=1.0)
+        line_renderer = p.line('x', 'y', source=source, line_width=2, color='darkblue', alpha=1.0)
 
         # 실선 아래 영역 채우기
-        p.patch('x', 'y', source=source, color='darkred', alpha=0.5)
+        p.patch('x', 'y', source=source, color='darkblue', alpha=0.5)
 
         # HoverTool 추가 (mode='vline' 설정으로 수직선 위의 line 값 표시)
         hover = HoverTool(renderers=[line_renderer], tooltips=[
@@ -678,17 +678,17 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
                sizing_mode="stretch_both")
 
     # True Values 라인 추가
-    true_values_renderer = p.line('Time', 'True_Values', source=source, legend_label='관측된 미호천교 수위', line_width=3, color='#464646')
+    true_values_renderer = p.line('Time', 'True_Values', source=source, legend_label='관측된 미호천교 수위', line_width=3, color='darkred')
 
     # Predictions 라인 추가
-    p.line('Time', 'Prediction', source=source, legend_label='예측된 미호천교 수위', line_width=3, color='darkred')
+    p.line('Time', 'Prediction', source=source, legend_label='예측된 미호천교 수위', line_width=3, color='darkblue')
 
     # Uncertainty 라인 추가
-    p.line('Time', 'Uncertainty', source=source, legend_label='예측된 불확실성', line_width=3, color='darkblue')
+    p.line('Time', 'Uncertainty', source=source, legend_label='예측된 불확실성', line_width=3, color='#464646')
 
     # 95% Prediction Interval 밴드 추가
     band = Band(base='Time', lower='Lower_Bound', upper='Upper_Bound', source=source, level='underlay',
-                fill_alpha=0.3, line_width=1, line_color='red', fill_color='red')
+                fill_alpha=0.3, line_width=1, line_color='darkblue', fill_color='red')
     p.add_layout(band)
     
     # 고정된 값의 상태선 추가
