@@ -98,7 +98,7 @@ def main():
             image_path = "data/daemoon.jpg"
 
             # Streamlit의 기본 이미지 표시 기능 사용
-            st.image(image_path, caption="Sample Image", use_column_width=300)
+            st.image(image_path, caption="Sample Image", use_column_width=500)
 
 
             
