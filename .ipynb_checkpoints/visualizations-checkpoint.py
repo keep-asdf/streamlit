@@ -420,7 +420,7 @@ def visualize_true_vs_predicted_last_6h(data):
     p.add_tools(hover)
     
     # 범례 숨김
-    p.legend.visible = False
+    p.legend.visible = True
 
     return p
 
