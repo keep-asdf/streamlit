@@ -370,8 +370,10 @@ def main():
                 else:
                     st.warning(result)
 
-
-        # 수신자의 이메일 주소 입력란 추가
+        # 여백 추가 (첫 번째 방법: st.write("") 사용)
+        st.write("")  # 한 줄의 여백 추가        # 수신자의 이메일 주소 입력란 추가
+        
+        
         st.subheader("이메일 알림 테스트 하기")
         test_email_address = st.text_input('Enter Test Recipient Email Address:', 
                                            key="test_email_address_input")
