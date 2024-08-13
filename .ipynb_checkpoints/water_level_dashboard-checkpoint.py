@@ -390,12 +390,12 @@ def main():
             elif not is_valid_email(test_email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력해주세요")
             else:
-                test_subject = "Test Notification"
-                test_body = "This is a test email to verify the notification system."
+                test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
+                test_body = "이 이메일은 테스트를 위한 이메일입니다."
                 test_result = send_email(test_subject, test_body, test_email_address)
         
                 if 'successfully' in test_result:
-                    st.success(f"테스트 이메일을 성공적으로 {test_email_address}로 보냈습니다. 이메일을 확인해주세요")
+                    st.success(f"테스트 이메일을 성공적으로 {test_email_address} 로 보냈습니다. 이메일을 확인해주세요")
                 else:
                     st.warning(f"테스트 이메일을 {test_result} 로 보내는데 실패했습니다")
 
