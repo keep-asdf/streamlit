@@ -425,12 +425,18 @@ def main():
     <br><br> <!-- 2줄의 빈 줄 추가 -->
     
     <!-- 썸네일 이미지와 설명이 포함된 링크 -->
+    
     <div style="border:1px solid #dcdcdc; padding: 10px; width: 300px;">
+    
         <a href="https://mhc-water-level.streamlit.app/" style="text-decoration:none; color:black;">
-            <img src="https://via.placeholder.com/300x150" alt="썸네일 이미지" style="width:100%; height:auto;">
+        
+            <img src="https://www.google.co.kr/url?sa=i&url=https%3A%2F%2Fuxwing.com%2Fcaution-icon%2F&psig=AOvVaw1GHgl0_JodEz2CW7tTXV2l&ust=1723629091784000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOCVtO_Y8YcDFQAAAAAdAAAAABAE" alt="썸네일 이미지" style="width:100%; height:auto;">
+            
             <div style="padding-top: 10px;">
+            
                 <h3 style="margin: 0;">미호천교 위험 알림 시스템</h3>
                 <p style="margin: 0;">미호천교의 현재 수위 및 교통 상황을 실시간으로 확인하세요.</p>
+                
             </div>
         </a>
     </div>
