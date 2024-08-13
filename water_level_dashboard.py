@@ -418,6 +418,12 @@ def main():
     <h2>미호천교 근방 교통 상황 데이터</h2>
     {traffic_df_html}
     
+    <!-- 빈칸 추가 -->
+    <div style="margin-top: 20px;"></div> <!-- 20px의 상단 여백 추가 -->
+
+    <!-- 또는 줄 바꿈을 사용하여 빈칸 추가 -->
+    <br><br> <!-- 2줄의 빈 줄 추가 -->
+    
     <!-- 썸네일 이미지와 설명이 포함된 링크 -->
     <div style="border:1px solid #dcdcdc; padding: 10px; width: 300px;">
         <a href="https://mhc-water-level.streamlit.app/" style="text-decoration:none; color:black;">
