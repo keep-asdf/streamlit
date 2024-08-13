@@ -363,7 +363,6 @@ def main():
                     st.success(result)
                 else:
                     st.warning(result)
-        st.write("")  # 한 줄의 여백 추가    
         # Remove User 버튼
         if st.button('이메일 등록 취소', key="remove_user_button"):
             if not is_valid_email(email_address):
