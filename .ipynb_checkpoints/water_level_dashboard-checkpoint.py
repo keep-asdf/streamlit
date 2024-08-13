@@ -348,11 +348,11 @@ def main():
         st.write("")  # 한 줄의 여백 추가    
         
         st.subheader("이메일로 위험 알림 받기")
-    
+        st.write("")  # 한 줄의 여백 추가    
         email_address = st.text_input('이메일 주소를 입력해주세요', 
                                   key="email_address_input")
 
-
+        st.write("")  # 한 줄의 여백 추가    
          # Add/Update User 버튼
         if st.button('이메일 등록', key="add_update_user_button"):
             if not is_valid_email(email_address):
@@ -363,7 +363,7 @@ def main():
                     st.success(result)
                 else:
                     st.warning(result)
-
+        st.write("")  # 한 줄의 여백 추가    
         # Remove User 버튼
         if st.button('이메일 등록 취소', key="remove_user_button"):
             if not is_valid_email(email_address):
