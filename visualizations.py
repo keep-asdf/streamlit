@@ -604,7 +604,7 @@ def plot_posterior_predictive_distribution_bokeh(df, time_points):
         source = ColumnDataSource(data=dict(x=x, y=y))
 
         # Bokeh Figure 생성
-        p = figure(title=f'{time_point}에서의 사후예측분포',
+        p = figure(title=f'{time_point} 에서의 사후예측분포',
                    x_axis_label='Predicted Value', 
                    y_axis_label='Density',
                    sizing_mode="stretch_both")  # 크기 자동 조절
