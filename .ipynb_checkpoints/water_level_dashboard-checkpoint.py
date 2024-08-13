@@ -126,9 +126,9 @@ def main():
             st.text(" ")  # 필요에 따라 여러 줄 추가
 
             # 3x3 그리드를 만들고 중앙에 이미지를 배치
-            top_col1, top_col2, top_col3 = st.columns([1, 2, 1])
-            mid_col1, mid_col2, mid_col3 = st.columns([1, 2, 1])
-            bot_col1, bot_col2, bot_col3 = st.columns([1, 2, 1])
+            top_col1, top_col2, top_col3 = st.columns([0.5, 3, 0.5])
+            mid_col1, mid_col2, mid_col3 = st.columns([0.5, 3, 0.5])
+            bot_col1, bot_col2, bot_col3 = st.columns([0.5, 3, 0.5])
 
             with mid_col1:
                 st.empty()  # 왼쪽 여백
