@@ -109,7 +109,7 @@ def create_individual_graphs(dataframe):
         # 라인 생성 및 렌더러 저장
         line_renderer = p.line(dataframe['Time'][-7:], dataframe[feature][-7:], line_width=2)
         
-        p.xaxis.axis_label = 'Time'
+        # p.xaxis.axis_label = 'Time'
         p.yaxis.axis_label = legend_mapping[feature]  # y축 레이블 설정
         
         # 통일된 크기를 위해 그래프의 최소 및 최대 범위 설정
