@@ -391,7 +391,7 @@ def main():
                 
                 data_true_pred_html = data_true_pred[-4:, :]
 
-                traffic_df_html = traffic_df
+                traffic_df_html = traffic_df[1:, :]
 
                 test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
                 
@@ -406,7 +406,7 @@ def main():
     <h2>미호천교 수위 데이터</h2>
     {data_true_pred_html}
     
-    <h2>교통 상황 데이터</h2>
+    <h2>미호천교 근방 교통 상황 데이터</h2>
     {traffic_df_html}
     
     <p>더 많은 정보는 <a href="https://mhc-water-level.streamlit.app/">여기</a>에서 확인할 수 있습니다.</p>
