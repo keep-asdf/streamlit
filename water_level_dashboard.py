@@ -389,18 +389,24 @@ def main():
             else:
                 
       
-                data_true_pred_html = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :].to_html(index=False)
+                # data_true_pred_html = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :].to_html(index=False)
+        
+                data_true_pred_email = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :]
+                data_true_pred_email = data_true_pred_email[['Time', 'True_Value', 'Predicted_Value']]
+                data_true_pred_email.columns = ['시간', '관측값', '예측값']
+                data_true_pred_html = data_true_pred_email.to_html(index=False)
+            
 
-                traffic_df = pd.read_csv('data/traffic_data.csv').iloc[1:, :]
+                traffic_df_email = pd.read_csv('data/traffic_data.csv').iloc[1:, :]
             
                 # 첫 번째 행이 비어 있는지 확인
-                if  traffic_df.empty :
+                if  traffic_df_email.empty :
                     
-                    traffic_df_html = '-> 현재 미호천교 주변 교통 이슈 없음'
+                    traffic_df_html = '  -> 현재 미호천교 주변 교통 이슈 없음'
                     
                 else:
                     
-                    traffic_df_html = traffic_df.to_html(index=False)
+                    traffic_df_html = traffic_df_email.to_html(index=False)
 
                 test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
                 
@@ -412,7 +418,7 @@ def main():
     <p>이 이메일은 테스트를 위한 이메일입니다.</p>
     <p>미호천교의 현재 상황에 대한 업데이트를 아래에서 확인하세요:</p>
     
-    <h2>미호천교 수위 데이터</h2>
+    <h2>미호천교 현재 및 미래 예측 수위 데이터</h2>
     {data_true_pred_html}
     
     <div style="margin-top: 20px;"></div> <!-- 20px의 상단 여백 추가 -->  
