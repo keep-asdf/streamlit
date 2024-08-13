@@ -391,7 +391,16 @@ def main():
       
                 data_true_pred_html = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :].to_html(index=False)
 
-                traffic_df_html = pd.read_csv('data/traffic_data.csv').iloc[1:, :].to_html(index=False)
+                traffic_df_html = pd.read_csv('data/traffic_data.csv').iloc[1:, :]
+            
+                # 첫 번째 행이 비어 있는지 확인
+                if traffic_df.empty or traffic_df.iloc[0].isnull().all():
+                    
+                    traffic_df_html = '현재 미호천교 교통 이슈 없음'
+                    
+                else:
+                    
+                    traffic_df_html = traffic_df.to_html(index=False)
 
                 test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
                 
