@@ -211,7 +211,7 @@ def main():
                 
                 data_true_pred = data_true_pred.fillna('관측 전')
                 data_true_pred.columns = ['시각', '관측값', '예측값', '신뢰구간 하방' ,'신뢰구간 상방']
-                st.write(data_true_pred.sort_values(by='시간', ascending=False))
+                st.write(data_true_pred.sort_values(by='시각', ascending=False))
                 # st.dataframe(data_true_pred.sort_values(by='Time', 
                 #                                         ascending=False).head(1000), 
                 #                                         use_container_width=True)
@@ -330,7 +330,7 @@ def main():
             bayes_data_mini = bayes_data.iloc[:, 0:6]
             bayes_data_mini = bayes_data_mini.fillna('관측 전')
             bayes_data_mini.columns = ['시각', '관측값', '예측값', '불확실성', '신용구간 하방', '신용구간 상방']
-            st.dataframe(bayes_data_mini.sort_values(by='시간', 
+            st.dataframe(bayes_data_mini.sort_values(by='시각', 
                                                 ascending=False), 
                         use_container_width=True)
             
