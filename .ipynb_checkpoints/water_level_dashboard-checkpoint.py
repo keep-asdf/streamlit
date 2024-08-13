@@ -92,27 +92,53 @@ def main():
 #                 unsafe_allow_html=True
 #             )
 
+#     if choice == "Introduction":
+#         with st.container():
+#             # 이미지 파일 경로
+#             image_path = "data/daemoon.jpg"
+
+#             # 첫 번째 행: 세 개의 열로 구성
+#             st.empty()  # 위쪽 여백 추가
+#             top_col1, top_col2, top_col3 = st.columns([1, 2, 1])
+
+#             # 두 번째 행: 세 개의 열로 구성, 가운데 열에 이미지를 배치
+#             mid_col1, mid_col2, mid_col3 = st.columns([1, 2, 1])
+#             with mid_col1:
+#                 st.empty()  # 왼쪽 여백 추가
+#             with mid_col2:
+#                 st.image(image_path, caption="Sample Image", use_column_width=True)  # 중앙에 이미지 표시
+#             with mid_col3:
+#                 st.empty()  # 오른쪽 여백 추가
+
+#             # 세 번째 행: 세 개의 열로 구성
+#             bot_col1, bot_col2, bot_col3 = st.columns([1, 2, 1])
+#             st.empty()  # 아래쪽 여백 추가
     if choice == "Introduction":
         with st.container():
             # 이미지 파일 경로
             image_path = "data/daemoon.jpg"
 
-            # 첫 번째 행: 세 개의 열로 구성
-            st.empty()  # 위쪽 여백 추가
-            top_col1, top_col2, top_col3 = st.columns([1, 2, 1])
+            # 상단 여백 추가
+            st.text(" ")  # 빈 텍스트로 여백 추가
+            st.text(" ")  # 필요에 따라 여러 줄 추가
 
-            # 두 번째 행: 세 개의 열로 구성, 가운데 열에 이미지를 배치
+            # 3x3 그리드를 만들고 중앙에 이미지를 배치
+            top_col1, top_col2, top_col3 = st.columns([1, 2, 1])
             mid_col1, mid_col2, mid_col3 = st.columns([1, 2, 1])
+            bot_col1, bot_col2, bot_col3 = st.columns([1, 2, 1])
+
             with mid_col1:
-                st.empty()  # 왼쪽 여백 추가
+                st.empty()  # 왼쪽 여백
+
             with mid_col2:
                 st.image(image_path, caption="Sample Image", use_column_width=True)  # 중앙에 이미지 표시
-            with mid_col3:
-                st.empty()  # 오른쪽 여백 추가
 
-            # 세 번째 행: 세 개의 열로 구성
-            bot_col1, bot_col2, bot_col3 = st.columns([1, 2, 1])
-            st.empty()  # 아래쪽 여백 추가
+            with mid_col3:
+                st.empty()  # 오른쪽 여백
+
+            # 하단 여백 추가
+            st.text(" ")  # 필요에 따라 여백 추가
+            st.text(" ")
 
     
             
