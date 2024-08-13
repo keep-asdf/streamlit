@@ -392,8 +392,8 @@ def visualize_true_vs_predicted_last_6h(data):
                sizing_mode="stretch_both")
     
     # 그래프에 데이터 추가
-    true_value_renderer = p.line(x='Time', y='True_Value', source=source, color="#464646", alpha=0.6, legend_label="True Value")
-    p.line(x='Time', y='Predicted_Value', source=source, color="darkblue", legend_label="Predicted Value", line_width=3)
+    true_value_renderer = p.line(x='Time', y='True_Value', source=source, color="darkred", alpha=0.6, legend_label="관측된 미호천교 수위",line_width=3)
+    p.line(x='Time', y='Predicted_Value', source=source, color="darkblue", legend_label="예측된 미호천교 수위", line_width=3)
     
     # 신뢰 구간 추가
     band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkblue')
@@ -419,8 +419,9 @@ def visualize_true_vs_predicted_last_6h(data):
     )
     p.add_tools(hover)
     
-    # 범례 숨김
     p.legend.visible = True
+    
+    p.legend.location = "top_left"
 
     return p
 
