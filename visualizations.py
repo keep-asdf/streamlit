@@ -380,7 +380,7 @@ def visualize_true_vs_predicted_last_6h(data):
     y_max = 9
 
     # 그래프 생성 with adjusted y_range
-    p = figure(title="True vs Predicted MHC Water Level with Confidence Intervals for Last 6H", 
+    p = figure(title="최근 6시간에 대한 예측 값과 실제 값", 
                x_axis_type="datetime", 
                x_axis_label="Time",
                y_range=(y_min, y_max),
