@@ -678,7 +678,7 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
                sizing_mode="stretch_both")
 
     # True Values 라인 추가
-    true_values_renderer = p.line('Time', '관측된 미호천교 수위', source=source, legend_label='True Values', line_width=2, color='#464646')
+    true_values_renderer = p.line('Time', 'True_Value', source=source, legend_label='관측된 미호천교 수위', line_width=2, color='#464646')
 
     # Predictions 라인 추가
     p.line('Time', 'Prediction', source=source, legend_label='예측된 미호천교 수위', line_width=3, color='darkred', alpha=0.5)
