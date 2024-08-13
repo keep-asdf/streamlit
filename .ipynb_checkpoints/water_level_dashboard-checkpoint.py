@@ -65,7 +65,7 @@ def main():
     ####################################################################################
 
     if choice == "Introduction":
-
+        
         with st.container():
             # 이미지 파일 경로
             image_path = "data/daemoon.jpg"
@@ -73,22 +73,22 @@ def main():
             # HTML과 CSS를 사용하여 이미지를 중앙에 배치
             st.markdown(
                 f"""
-                
                 <div style="display: flex; 
                 justify-content: center; 
                 align-items: center; 
-                height: auto;">
-                
-                <img src="{image_path}"
-                alt="Sample Image" 
-                style="max-width:100%;
-                height:auto;">
-                
+                height: 100vh;"> <!-- Viewport Height로 설정하여 화면 전체에 대해 중앙 정렬 -->
+
+                    <img src="{image_path}" 
+                    alt="Sample Image" 
+                    style="max-width: 100%; 
+                    height: auto; 
+                    display: block; 
+                    margin: 0 auto;"> <!-- 이미지 중앙 정렬 -->
+
                 </div>
                 """,
-                
                 unsafe_allow_html=True
-                )
+            )
 
 
 
