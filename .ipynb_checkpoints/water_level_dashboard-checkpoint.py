@@ -262,7 +262,7 @@ def main():
             
             col1, col2 = st.columns(2)
             with col1:
-                st.subheader("실시간 미호천교 근방 교통 이벤트 데이터\n(empty = 현재 이벤트 없음)")
+                st.subheader("실시간 미호천교 근방 교통 이벤트 데이터")
                 st.write(traffic_df)
             
             with col2:

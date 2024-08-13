@@ -216,7 +216,7 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe,
                width=1600,
                height=700, 
                sizing_mode="stretch_both",
-               title="True vs Predicted Values with Confidence Intervals and Status Lines")
+               title="Test 데이터에 대한 예측 값과 실제 값")
 
     # Plot the True Values
     true_values_renderer = p.line('Time', 'True_Value', source=source, color="#464646", legend_label="관측된 미호천교 수위", line_width=2)
@@ -327,7 +327,7 @@ def visualize_last_6h_moving_averages(data):
     y_max = 9.5
 
     # 그래프 생성 with adjusted y_range
-    p = figure(title="Predicted MHC Water Level with Confidence Intervals, Moving Averages and Status Lines for Last 6H", 
+    p = figure(title="최근 6시간에 대한 예측 값과 실제 값", 
                x_axis_type="datetime",
                x_axis_label="Time", 
                y_range=(y_min, y_max),
