@@ -380,7 +380,7 @@ def main():
         st.write("")  # 한 줄의 여백 추가        
         
         st.subheader("이메일 알림 테스트 하기")
-        test_email_address = st.text_input('이메일 주소를 입력해주세요:', 
+        test_email_address = st.text_input('이메일 주소를 입력해주세요', 
                                            key="test_email_address_input")
 
         # 이메일 테스트 기능 추가
@@ -395,9 +395,9 @@ def main():
                 test_result = send_email(test_subject, test_body, test_email_address)
         
                 if 'successfully' in test_result:
-                    st.success(f"Test email sent successfully to {test_email_address}")
+                    st.success(f"테스트 이메일을 {test_email_address}로 보냈습니. 이메일을 확인해주세요")
                 else:
-                    st.warning(f"Failed to send test email: {test_result}")
+                    st.warning(f"테스트 이메일을 {test_result} 로 보내는데 실패했습니다")
 
 
 
@@ -447,11 +447,11 @@ def main():
                          key="load_data_and_changes"):
                 
                 data = load_data()
-                st.write("Current Data:")
+                st.write("현재 등록된 유저 이메일")
                 st.write(data)
                 
                 changes = load_changes()
-                st.write("Change Log:")
+                st.write("로그 기록")
                 st.write(changes)
             
 
