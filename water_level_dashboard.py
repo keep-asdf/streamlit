@@ -156,7 +156,7 @@ def main():
         with st.container():            
 
             # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
-            @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
+            # @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_data_true_pred():
                 return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
