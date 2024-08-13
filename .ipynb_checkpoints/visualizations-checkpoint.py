@@ -104,8 +104,6 @@ def create_individual_graphs(dataframe):
         p = figure(title=legend_mapping[feature], 
                    x_axis_type="datetime",
                    sizing_mode="stretch_both",
-                   color = 'darkred',
-                   line_width = 3,
                    height=300)  # 크기 자동 조절
         
         # 라인 생성 및 렌더러 저장
