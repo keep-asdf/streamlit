@@ -338,9 +338,14 @@ def main():
                         }).set_table_styles({
                                         'text-align': 'center'
                                                 })
-            st.dataframe(bayes_data_mini.sort_values(by='시각', 
-                                                ascending=False), 
-                        use_container_width=True)
+            
+            
+            # Streamlit에 출력
+            st.write(styled_df.to_html(), unsafe_allow_html=True)
+
+            # st.dataframe(bayes_data_mini.sort_values(by='시각', 
+            #                                     ascending=False), 
+            #             use_container_width=True)
             
             
 ##################################################################
