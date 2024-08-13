@@ -388,6 +388,8 @@ def main():
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력해주세요")
             else:
                 
+                global data_true_pred
+                global traffic_df
                 
                 data_true_pred_html = data_true_pred.iloc[-4:, :]
 
