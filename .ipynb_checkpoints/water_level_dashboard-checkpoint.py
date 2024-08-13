@@ -121,6 +121,9 @@ def main():
             # 상단 여백 추가
             st.text(" ")  # 빈 텍스트로 여백 추가
             st.text(" ")  # 필요에 따라 여러 줄 추가
+            st.text(" ")  # 필요에 따라 여러 줄 추가
+            st.text(" ")  # 필요에 따라 여러 줄 추가
+            st.text(" ")  # 필요에 따라 여러 줄 추가
 
             # 3x3 그리드를 만들고 중앙에 이미지를 배치
             top_col1, top_col2, top_col3 = st.columns([1, 2, 1])
