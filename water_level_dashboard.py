@@ -394,6 +394,7 @@ def main():
                 data_true_pred_email = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :]
                 data_true_pred_email = data_true_pred_email[['Time', 'True_Value', 'Predicted_Value']]
                 data_true_pred_email.columns = ['시간', '관측값', '예측값']
+                data_true_pred_email = data_true_pred_email.fillna('관측전')
                 data_true_pred_html = data_true_pred_email.to_html(index=False)
             
 
