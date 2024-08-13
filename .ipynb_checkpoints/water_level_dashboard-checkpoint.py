@@ -327,10 +327,10 @@ def main():
                                                                         time_points_to_plot),
                                                 use_container_width=True,
                           )            
-
-            bayes_data = bayes_data.fillna('관측 전')
-            bayes_data.columns = ['시간', '관측값', '예측값', '불확실성', '신용구간 하방', '신용구간 상방']
-            st.dataframe(bayes_data.iloc[:, 0:6].sort_values(by='시간', 
+            bayes_data_mini = bayes_data.iloc[:, 0:6]
+            bayes_data_mini = bayes_data_mini.fillna('관측 전')
+            bayes_data_mini.columns = ['시간', '관측값', '예측값', '불확실성', '신용구간 하방', '신용구간 상방']
+            st.dataframe(bayes_data_mini.sort_values(by='시간', 
                                                 ascending=False), 
                         use_container_width=True)
             
