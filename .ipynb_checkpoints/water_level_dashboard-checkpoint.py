@@ -346,7 +346,9 @@ def main():
         # 여백 추가 (첫 번째 방법: st.write("") 사용)
         st.write("")  # 한 줄의 여백 추가    
         st.write("")  # 한 줄의 여백 추가    
-        
+        st.write("")  # 한 줄의 여백 추가    
+        st.write("")  # 한 줄의 여백 추가    
+
         st.subheader("이메일로 위험 알림 받기")
         st.write("")  # 한 줄의 여백 추가    
         email_address = st.text_input('이메일 주소를 입력해주세요', 
