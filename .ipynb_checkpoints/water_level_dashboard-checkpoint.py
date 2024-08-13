@@ -391,10 +391,10 @@ def main():
       
                 data_true_pred_html = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :].to_html(index=False)
 
-                traffic_df_html = pd.read_csv('data/traffic_data.csv').iloc[1:, :]
+                traffic_df = pd.read_csv('data/traffic_data.csv').iloc[1:, :]
             
                 # 첫 번째 행이 비어 있는지 확인
-                if traffic_df.empty or traffic_df.iloc[0].isnull().all():
+                if  traffic_df.iloc[0].isnull().all():
                     
                     traffic_df_html = '현재 미호천교 교통 이슈 없음'
                     
