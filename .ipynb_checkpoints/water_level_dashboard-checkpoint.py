@@ -10,6 +10,7 @@ from kakao_notify import *
 from bokeh.layouts import gridplot
 from bokeh.layouts import column, row
 
+from alert_sys import *
 
 import streamlit as st
 from PIL import Image
@@ -145,20 +146,15 @@ def main():
 
     
             
-            
-    
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+
     elif choice == "True vs Predicted with CI(Random Forest ver)":
         
-        with st.container():
-            
-           # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
-            
-#             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
-#             def load_data_moving_averages():
-#                 return pd.read_csv('data/water_level_with_moving_averages.csv').copy()
+        with st.container():            
 
-#             data_moving_averages = load_data_moving_averages()
-            
             # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
             @st.cache_data(ttl=3600)  # 3600 seconds = 1 hour
             def load_data_true_pred():
@@ -166,16 +162,12 @@ def main():
 
             data_true_pred = load_data_true_pred()
             
-            
             # Convert the 'Time' column to datetime format
             data_true_pred['Time'] = pd.to_datetime(data_true_pred['Time'])
 
             # Check the last 6 hours of data
             true_pred_last_6h_data = data_true_pred.loc[data_true_pred['Time'] >= data_true_pred['Time'].iloc[-1] - pd.Timedelta(hours=6)]
 
-            
-
-            
             
              ##################################################################
             # Streamlit에서 날짜와 시간을 입력받습니다.
@@ -198,8 +190,13 @@ def main():
             selected_datetime1 = datetime.datetime.combine(selected_date1,
                                                            datetime.time(selected_time1, 0)) 
                 
+
+            ########## 위험 감지 #############
             
-            
+
+                
+                
+                
             ##################################################################
         
             st.bokeh_chart(visualize_true_pred_with_CI_and_status_lines_bokeh(data_true_pred,
@@ -207,7 +204,7 @@ def main():
                                                                               show_blue_line1))        
             
             
-             # 데이터 프레임과 그래프를 나란히 표시
+            # 데이터 프레임과 그래프를 나란히 표시
             col1, col2 = st.columns(2)
             with col1:
                 # st.write(data_moving_averages.sort_values(by='Time', ascending=False))
