@@ -331,21 +331,10 @@ def main():
             bayes_data_mini = bayes_data_mini.fillna('관측 전')
             bayes_data_mini.columns = ['시각', '관측값', '예측값', '불확실성', '신용구간 하방', '신용구간 상방']
             
-            
-            # 데이터프레임을 HTML 스타일로 가운데 정렬
-            styled_df = bayes_data_mini.style.set_properties(**{
-                        'text-align': 'center'
-                        }).set_table_styles({
-                                        'text-align': 'center'
-                                                })
-            
-            
-            # Streamlit에 출력
-            st.write(styled_df.to_html(), unsafe_allow_html=True)
 
-            # st.dataframe(bayes_data_mini.sort_values(by='시각', 
-            #                                     ascending=False), 
-            #             use_container_width=True)
+            st.dataframe(bayes_data_mini.sort_values(by='시각', 
+                                                ascending=False), 
+                        use_container_width=True)
             
             
 ##################################################################
