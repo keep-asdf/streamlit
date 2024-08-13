@@ -342,14 +342,14 @@ def main():
 
     # Email Notification 페이지
     elif choice == "Email Notification":
-        st.subheader("Email Notification System")
+        st.subheader("이메일로 위험 알림 받기")
     
-        email_address = st.text_input('Enter Email Address:', 
+        email_address = st.text_input('이메일 주소를 입력해주세요', 
                                   key="email_address_input")
 
 
          # Add/Update User 버튼
-        if st.button('Add/Update User', key="add_update_user_button"):
+        if st.button('이메일 등록', key="add_update_user_button"):
             if not is_valid_email(email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
             else:
@@ -360,7 +360,7 @@ def main():
                     st.warning(result)
 
         # Remove User 버튼
-        if st.button('Remove User', key="remove_user_button"):
+        if st.button('이메일 등록 취소', key="remove_user_button"):
             if not is_valid_email(email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
             else:
