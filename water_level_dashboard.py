@@ -64,34 +64,41 @@ def main():
     ####################################################################################
     ####################################################################################
 
-    if choice == "Introduction":
+#     if choice == "Introduction":
         
+#         with st.container():
+#             # 이미지 파일 경로
+#             image_path = "data/daemoon.jpg"
+
+#             # HTML과 CSS를 사용하여 이미지를 중앙에 배치
+#             st.markdown(
+#                 f"""
+                
+#                 <div style="display: flex; 
+#                 justify-content: center; 
+#                 align-items: center; 
+#                 height: 100vh;"> <!-- Viewport Height로 설정하여 화면 전체에 대해 중앙 정렬 -->
+
+#                     <img src="{image_path}" 
+#                     alt="Sample Image" 
+#                     style="max-width: 100%; 
+#                     height: auto; 
+#                     display: block; 
+#                     margin: 0 auto;"> <!-- 이미지 중앙 정렬 -->
+
+#                 </div>
+                
+#                 """,
+#                 unsafe_allow_html=True
+#             )
+
+    if choice == "Introduction":
         with st.container():
             # 이미지 파일 경로
             image_path = "data/daemoon.jpg"
 
-            # HTML과 CSS를 사용하여 이미지를 중앙에 배치
-            st.markdown(
-                f"""
-                
-                <div style="display: flex; 
-                justify-content: center; 
-                align-items: center; 
-                height: 100vh;"> <!-- Viewport Height로 설정하여 화면 전체에 대해 중앙 정렬 -->
-
-                    <img src="{image_path}" 
-                    alt="Sample Image" 
-                    style="max-width: 100%; 
-                    height: auto; 
-                    display: block; 
-                    margin: 0 auto;"> <!-- 이미지 중앙 정렬 -->
-
-                </div>
-                
-                """,
-                unsafe_allow_html=True
-            )
-
+            # Streamlit의 기본 이미지 표시 기능 사용
+            st.image(image_path, caption="Sample Image", use_column_width=True)
 
 
             
