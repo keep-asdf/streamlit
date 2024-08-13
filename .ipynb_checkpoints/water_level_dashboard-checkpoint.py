@@ -415,6 +415,8 @@ def main():
     <h2>미호천교 수위 데이터</h2>
     {data_true_pred_html}
     
+    <div style="margin-top: 20px;"></div> <!-- 20px의 상단 여백 추가 -->  
+    
     <h2>미호천교 근방 교통 상황 데이터</h2>
     {traffic_df_html}
     
