@@ -342,6 +342,9 @@ def main():
 
     # Email Notification 페이지
     elif choice == "Email Notification":
+        # 여백 추가 (첫 번째 방법: st.write("") 사용)
+        st.write("")  # 한 줄의 여백 추가    
+        st.write("")  # 한 줄의 여백 추가    
         st.subheader("이메일로 위험 알림 받기")
     
         email_address = st.text_input('이메일 주소를 입력해주세요', 
@@ -371,8 +374,7 @@ def main():
                     st.warning(result)
 
         # 여백 추가 (첫 번째 방법: st.write("") 사용)
-        st.write("")  # 한 줄의 여백 추가        # 수신자의 이메일 주소 입력란 추가
-        
+        st.write("")  # 한 줄의 여백 추가        
         
         st.subheader("이메일 알림 테스트 하기")
         test_email_address = st.text_input('Enter Test Recipient Email Address:', 
