@@ -210,6 +210,7 @@ def main():
                 # st.write(data_moving_averages.sort_values(by='Time', ascending=False))
                 
                 data_true_pred = data_true_pred.fillna('관측 전')
+                data_true_pred.columns = ['시간', '관측값', '예측값', '신뢰구간 하방' ,'신뢰구간 상방']
                 st.write(data_true_pred.sort_values(by='Time', ascending=False))
                 # st.dataframe(data_true_pred.sort_values(by='Time', 
                 #                                         ascending=False).head(1000), 
