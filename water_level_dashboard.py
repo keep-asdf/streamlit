@@ -325,6 +325,7 @@ def main():
                                                 use_container_width=True,
                           )            
 
+            bayes_data = bayes_data.fillna('관측 전')
             st.dataframe(bayes_data.iloc[:, 0:6].sort_values(by='Time', 
                                                 ascending=False), 
                         use_container_width=True)
