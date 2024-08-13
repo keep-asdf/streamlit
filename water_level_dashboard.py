@@ -211,10 +211,10 @@ def main():
             col1, col2 = st.columns(2)
             with col1:
                 # st.write(data_moving_averages.sort_values(by='Time', ascending=False))
-                st.write(data_true_pred.sort_values(by='Time', ascending=False))
-                # st.dataframe(data_true_pred.sort_values(by='Time', 
-                #                                         ascending=False).head(1000), 
-                #                                         use_container_width=True)
+                # st.write(data_true_pred.sort_values(by='Time', ascending=False))
+                st.dataframe(data_true_pred.sort_values(by='Time', 
+                                                        ascending=False).head(1000), 
+                                                        use_container_width=True)
 
 
 
