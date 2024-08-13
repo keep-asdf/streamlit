@@ -406,8 +406,13 @@ def main():
     
     
     elif choice == "Admin Page":
-        st.subheader("Admin Page")
-    
+        st.subheader("관리자 페이지")
+
+        st.write("")  # 한 줄의 여백 추가    
+        st.write("")  # 한 줄의 여백 추가    
+        st.write("")  # 한 줄의 여백 추가    
+        st.write("")  # 한 줄의 여백 추가    
+        
         # 관리자 인증
         if 'authenticated' not in st.session_state:
             st.session_state['authenticated'] = False
