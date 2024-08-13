@@ -92,24 +92,28 @@ def main():
 #                 unsafe_allow_html=True
 #             )
 
-    if choice == "Introduction":
-        with st.container():
-            # 이미지 파일 경로
-            image_path = "data/daemoon.jpg"
+        if choice == "Introduction":
+            with st.container():
+                # 이미지 파일 경로
+                image_path = "data/daemoon.jpg"
 
-            # 세 개의 열을 만들고 중앙 열에 이미지를 배치
-            col1, col2, col3 = st.columns([1, 2, 1])  # 중앙 열을 조금 더 넓게 설정
+                # 첫 번째 행: 세 개의 열로 구성
+                st.empty()  # 위쪽 여백 추가
+                top_col1, top_col2, top_col3 = st.columns([1, 2, 1])
 
-            with col1:
-                st.empty()  # 왼쪽 열을 비워둡니다.
+                # 두 번째 행: 세 개의 열로 구성, 가운데 열에 이미지를 배치
+                mid_col1, mid_col2, mid_col3 = st.columns([1, 2, 1])
+                with mid_col1:
+                    st.empty()  # 왼쪽 여백 추가
+                with mid_col2:
+                    st.image(image_path, caption="Sample Image", use_column_width=True)  # 중앙에 이미지 표시
+                with mid_col3:
+                    st.empty()  # 오른쪽 여백 추가
+        
+                # 세 번째 행: 세 개의 열로 구성
+                bot_col1, bot_col2, bot_col3 = st.columns([1, 2, 1])
+                st.empty()  # 아래쪽 여백 추가
 
-            with col2:
-                st.image(image_path, caption="Sample Image", use_column_width=True)  # 중앙 열에 이미지 표시
-    
-            with col3:
-                st.empty()  # 오른쪽 열을 비워둡니다.
-    
-            
             
     
     elif choice == "True vs Predicted with CI(Random Forest ver)":
