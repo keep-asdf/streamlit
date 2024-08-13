@@ -412,7 +412,7 @@ def main():
         st.write("")  # 한 줄의 여백 추가    
         st.write("")  # 한 줄의 여백 추가  
         
-        st.subheader("관리자 페이지")
+        st.subheader("⚠️ 관리자 페이지")
 
         st.write("")  # 한 줄의 여백 추가  
 
