@@ -211,7 +211,7 @@ def main():
                 
                 data_true_pred = data_true_pred.fillna('관측 전')
                 data_true_pred.columns = ['시간', '관측값', '예측값', '신뢰구간 하방' ,'신뢰구간 상방']
-                st.write(data_true_pred.sort_values(by='Time', ascending=False))
+                st.write(data_true_pred.sort_values(by='시간', ascending=False))
                 # st.dataframe(data_true_pred.sort_values(by='Time', 
                 #                                         ascending=False).head(1000), 
                 #                                         use_container_width=True)
