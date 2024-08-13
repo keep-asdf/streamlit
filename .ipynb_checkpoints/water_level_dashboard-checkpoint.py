@@ -389,9 +389,9 @@ def main():
             else:
                 
                 
-                data_true_pred_html = data_true_pred[-4:, :]
+                data_true_pred_html = data_true_pred.iloc[-4:, :]
 
-                traffic_df_html = traffic_df[1:, :]
+                traffic_df_html = traffic_df.iloc[1:, :]
 
                 test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
                 
