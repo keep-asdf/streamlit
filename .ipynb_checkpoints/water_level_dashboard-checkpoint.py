@@ -388,7 +388,7 @@ def main():
             if not test_email_address:
                 st.warning("테스트 이메일을 받을 이메일 주소를 입력해주세요.")
             elif not is_valid_email(test_email_address):
-                st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력해주세요
+                st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력해주세요")
             else:
                 test_subject = "Test Notification"
                 test_body = "This is a test email to verify the notification system."
