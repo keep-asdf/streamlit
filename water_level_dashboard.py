@@ -329,7 +329,8 @@ def main():
                           )            
 
             bayes_data = bayes_data.fillna('관측 전')
-            st.dataframe(bayes_data.iloc[:, 0:6].sort_values(by='Time', 
+            bayes_data.columns = ['시간', '관측값', '예측값', '불확실성', '신용구간 하방', '신용구간 상방']
+            st.dataframe(bayes_data.iloc[:, 0:6].sort_values(by='시간', 
                                                 ascending=False), 
                         use_container_width=True)
             
