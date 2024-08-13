@@ -427,7 +427,7 @@ def main():
             if st.button("로그인", key="admin_login_button"):
                 if password == ADMIN_PASSWORD:
                     st.session_state['authenticated'] = True
-                    st.success("Login successful")
+                    st.success("로그인 성공! 로그인 버튼을 한번 더 눌러주세요")
                     # st.experimental_rerun()  # 로그인 성공 시 페이지 새로고침
                 else:
                     st.error("Invalid password")
