@@ -92,28 +92,30 @@ def main():
 #                 unsafe_allow_html=True
 #             )
 
-        if choice == "Introduction":
-            with st.container():
-                # 이미지 파일 경로
-                image_path = "data/daemoon.jpg"
+    if choice == "Introduction":
+        with st.container():
+            # 이미지 파일 경로
+            image_path = "data/daemoon.jpg"
 
-                # 첫 번째 행: 세 개의 열로 구성
-                st.empty()  # 위쪽 여백 추가
-                top_col1, top_col2, top_col3 = st.columns([1, 2, 1])
+            # 첫 번째 행: 세 개의 열로 구성
+            st.empty()  # 위쪽 여백 추가
+            top_col1, top_col2, top_col3 = st.columns([1, 2, 1])
 
-                # 두 번째 행: 세 개의 열로 구성, 가운데 열에 이미지를 배치
-                mid_col1, mid_col2, mid_col3 = st.columns([1, 2, 1])
-                with mid_col1:
-                    st.empty()  # 왼쪽 여백 추가
-                with mid_col2:
-                    st.image(image_path, caption="Sample Image", use_column_width=True)  # 중앙에 이미지 표시
-                with mid_col3:
-                    st.empty()  # 오른쪽 여백 추가
-        
-                # 세 번째 행: 세 개의 열로 구성
-                bot_col1, bot_col2, bot_col3 = st.columns([1, 2, 1])
-                st.empty()  # 아래쪽 여백 추가
+            # 두 번째 행: 세 개의 열로 구성, 가운데 열에 이미지를 배치
+            mid_col1, mid_col2, mid_col3 = st.columns([1, 2, 1])
+            with mid_col1:
+                st.empty()  # 왼쪽 여백 추가
+            with mid_col2:
+                st.image(image_path, caption="Sample Image", use_column_width=True)  # 중앙에 이미지 표시
+            with mid_col3:
+                st.empty()  # 오른쪽 여백 추가
 
+            # 세 번째 행: 세 개의 열로 구성
+            bot_col1, bot_col2, bot_col3 = st.columns([1, 2, 1])
+            st.empty()  # 아래쪽 여백 추가
+
+    
+            
             
     
     elif choice == "True vs Predicted with CI(Random Forest ver)":
