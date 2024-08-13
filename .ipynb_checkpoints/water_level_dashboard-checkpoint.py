@@ -212,21 +212,9 @@ def main():
             with col1:
                 # st.write(data_moving_averages.sort_values(by='Time', ascending=False))
                 # st.write(data_true_pred.sort_values(by='Time', ascending=False))
-                # st.dataframe(data_true_pred.sort_values(by='Time', 
-                #                                         ascending=False).head(1000), 
-                #                                         use_container_width=True)
-                st.markdown(
-                    """
-                    <style>
-                    .full-width-table {
-                        width: 100%;
-                    }
-                    </style>
-                    """,
-                    unsafe_allow_html=True
-                )
-
-                st.write(data_true_pred.sort_values(by='Time', ascending=False).style.set_table_attributes('class="full-width-table"'))
+                st.dataframe(data_true_pred.sort_values(by='Time', 
+                                                        ascending=False).head(1000), 
+                                                        use_container_width=True)
 
 
 
