@@ -378,11 +378,11 @@ def main():
         st.write("")  # 한 줄의 여백 추가        
         
         st.subheader("이메일 알림 테스트 하기")
-        test_email_address = st.text_input('Enter Test Recipient Email Address:', 
+        test_email_address = st.text_input('이메일 주소를 입력해주세요:', 
                                            key="test_email_address_input")
 
         # 이메일 테스트 기능 추가
-        if st.button('Test Email', key="test_email_button"):
+        if st.button('테스트 이메일 보내기', key="test_email_button"):
             if not test_email_address:
                 st.warning("Please enter a recipient email address for the test email.")
             elif not is_valid_email(test_email_address):
