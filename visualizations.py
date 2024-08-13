@@ -678,13 +678,13 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
                sizing_mode="stretch_both")
 
     # True Values 라인 추가
-    true_values_renderer = p.line('Time', 'True_Values', source=source, legend_label='관측된 미호천교 수위', line_width=3, color='darkblue')
+    true_values_renderer = p.line('Time', 'True_Values', source=source, legend_label='관측된 미호천교 수위', line_width=3, color='#464646')
 
     # Predictions 라인 추가
     p.line('Time', 'Prediction', source=source, legend_label='예측된 미호천교 수위', line_width=3, color='darkred')
 
     # Uncertainty 라인 추가
-    p.line('Time', 'Uncertainty', source=source, legend_label='예측된 불확실성', line_width=2, color='black')
+    p.line('Time', 'Uncertainty', source=source, legend_label='예측된 불확실성', line_width=2, color='darkblue')
 
     # 95% Prediction Interval 밴드 추가
     band = Band(base='Time', lower='Lower_Bound', upper='Upper_Bound', source=source, level='underlay',
