@@ -391,11 +391,11 @@ def main():
       
                 data_true_pred_html = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :].copy()
 
-                traffic_df_html = pd.read_csv('data/traffic_data.csv').iloc[-1:, :].copy()
+                traffic_df_html = pd.read_csv('data/traffic_data.csv').iloc[1:, :].copy()
 
                 test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
                 
-                test_body ="""
+                test_body =f"""
                 
 <html>
 <body>
