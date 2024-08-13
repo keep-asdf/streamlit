@@ -396,7 +396,7 @@ def main():
                 # 첫 번째 행이 비어 있는지 확인
                 if  traffic_df.empty :
                     
-                    traffic_df_html = '현재 미호천교 교통 이슈 없음'
+                    traffic_df_html = '현재 미호천교 주변 교통 이슈 없음'
                     
                 else:
                     
@@ -418,7 +418,17 @@ def main():
     <h2>미호천교 근방 교통 상황 데이터</h2>
     {traffic_df_html}
     
-    <p>더 많은 정보는 <a href="https://mhc-water-level.streamlit.app/">여기</a>에서 확인할 수 있습니다.</p>
+    <!-- 썸네일 이미지와 설명이 포함된 링크 -->
+    <div style="border:1px solid #dcdcdc; padding: 10px; width: 300px;">
+        <a href="https://mhc-water-level.streamlit.app/" style="text-decoration:none; color:black;">
+            <img src="https://via.placeholder.com/300x150" alt="썸네일 이미지" style="width:100%; height:auto;">
+            <div style="padding-top: 10px;">
+                <h3 style="margin: 0;">미호천교 위험 알림 시스템</h3>
+                <p style="margin: 0;">미호천교의 현재 수위 및 교통 상황을 실시간으로 확인하세요.</p>
+            </div>
+        </a>
+    </div>
+    
     <p>감사합니다.</p>
 </body>
 </html>
