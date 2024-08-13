@@ -10,7 +10,7 @@ from kakao_notify import *
 from bokeh.layouts import gridplot
 from bokeh.layouts import column, row
 
-from alert_sys import *
+# from alert_sys import *
 
 import streamlit as st
 from PIL import Image
