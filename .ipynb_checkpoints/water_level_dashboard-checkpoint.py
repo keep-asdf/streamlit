@@ -435,7 +435,7 @@ def main():
     
         # 관리자 인증 후 표시할 내용
         if st.session_state['authenticated']:
-            st.subheader('Registered Users')
+            st.subheader('유저 이메일 데이터 불러오기')
             
             ##
             # if st.button("Load KakaoTalk User List", key="load_kakao_user_list"):
@@ -443,7 +443,7 @@ def main():
             #     st.write(data)
             ##
             
-            if st.button("Load Data and Changes", 
+            if st.button("유저 이메일 데이터 불러오기", 
                          key="load_data_and_changes"):
                 
                 data = load_data()
