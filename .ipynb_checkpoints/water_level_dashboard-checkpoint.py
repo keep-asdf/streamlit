@@ -387,8 +387,36 @@ def main():
             elif not is_valid_email(test_email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력해주세요")
             else:
+                
+                
+                data_true_pred_html = data_true_pred[-4:, :]
+
+                traffic_df_html = traffic_df
+
                 test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
-                test_body = "이 이메일은 테스트를 위한 이메일입니다."
+                
+                test_body ="""
+                
+<html>
+<body>
+    <h1>미호천교 위험 알림 시스템</h1>
+    <p>이 이메일은 테스트를 위한 이메일입니다.</p>
+    <p>미호천교의 현재 상황에 대한 업데이트를 아래에서 확인하세요:</p>
+    
+    <h2>미호천교 수위 데이터</h2>
+    {data_true_pred_html}
+    
+    <h2>교통 상황 데이터</h2>
+    {traffic_df_html}
+    
+    <p>더 많은 정보는 <a href="https://mhc-water-level.streamlit.app/">여기</a>에서 확인할 수 있습니다.</p>
+    <p>감사합니다.</p>
+</body>
+</html>
+"""
+
+                
+                
                 test_result = send_email(test_subject, test_body, test_email_address)
         
                 if 'successfully' in test_result:
