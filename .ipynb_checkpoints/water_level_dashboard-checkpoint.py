@@ -421,7 +421,7 @@ def main():
             st.session_state['authenticated'] = False
     
         if not st.session_state['authenticated']:
-            password = st.text_input("관리자 비밀번호를 입력해주세요/n(로그인을 성공했으면, '로그인' 버튼을 한번 더 눌러주세요)", 
+            password = st.text_input("관리자 비밀번호를 입력해주세요\n(로그인을 성공했으면, '로그인' 버튼을 한번 더 눌러주세요)", 
                                      type="password", 
                                      key="admin_password_input")
             if st.button("로그인", key="admin_login_button"):
