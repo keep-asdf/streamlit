@@ -354,7 +354,7 @@ def main():
 
         st.write("")  # 한 줄의 여백 추가    
          # Add/Update User 버튼
-        if st.button('이메일 등록', key="add_update_user_button"):
+        if st.button('이메일 등록을 원하시면 이 버튼을 클릭해주세요', key="add_update_user_button"):
             if not is_valid_email(email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
             else:
@@ -364,7 +364,7 @@ def main():
                 else:
                     st.warning(result)
         # Remove User 버튼
-        if st.button('이메일 등록 취소', key="remove_user_button"):
+        if st.button('이메일 등록 취소를 원하시면 이 버튼을 클릭해주세요', key="remove_user_button"):
             if not is_valid_email(email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
             else:
