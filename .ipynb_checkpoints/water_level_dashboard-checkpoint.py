@@ -134,7 +134,7 @@ def main():
                 st.empty()  # 왼쪽 여백
 
             with mid_col2:
-                st.image(image_path, caption="미호천교 범람에 의한 궁평2지하차도 침수 모습", use_column_width=True)  # 중앙에 이미지 표시
+                st.image(image_path, caption="미호천교 범람에 의한 궁평 2지하차도 침수 모습", use_column_width=True)  # 중앙에 이미지 표시
 
             with mid_col3:
                 st.empty()  # 오른쪽 여백
