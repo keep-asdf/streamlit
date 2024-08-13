@@ -406,22 +406,24 @@ def main():
     
     
     elif choice == "Admin Page":
-        st.subheader("관리자 페이지")
 
         st.write("")  # 한 줄의 여백 추가    
         st.write("")  # 한 줄의 여백 추가    
         st.write("")  # 한 줄의 여백 추가    
-        st.write("")  # 한 줄의 여백 추가    
+        st.write("")  # 한 줄의 여백 추가  
+        
+        st.subheader("관리자 페이지")
+
         
         # 관리자 인증
         if 'authenticated' not in st.session_state:
             st.session_state['authenticated'] = False
     
         if not st.session_state['authenticated']:
-            password = st.text_input("Enter admin password:", 
+            password = st.text_input("관리자 비밀번호를 입력해주세요:", 
                                      type="password", 
                                      key="admin_password_input")
-            if st.button("Login", key="admin_login_button"):
+            if st.button("로그인", key="admin_login_button"):
                 if password == ADMIN_PASSWORD:
                     st.session_state['authenticated'] = True
                     st.success("Login successful")
