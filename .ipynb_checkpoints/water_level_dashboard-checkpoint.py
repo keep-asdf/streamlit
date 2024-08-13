@@ -372,6 +372,7 @@ def main():
 
 
         # 수신자의 이메일 주소 입력란 추가
+        st.subheader("이메일 알림 테스트 하기")
         test_email_address = st.text_input('Enter Test Recipient Email Address:', 
                                            key="test_email_address_input")
 
