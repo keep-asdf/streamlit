@@ -92,14 +92,35 @@ def main():
 #                 unsafe_allow_html=True
 #             )
 
+#     if choice == "Introduction":
+#         with st.container():
+#             # 이미지 파일 경로
+#             image_path = "data/daemoon.jpg"
+
+#             # Streamlit의 기본 이미지 표시 기능 사용
+#             st.image(image_path, caption="Sample Image", use_column_width=True)
+
+
     if choice == "Introduction":
         with st.container():
             # 이미지 파일 경로
             image_path = "data/daemoon.jpg"
 
-            # Streamlit의 기본 이미지 표시 기능 사용
-            st.image(image_path, caption="Sample Image", use_column_width=True)
-
+            # HTML과 CSS를 사용하여 이미지를 중앙에 배치
+            st.markdown(
+                f"""
+                <style>
+                .centered-image {{
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;
+                }}
+                </style>
+                <img src="{image_path}" class="centered-image" alt="Sample Image">
+                """,
+                unsafe_allow_html=True
+            )
 
             
             
