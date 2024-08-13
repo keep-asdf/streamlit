@@ -225,7 +225,7 @@ def visualize_true_pred_with_CI_and_status_lines_bokeh(dataframe,
     p.line('Time', 'Predicted_Value', source=source, color="darkblue", legend_label="예측된 미호천교 수위", line_width=3)
 
     # Plot confidence intervals
-    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkred')
+    band = Band(base='Time', lower='CI_Lower', upper='CI_Upper', source=source, level='underlay', fill_alpha=0.3, fill_color='darkblue')
     p.add_layout(band)
 
     # Adding the status lines using fixed values
