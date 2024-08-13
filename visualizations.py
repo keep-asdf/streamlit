@@ -638,6 +638,9 @@ def plot_posterior_predictive_distribution_bokeh(df, time_points):
 ####################################################################################
 
 
+
+
+
 def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_blue_line):
     """
     Bokeh를 이용한 시간대별 예측 분포 시각화 함수
@@ -675,10 +678,10 @@ def plot_predictions_with_uncertainty_bokeh(pred_uncer, selected_datetime, show_
                sizing_mode="stretch_both")
 
     # True Values 라인 추가
-    true_values_renderer = p.line('Time', '관측된 미호천교 수위', source=source, legend_label='True Values', line_width=2, color='blue')
+    true_values_renderer = p.line('Time', '관측된 미호천교 수위', source=source, legend_label='True Values', line_width=2, color='#464646')
 
     # Predictions 라인 추가
-    p.line('Time', 'Prediction', source=source, legend_label='예측된 미호천교 수위', line_width=2, color='red', alpha=0.5)
+    p.line('Time', 'Prediction', source=source, legend_label='예측된 미호천교 수위', line_width=3, color='darkred', alpha=0.5)
 
     # Uncertainty 라인 추가
     p.line('Time', 'Uncertainty', source=source, legend_label='예측된 불확실성', line_width=2, color='black')
