@@ -621,6 +621,7 @@ def main():
                 else:
                         st.warning(f"테스트 이메일을 {test_result} 로 보내는데 실패했습니다")
                         
+                        
         st.write("")  # 한 줄의 여백 추가   
         st.write("")  # 한 줄의 여백 추가   
         st.write("")  # 한 줄의 여백 추가   
@@ -639,7 +640,7 @@ def main():
             # st.write("")  # 한 줄의 여백 추가   
             if st.button('이메일 등록 취소를 원하시면 이 버튼을 클릭해주세요', key="remove_user_button"):
                 result = remove_user(email_address)
-                if 'removed successfully' in result:
+                if '등록취소' in result:
                     st.success(result)
                 else:
                     st.warning(result)

@@ -177,7 +177,7 @@ def remove_user(e_mail_address):
                 connection.commit()
                 logger.info(f"Email removed successfully: {e_mail_address}")
                 log_user_change('DELETE', e_mail_address)  # 로그 기록 추가
-                return 'Email removed successfully!'
+                return '성공적으로 이메일을 등록취소 하였습니다!'
             else:
                 logger.warning(f"Attempt to remove a non-existent Email: {e_mail_address}")
                 return 'KakaoTalk ID not found.'
