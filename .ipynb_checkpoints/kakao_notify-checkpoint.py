@@ -244,7 +244,7 @@ def save_verification_code(email, code):
     
     # 새로운 인증 코드 저장
     cursor.execute("""
-        INSERT INTO email_verifications (email, verification_code, expires_at)
+        INSERT INTO email_verifications (e_mail_address, verification_code, expires_at)
         VALUES (%s, %s, %s)
     """, (email, code, expires_at))
     
