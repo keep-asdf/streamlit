@@ -240,7 +240,7 @@ def save_verification_code(email, code):
     cursor = connection.cursor()
     
     # 기존 인증 코드 삭제 (이미 있는 경우)
-    cursor.execute("DELETE FROM email_verifications WHERE email = %s", (email,))
+    cursor.execute("DELETE FROM email_verifications WHERE e_mail_address = %s", (email,))
     
     # 새로운 인증 코드 저장
     cursor.execute("""
@@ -269,7 +269,7 @@ def verify_code(email, entered_code):
     cursor = connection.cursor()
 
     cursor.execute("""
-        SELECT verification_code, expires_at FROM email_verifications WHERE email = %s
+        SELECT verification_code, expires_at FROM email_verifications WHERE e_mail_address = %s
     """, (email,))
     
     result = cursor.fetchone()
@@ -278,7 +278,7 @@ def verify_code(email, entered_code):
         if datetime.datetime.now() > expires_at:
             return "인증 코드가 만료되었습니다."
         if saved_code == entered_code:
-            cursor.execute("UPDATE users SET verification = TRUE WHERE email = %s", (email,))
+            cursor.execute("UPDATE users SET verification = TRUE WHERE e_mail_address = %s", (email,))
             connection.commit()
             cursor.close()
             connection.close()
@@ -294,7 +294,7 @@ def is_user_verified(email):
     connection = get_db_connection()
     cursor = connection.cursor()
 
-    cursor.execute("SELECT verification FROM users WHERE email = %s", (email,))
+    cursor.execute("SELECT verification FROM users WHERE e_mail_address = %s", (email,))
     result = cursor.fetchone()
     
     cursor.close()
