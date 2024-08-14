@@ -339,10 +339,6 @@ def main():
             
 ##################################################################
 ##################################################################
-##################################################################
-##################################################################
-##################################################################
-##################################################################
 
 #     # Email Notification 페이지
 #     elif choice == "Email Notification":
@@ -475,11 +471,18 @@ def main():
 
     elif choice == "Email Notification":
         
+        st.write("")  # 한 줄의 여백 추가    
+        st.write("")  # 한 줄의 여백 추가    
+        st.write("")  # 한 줄의 여백 추가    
+        st.write("")  # 한 줄의 여백 추가  
+        
         st.header("이메일로 위험 알림 받기")
+        st.write("")  # 한 줄의 여백 추가   
         
         st.subheader("1. 이메일 인증 받기")
         email_address = st.text_input('이메일 주소를 입력해주세요', key="email_address_input")
-    
+        
+        st.header("이메일로 위험 알림 받기")
         if st.button('이메일 인증 코드 보내기', key="send_verification_code_button"):
             if not is_valid_email(email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
@@ -489,7 +492,8 @@ def main():
                     st.success(f"인증 코드를 {email_address}로 보냈습니다. 이메일을 확인해주세요.")
                 else:
                     st.warning(f"인증 코드를 보내는데 실패했습니다: {send_result}")
-    
+                    
+        st.header("이메일로 위험 알림 받기")
         entered_code = st.text_input('이메일로 받은 인증 코드를 입력하세요', key="entered_verification_code")
     
         if st.button('이메일 인증하기', key="verify_email_button"):
@@ -503,7 +507,8 @@ def main():
                 
             else:
                 st.warning(verification_result)
-                
+        st.header("이메일로 위험 알림 받기")
+        st.header("이메일로 위험 알림 받기")
         st.subheader("2. 이메일 등록,삭제 하기(인증 후 버튼 등장)")
         # 인증된 사용자만 이메일 등록/삭제 가능
         if is_user_verified(email_address):
@@ -524,7 +529,8 @@ def main():
             st.warning("이메일을 인증하시면 등록/삭제 하실 수 있습니다.")
 
             
-            
+        st.header("이메일로 위험 알림 받기")
+        st.header("이메일로 위험 알림 받기")
         st.subheader("3. 이메일 알림 테스트 하기")
         
         test_email_address = st.text_input('이메일 주소를 입력해주세요', key="test_email_address_input")
