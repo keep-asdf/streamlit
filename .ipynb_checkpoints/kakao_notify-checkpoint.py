@@ -324,7 +324,11 @@ def verify_code(email, entered_code):
         if saved_code == entered_code:
             connection = get_db_connection()
             cursor = connection.cursor()
-            cursor.execute("UPDATE users SET verification = TRUE WHERE e_mail_address = %s", (email,))
+            cursor.execute("""
+                INSERT INTO users (e_mail_address, verification) 
+                VALUES (%s, TRUE)
+                ON DUPLICATE KEY UPDATE verification = TRUE
+            """, (email,))
             connection.commit()
             cursor.close()
             connection.close()
