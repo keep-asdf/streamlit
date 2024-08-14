@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import pymysql
 
 def alert_sys(df): 
     # 마지막 행 데이터 추출
