@@ -236,7 +236,7 @@ def generate_verification_code(length=6):
 def save_verification_code(email, code):
     expires_at = datetime.datetime.now() + datetime.timedelta(minutes=10)  # 만료 시간 설정 (10분 후)
     
-    connection = connect_db()  # DB 연결
+    connection = get_db_connection()  # DB 연결
     cursor = connection.cursor()
     
     # 기존 인증 코드 삭제 (이미 있는 경우)
@@ -265,7 +265,7 @@ def send_verification_email(email):
 
 # 인증 코드를 검증하는 함수
 def verify_code(email, entered_code):
-    connection = connect_db()
+    connection = get_db_connection()
     cursor = connection.cursor()
 
     cursor.execute("""
@@ -291,7 +291,7 @@ def verify_code(email, entered_code):
 
 #로그기록
 def is_user_verified(email):
-    connection = connect_db()
+    connection = get_db_connection()
     cursor = connection.cursor()
 
     cursor.execute("SELECT verification FROM users WHERE email = %s", (email,))
