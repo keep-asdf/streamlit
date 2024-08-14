@@ -492,12 +492,16 @@ def main():
     
         if st.button('이메일 인증하기', key="verify_email_button"):
             verification_result = verify_code(email_address, entered_code)
+            
             if "성공적으로 완료" in verification_result:
                 st.success(verification_result)
+                
             elif "인증 코드가 만료되었습니다" in verification_result:
                 st.error(verification_result)
+                
             else:
                 st.warning(verification_result)
+                
 
         # 인증된 사용자만 이메일 등록/삭제 가능
         if is_user_verified(email_address):

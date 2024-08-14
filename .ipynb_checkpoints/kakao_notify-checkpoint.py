@@ -87,6 +87,32 @@ def load_data():
             
             
 
+# def add_user(e_mail_address):
+#     connection = get_db_connection()
+#     if connection is None:
+#         return 'Failed to connect to the database.'
+#     try:
+#         with connection.cursor() as cursor:
+#             cursor.execute("SELECT * FROM users WHERE e_mail_address = %s", (e_mail_address,))
+#             result = cursor.fetchone()
+#             if result:
+#                 logger.warning(f"Attempt to add a duplicate KakaoTalk ID: {e_mail_address}")
+#                 return 'This KakaoTalk ID is already registered.'
+#             else:
+#                 cursor.execute(
+#                     "INSERT INTO users (e_mail_address) VALUES (%s, %s)",
+#                     (e_mail_address)
+#                 )
+#                 connection.commit()
+#                 logger.info(f"User added successfully: {e_mail_address}")
+#                 return 'User added successfully!'
+#     except Exception as e:
+#         logger.error(f"Failed to add user: {e}")
+#         return f'Failed to add user: {e}'
+#     finally:
+#         if connection is not None:
+#             connection.close()
+
 def add_user(e_mail_address):
     connection = get_db_connection()
     if connection is None:
@@ -100,11 +126,12 @@ def add_user(e_mail_address):
                 return 'This KakaoTalk ID is already registered.'
             else:
                 cursor.execute(
-                    "INSERT INTO users (e_mail_address) VALUES (%s, %s)",
-                    (e_mail_address)
+                    "INSERT INTO users (e_mail_address) VALUES (%s)",
+                    (e_mail_address,)
                 )
                 connection.commit()
                 logger.info(f"User added successfully: {e_mail_address}")
+                log_user_change('INSERT', e_mail_address)  # 로그 기록 추가
                 return 'User added successfully!'
     except Exception as e:
         logger.error(f"Failed to add user: {e}")
@@ -112,6 +139,30 @@ def add_user(e_mail_address):
     finally:
         if connection is not None:
             connection.close()
+
+# def remove_user(e_mail_address):
+#     connection = get_db_connection()
+#     if connection is None:
+#         return 'Failed to connect to the database.'
+#     try:
+#         with connection.cursor() as cursor:
+#             cursor.execute("SELECT * FROM users WHERE e_mail_address = %s", (e_mail_address,))
+#             result = cursor.fetchone()
+#             if result:
+#                 cursor.execute("DELETE FROM users WHERE e_mail_address = %s", (e_mail_address,))
+#                 connection.commit()
+#                 logger.info(f"User removed successfully: {e_mail_address}")
+#                 return 'User removed successfully!'
+#             else:
+#                 logger.warning(f"Attempt to remove a non-existent KakaoTalk ID: {e_mail_address}")
+#                 return 'KakaoTalk ID not found.'
+#     except Exception as e:
+#         logger.error(f"Failed to remove user: {e}")
+#         return f'Failed to remove user: {e}'
+#     finally:
+#         if connection is not None:
+#             connection.close()
+
 
 def remove_user(e_mail_address):
     connection = get_db_connection()
@@ -125,6 +176,7 @@ def remove_user(e_mail_address):
                 cursor.execute("DELETE FROM users WHERE e_mail_address = %s", (e_mail_address,))
                 connection.commit()
                 logger.info(f"User removed successfully: {e_mail_address}")
+                log_user_change('DELETE', e_mail_address)  # 로그 기록 추가
                 return 'User removed successfully!'
             else:
                 logger.warning(f"Attempt to remove a non-existent KakaoTalk ID: {e_mail_address}")
