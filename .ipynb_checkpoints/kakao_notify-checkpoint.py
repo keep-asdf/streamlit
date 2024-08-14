@@ -122,20 +122,20 @@ def add_user(e_mail_address):
             cursor.execute("SELECT * FROM users WHERE e_mail_address = %s", (e_mail_address,))
             result = cursor.fetchone()
             if result:
-                logger.warning(f"Attempt to add a duplicate KakaoTalk ID: {e_mail_address}")
-                return 'This KakaoTalk ID is already registered.'
+                logger.warning(f"Attempt to add a duplicate Email: {e_mail_address}")
+                return 'This Email is already registered.'
             else:
                 cursor.execute(
                     "INSERT INTO users (e_mail_address) VALUES (%s)",
                     (e_mail_address,)
                 )
                 connection.commit()
-                logger.info(f"User added successfully: {e_mail_address}")
+                logger.info(f"Email added successfully: {e_mail_address}")
                 log_user_change('INSERT', e_mail_address)  # 로그 기록 추가
-                return 'User added successfully!'
+                return 'Email added successfully!'
     except Exception as e:
-        logger.error(f"Failed to add user: {e}")
-        return f'Failed to add user: {e}'
+        logger.error(f"Failed to add Email: {e}")
+        return f'Failed to add Email: {e}'
     finally:
         if connection is not None:
             connection.close()
@@ -175,15 +175,15 @@ def remove_user(e_mail_address):
             if result:
                 cursor.execute("DELETE FROM users WHERE e_mail_address = %s", (e_mail_address,))
                 connection.commit()
-                logger.info(f"User removed successfully: {e_mail_address}")
+                logger.info(f"Email removed successfully: {e_mail_address}")
                 log_user_change('DELETE', e_mail_address)  # 로그 기록 추가
-                return 'User removed successfully!'
+                return 'Email removed successfully!'
             else:
-                logger.warning(f"Attempt to remove a non-existent KakaoTalk ID: {e_mail_address}")
+                logger.warning(f"Attempt to remove a non-existent Email: {e_mail_address}")
                 return 'KakaoTalk ID not found.'
     except Exception as e:
-        logger.error(f"Failed to remove user: {e}")
-        return f'Failed to remove user: {e}'
+        logger.error(f"Failed to remove Email: {e}")
+        return f'Failed to remove Email: {e}'
     finally:
         if connection is not None:
             connection.close()
@@ -353,6 +353,7 @@ def verify_code(email, entered_code):
 #         return True
 #     return False
 
+
 def is_user_verified(email):
     try:
         connection = get_db_connection()
@@ -377,6 +378,7 @@ def is_user_verified(email):
         logger.error(f"Unexpected error: {e}")
         st.error(f"An unexpected error occurred: {e}")
         return False
+
 
 def log_user_change(action, email):
     connection = get_db_connection()
