@@ -339,20 +339,44 @@ def verify_code(email, entered_code):
         return "이메일 주소를 찾을 수 없습니다."
 
 #로그기록
+# def is_user_verified(email):
+#     connection = get_db_connection()
+#     cursor = connection.cursor()
+
+#     cursor.execute("SELECT verification FROM users WHERE e_mail_address = %s", (email,))
+#     result = cursor.fetchone()
+    
+#     cursor.close()
+#     connection.close()
+    
+#     if result and result[0]:  # verification이 True이면 인증된 사용자
+#         return True
+#     return False
+
 def is_user_verified(email):
-    connection = get_db_connection()
-    cursor = connection.cursor()
-
-    cursor.execute("SELECT verification FROM users WHERE e_mail_address = %s", (email,))
-    result = cursor.fetchone()
-    
-    cursor.close()
-    connection.close()
-    
-    if result and result[0]:  # verification이 True이면 인증된 사용자
-        return True
-    return False
-
+    try:
+        connection = get_db_connection()
+        if connection is None:
+            raise Exception("Failed to connect to the database.")
+        
+        cursor = connection.cursor()
+        cursor.execute("SELECT verification FROM users WHERE e_mail_address = %s", (email,))
+        result = cursor.fetchone()
+        
+        cursor.close()
+        connection.close()
+        
+        if result and result['verification']:  # verification이 True이면 인증된 사용자
+            return True
+        return False
+    except pymysql.MySQLError as e:
+        logger.error(f"MySQL error: {e}")
+        st.error(f"Database query failed: {e}")
+        return False
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")
+        st.error(f"An unexpected error occurred: {e}")
+        return False
 
 def log_user_change(action, email):
     connection = get_db_connection()
