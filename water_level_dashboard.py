@@ -604,11 +604,11 @@ def main():
 """
                     test_result = send_email(test_subject, test_body, test_email_address)
         
-                if 'successfully' in test_result:
-                    st.success(f"테스트 이메일을 성공적으로 {test_email_address} 로 보냈습니다. 이메일을 확인해주세요")
+                    if 'successfully' in test_result:
+                        st.success(f"테스트 이메일을 성공적으로 {test_email_address} 로 보냈습니다. 이메일을 확인해주세요")
                     
-                else:
-                    st.warning(f"테스트 이메일을 {test_result} 로 보내는데 실패했습니다")
+                    else:
+                        st.warning(f"테스트 이메일을 {test_result} 로 보내는데 실패했습니다")
 
 
 
