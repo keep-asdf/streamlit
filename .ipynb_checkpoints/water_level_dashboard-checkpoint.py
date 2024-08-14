@@ -738,7 +738,8 @@ def main():
                 
         for email in email_addresses:
                   
-                if is_user_verified(email):
+            if is_user_verified(email):
+                
                     subject = "미호천교 위험 알림"
                     body = f"""
                 
@@ -786,8 +787,8 @@ def main():
 </html>
 """
                 
-                            send_email(subject, body, email)
-                            # st.write(f"{email} 로 알림 이메일을 전송했습니다.")
+                    send_email(subject, body, email)
+                    # st.write(f"{email} 로 알림 이메일을 전송했습니다.")
 
 
 if __name__ == '__main__':
