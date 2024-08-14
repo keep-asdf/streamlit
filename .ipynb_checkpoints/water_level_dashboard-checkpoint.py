@@ -474,7 +474,9 @@ def main():
 
 
     elif choice == "Email Notification":
+        
         st.header("이메일로 위험 알림 받기")
+        
         st.subheader("1. 이메일 인증 받기")
         email_address = st.text_input('이메일 주소를 입력해주세요', key="email_address_input")
     
@@ -519,7 +521,7 @@ def main():
                 else:
                     st.warning(result)
         else:
-            st.warning("이메일을 인증한 후에 등록할 수 있습니다.")
+            st.warning("이메일을 인증하시면 등록/삭제 하실 수 있습니다.")
 
         st.subheader("이메일 알림 테스트 하기")
         test_email_address = st.text_input('이메일 주소를 입력해주세요', key="test_email_address_input")
