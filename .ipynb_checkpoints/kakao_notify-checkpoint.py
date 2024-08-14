@@ -162,28 +162,28 @@ def add_user(e_mail_address):
         if connection is not None:
             connection.close()
 
-# def remove_user(e_mail_address):
-#     connection = get_db_connection()
-#     if connection is None:
-#         return 'Failed to connect to the database.'
-#     try:
-#         with connection.cursor() as cursor:
-#             cursor.execute("SELECT * FROM users WHERE e_mail_address = %s", (e_mail_address,))
-#             result = cursor.fetchone()
-#             if result:
-#                 cursor.execute("DELETE FROM users WHERE e_mail_address = %s", (e_mail_address,))
-#                 connection.commit()
-#                 logger.info(f"User removed successfully: {e_mail_address}")
-#                 return 'User removed successfully!'
-#             else:
-#                 logger.warning(f"Attempt to remove a non-existent KakaoTalk ID: {e_mail_address}")
-#                 return 'KakaoTalk ID not found.'
-#     except Exception as e:
-#         logger.error(f"Failed to remove user: {e}")
-#         return f'Failed to remove user: {e}'
-#     finally:
-#         if connection is not None:
-#             connection.close()
+def remove_user(e_mail_address):
+    connection = get_db_connection()
+    if connection is None:
+        return 'Failed to connect to the database.'
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM users WHERE e_mail_address = %s", (e_mail_address,))
+            result = cursor.fetchone()
+            if result:
+                cursor.execute("DELETE FROM users WHERE e_mail_address = %s", (e_mail_address,))
+                connection.commit()
+                logger.info(f"User removed successfully: {e_mail_address}")
+                return 'User removed successfully!'
+            else:
+                logger.warning(f"Attempt to remove a non-existent KakaoTalk ID: {e_mail_address}")
+                return 'KakaoTalk ID not found.'
+    except Exception as e:
+        logger.error(f"Failed to remove user: {e}")
+        return f'Failed to remove user: {e}'
+    finally:
+        if connection is not None:
+            connection.close()
 
 
 def remove_user(e_mail_address):
@@ -214,7 +214,7 @@ def remove_user(e_mail_address):
 # 이메일 전송 함수
 def send_email(subject, 
                body, 
-               to_email, d
+               to_email, 
                EMAIL_USER = EMAIL_USER, 
                EMAIL_PASSWORD = EMAIL_PASSWORD):
     
