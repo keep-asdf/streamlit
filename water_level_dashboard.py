@@ -504,7 +504,7 @@ def main():
             else:
                 st.warning(verification_result)
                 
-
+        st.subheader("2. 이메일 등록,삭제 하기(인증 후 버튼 등장)")
         # 인증된 사용자만 이메일 등록/삭제 가능
         if is_user_verified(email_address):
             if st.button('이메일 등록을 원하시면 이 버튼을 클릭해주세요', key="add_update_user_button"):
@@ -523,9 +523,12 @@ def main():
         else:
             st.warning("이메일을 인증하시면 등록/삭제 하실 수 있습니다.")
 
-        st.subheader("이메일 알림 테스트 하기")
+            
+            
+        st.subheader("3. 이메일 알림 테스트 하기")
+        
         test_email_address = st.text_input('이메일 주소를 입력해주세요', key="test_email_address_input")
-
+        
         if st.button('테스트 이메일 보내기', key="test_email_button"):
             
             if not test_email_address:
