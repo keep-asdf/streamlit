@@ -192,7 +192,7 @@ def remove_user(e_mail_address):
 # 이메일 전송 함수
 def send_email(subject, 
                body, 
-               to_email, 
+               to_email, d
                EMAIL_USER = EMAIL_USER, 
                EMAIL_PASSWORD = EMAIL_PASSWORD):
     
