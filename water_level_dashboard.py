@@ -474,7 +474,9 @@ def main():
 
 
     elif choice == "Email Notification":
+        
         st.header("이메일로 위험 알림 받기")
+        
         st.subheader("1. 이메일 인증 받기")
         email_address = st.text_input('이메일 주소를 입력해주세요', key="email_address_input")
     
