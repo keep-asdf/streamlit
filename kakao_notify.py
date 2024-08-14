@@ -293,6 +293,8 @@ def send_verification_email(email):
         
 #     else:
 #         return "이메일 주소를 찾을 수 없습니다."
+
+
 def verify_code(email, entered_code):
     connection = get_db_connection()
     cursor = connection.cursor()
