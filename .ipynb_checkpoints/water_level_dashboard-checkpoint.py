@@ -493,9 +493,7 @@ def main():
                     st.warning(f"인증 코드를 보내는데 실패했습니다: {send_result}")
                     
         st.write("")  # 한 줄의 여백 추가   
-        entered_code = st.text_input('이메일로 받은 인증 코드를 입력하세요', key="entered_verification_code")
-        st.write("")  # 한 줄의 여백 추가   
-        
+        entered_code = st.text_input('이메일로 받은 인증 코드를 입력하세요', key="entered_verification_code")        
         if st.button('이메일 인증하기', key="verify_email_button"):
             verification_result = verify_code(email_address, entered_code)
             
