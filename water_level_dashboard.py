@@ -715,80 +715,80 @@ def main():
 ##################################################
 
 
-#     # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
-#     def load_data_true_pred():
+    # 데이터를 로드합니다. 캐시는 1시간마다 만료됩니다.
+    def load_data_true_pred():
          
-#         return pd.read_csv('data/true_pred_with_CI.csv').copy()
+        return pd.read_csv('data/true_pred_with_CI.csv').copy()
 
-#     alert_data = load_data_true_pred()  # 데이터 로드
-#     alert_data['Time'] = pd.to_datetime(alert_data['Time'])  # 날짜 형식으로 변환
-
-
-#     # 위험 감지 및 자동 이메일 전송
-#     # st.write("자동 위험 감지 및 이메일 알림 실행 중...")
+    alert_data = load_data_true_pred()  # 데이터 로드
+    alert_data['Time'] = pd.to_datetime(alert_data['Time'])  # 날짜 형식으로 변환
 
 
-#     # 알림 메시지 생성
-#     alert_message = alert_sys(alert_data)  # 데이터를 로드하여 함수에 전달
+    # 위험 감지 및 자동 이메일 전송
+    # st.write("자동 위험 감지 및 이메일 알림 실행 중...")
+
+
+    # 알림 메시지 생성
+    alert_message = alert_sys(alert_data)  # 데이터를 로드하여 함수에 전달
                 
-#     # 알림이 있을 경우 이메일 전송
-#     if alert_message and not "안정적" in alert_message:
+    # 알림이 있을 경우 이메일 전송
+    if alert_message and not "안정적" in alert_message:
                     
-#         email_addresses = get_email_addresses()  # 이메일 주소 로드
+        email_addresses = get_email_addresses()  # 이메일 주소 로드
                 
-#         for email in email_addresses:
+        for email in email_addresses:
                   
-#             if is_user_verified(email):
+            if is_user_verified(email):
                 
-#                     subject = "미호천교 위험 알림"
-#                     body = f"""
+                    subject = "미호천교 위험 알림"
+                    body = f"""
                 
-# <html>
-# <body>
-#     <h1>미호천교 위험 알림 시스템(실제상황)</h1>
+<html>
+<body>
+    <h1>미호천교 위험 알림 시스템(실제상황)</h1>
     
-#     <p>{alert_message}</p>
+    <p>{alert_message}</p>
     
-#     <p>미호천교의 현재 상황에 대한 업데이트를 아래에서 확인하세요:</p>
+    <p>미호천교의 현재 상황에 대한 업데이트를 아래에서 확인하세요:</p>
     
-#     <h2>미호천교 현재 및 미래 예측 수위 데이터</h2>
-#     {data_true_pred_html}
+    <h2>미호천교 현재 및 미래 예측 수위 데이터</h2>
+    {data_true_pred_html}
     
-#     <div style="margin-top: 20px;"></div> <!-- 20px의 상단 여백 추가 -->  
+    <div style="margin-top: 20px;"></div> <!-- 20px의 상단 여백 추가 -->  
     
-#     <h2>미호천교 근방 교통 상황 데이터</h2>
-#     {traffic_df_html}
+    <h2>미호천교 근방 교통 상황 데이터</h2>
+    {traffic_df_html}
     
-#     <!-- 빈칸 추가 -->
-#     <div style="margin-top: 20px;"></div> <!-- 20px의 상단 여백 추가 -->
+    <!-- 빈칸 추가 -->
+    <div style="margin-top: 20px;"></div> <!-- 20px의 상단 여백 추가 -->
 
-#     <!-- 또는 줄 바꿈을 사용하여 빈칸 추가 -->
-#     <br><br> <!-- 2줄의 빈 줄 추가 -->
+    <!-- 또는 줄 바꿈을 사용하여 빈칸 추가 -->
+    <br><br> <!-- 2줄의 빈 줄 추가 -->
     
-#     <!-- 썸네일 이미지와 설명이 포함된 링크 -->
+    <!-- 썸네일 이미지와 설명이 포함된 링크 -->
     
-#     <div style="border:1px solid #dcdcdc; padding: 10px; width: 300px;">
+    <div style="border:1px solid #dcdcdc; padding: 10px; width: 300px;">
     
-#         <a href="https://mhc-water-level.streamlit.app/" style="text-decoration:none; color:black;">
+        <a href="https://mhc-water-level.streamlit.app/" style="text-decoration:none; color:black;">
         
-#             <img src="https://i.pinimg.com/564x/a5/ab/81/a5ab81cc6854d75ac3be20a90a22ab7b.jpg" alt="썸네일 이미지" style="width:100%; height:auto;">
+            <img src="https://i.pinimg.com/564x/a5/ab/81/a5ab81cc6854d75ac3be20a90a22ab7b.jpg" alt="썸네일 이미지" style="width:100%; height:auto;">
             
-#             <div style="padding-top: 10px;">
+            <div style="padding-top: 10px;">
             
-#                 <h3 style="margin: 0;">미호천교 위험 알림 시스템</h3>
-#                 <p style="margin: 0;">미호천교의 현재 수위 및 예측 수위, 교통 상황을 실시간으로 확인하세요.</p>
+                <h3 style="margin: 0;">미호천교 위험 알림 시스템</h3>
+                <p style="margin: 0;">미호천교의 현재 수위 및 예측 수위, 교통 상황을 실시간으로 확인하세요.</p>
                 
-#             </div>
-#         </a>
-#     </div>
+            </div>
+        </a>
+    </div>
     
-#     <p>감사합니다.</p>
-# </body>
-# </html>
-# """
+    <p>감사합니다.</p>
+</body>
+</html>
+"""
                 
-#                     send_email(subject, body, email)
-#                     # st.write(f"{email} 로 알림 이메일을 전송했습니다.")
+                    send_email(subject, body, email)
+                    # st.write(f"{email} 로 알림 이메일을 전송했습니다.")
 
 
 if __name__ == '__main__':
