@@ -479,7 +479,7 @@ def main():
         st.header("이메일로 위험 알림 받기")
         st.write("")  # 한 줄의 여백 추가   
         
-        st.subheader("1. 이메일 인증 받기")
+        st.subheader("1. 이메일 인증 후 등록하기")
         st.write("")  # 한 줄의 여백 추가   
         email_address = st.text_input('이메일 주소를 입력해주세요', key="email_address_input")  
         if st.button('이메일 인증 코드 보내기', key="send_verification_code_button"):

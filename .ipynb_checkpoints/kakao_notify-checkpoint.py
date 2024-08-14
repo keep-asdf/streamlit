@@ -332,7 +332,7 @@ def verify_code(email, entered_code):
             connection.commit()
             cursor.close()
             connection.close()
-            return "이메일 인증이 성공적으로 완료되었습니다."
+            return "이메일 인증, 등록이 성공적으로 완료되었습니다."
         else:
             return "잘못된 인증 코드입니다."
     else:
