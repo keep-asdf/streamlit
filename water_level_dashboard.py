@@ -475,7 +475,7 @@ def main():
         st.write("")  # 한 줄의 여백 추가    
         st.write("")  # 한 줄의 여백 추가    
         st.write("")  # 한 줄의 여백 추가  
-        
+        st.write("")  # 한 줄의 여백 추가   
         st.header("이메일로 위험 알림 받기")
         st.write("")  # 한 줄의 여백 추가   
         
