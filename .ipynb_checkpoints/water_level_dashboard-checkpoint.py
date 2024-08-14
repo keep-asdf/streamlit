@@ -736,7 +736,7 @@ def main():
                     
         email_addresses = get_email_addresses()  # 이메일 주소 로드
                 
-            for email in email_addresses:
+        for email in email_addresses:
                   
                 if is_user_verified(email):
                     subject = "미호천교 위험 알림"

@@ -59,26 +59,26 @@ def get_db_connection(retries=5, delay=5):
 
 
 
-# def get_email_addresses():
-#     # MySQL 연결 설정
-#     connection = pymysql.connect(
-#                       host=DB_HOST,
-#                       user=DB_USER,
-#                       password=DB_PASSWORD,
-#                       database=DB_NAME,
-#                       charset='utf8mb4',
-#                       cursorclass=pymysql.cursors.DictCursor
-#                         )
+def get_email_addresses():
+    # MySQL 연결 설정
+    connection = pymysql.connect(
+                      host=DB_HOST,
+                      user=DB_USER,
+                      password=DB_PASSWORD,
+                      database=DB_NAME,
+                      charset='utf8mb4',
+                      cursorclass=pymysql.cursors.DictCursor
+                        )
 
-#     try:
-#         with connection.cursor() as cursor:
-#             cursor.execute("SELECT e_mail_address FROM users")
-#             result = cursor.fetchall()
-#             email_addresses = [row[0] for row in result]
-#     finally:
-#         connection.close()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT e_mail_address FROM users")
+            result = cursor.fetchall()
+            email_addresses = [row[0] for row in result]
+    finally:
+        connection.close()
 
-#     return email_addresses
+    return email_addresses
 
     
 def load_changes():
