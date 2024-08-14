@@ -511,18 +511,18 @@ def main():
         st.write("")  # 한 줄의 여백 추가   
         st.write("")  # 한 줄의 여백 추가   
         st.write("")  # 한 줄의 여백 추가   
-        st.subheader("2. 이메일 등록,삭제 하기(인증 후 버튼 등장)")
+        st.subheader("2. 이메일 삭제 하기(인증 후 버튼 등장)")
         st.write("")  # 한 줄의 여백 추가   
         # 인증된 사용자만 이메일 등록/삭제 가능
         if is_user_verified(email_address):
             st.write("")  # 한 줄의 여백 추가   
-            if st.button('이메일 등록을 원하시면 이 버튼을 클릭해주세요', key="add_update_user_button"):
-                result = add_user(email_address)
-                if 'successfully' in result:
-                    st.success(result)
-                else:
-                    st.warning(result)
-            st.write("")  # 한 줄의 여백 추가   
+            # if st.button('이메일 등록을 원하시면 이 버튼을 클릭해주세요', key="add_update_user_button"):
+            #     result = add_user(email_address)
+            #     if 'successfully' in result:
+            #         st.success(result)
+            #     else:
+            #         st.warning(result)
+            # st.write("")  # 한 줄의 여백 추가   
             if st.button('이메일 등록 취소를 원하시면 이 버튼을 클릭해주세요', key="remove_user_button"):
                 result = remove_user(email_address)
                 if 'removed successfully' in result:
@@ -530,7 +530,7 @@ def main():
                 else:
                     st.warning(result)
         else:
-            st.warning("이메일을 인증하시면 등록/삭제 하실 수 있습니다.")
+            st.warning("이메일을 인증하시면 삭제 하실 수 있습니다.")
 
         st.write("")  # 한 줄의 여백 추가   
         st.write("")  # 한 줄의 여백 추가   
