@@ -264,6 +264,35 @@ def send_verification_email(email):
 
 
 # 인증 코드를 검증하는 함수
+# def verify_code(email, entered_code):
+#     connection = get_db_connection()
+#     cursor = connection.cursor()
+
+#     cursor.execute("""
+#         SELECT verification_code, expires_at FROM email_verifications WHERE e_mail_address = %s
+#     """, (email,))
+    
+#     result = cursor.fetchone()
+    
+#     if result:
+        
+#         saved_code, expires_at = result
+        
+#         if datetime.datetime.now() > expires_at:
+#             return "인증 코드가 만료되었습니다."
+        
+#         if saved_code == entered_code:
+#             cursor.execute("UPDATE users SET verification = TRUE WHERE e_mail_address = %s", (email,))
+#             connection.commit()
+#             cursor.close()
+#             connection.close()
+#             return "이메일 인증이 성공적으로 완료되었습니다."
+        
+#         else:
+#             return "잘못된 인증 코드입니다."
+        
+#     else:
+#         return "이메일 주소를 찾을 수 없습니다."
 def verify_code(email, entered_code):
     connection = get_db_connection()
     cursor = connection.cursor()
@@ -273,11 +302,28 @@ def verify_code(email, entered_code):
     """, (email,))
     
     result = cursor.fetchone()
+    cursor.close()
+    connection.close()
+
     if result:
-        saved_code, expires_at = result
+        saved_code, expires_at = result['verification_code'], result['expires_at']
+        
+        if expires_at is None:
+            return "인증 코드의 만료 시간을 확인할 수 없습니다."
+        
+        # datetime 형식이 맞는지 확인
+        if not isinstance(expires_at, datetime.datetime):
+            try:
+                expires_at = datetime.datetime.strptime(expires_at, "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                return "인증 코드의 만료 시간이 잘못되었습니다."
+        
         if datetime.datetime.now() > expires_at:
             return "인증 코드가 만료되었습니다."
+        
         if saved_code == entered_code:
+            connection = get_db_connection()
+            cursor = connection.cursor()
             cursor.execute("UPDATE users SET verification = TRUE WHERE e_mail_address = %s", (email,))
             connection.commit()
             cursor.close()
@@ -287,7 +333,6 @@ def verify_code(email, entered_code):
             return "잘못된 인증 코드입니다."
     else:
         return "이메일 주소를 찾을 수 없습니다."
-
 
 #로그기록
 def is_user_verified(email):
