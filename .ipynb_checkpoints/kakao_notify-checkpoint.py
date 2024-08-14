@@ -13,7 +13,9 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import re  # re 모듈을 임포트합니다.
-
+import random
+import string
+import datetime
 
 # MySQL 데이터베이스 연결 설정
 DB_HOST = st.secrets["database"]["DB_HOST"]
@@ -166,3 +168,105 @@ def send_email(subject,
 def is_valid_email(email):
     email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     return re.match(email_regex, email) is not None
+
+
+#####################################
+#####################################
+######## email 인증 관련 함수 ######## 
+#####################################
+#####################################
+
+# 인증 코드 생성 함수
+def generate_verification_code(length=6):
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
+
+# 인증 코드를 데이터베이스에 저장하는 함수
+def save_verification_code(email, code):
+    expires_at = datetime.datetime.now() + datetime.timedelta(minutes=10)  # 만료 시간 설정 (10분 후)
+    
+    connection = connect_db()  # DB 연결
+    cursor = connection.cursor()
+    
+    # 기존 인증 코드 삭제 (이미 있는 경우)
+    cursor.execute("DELETE FROM email_verifications WHERE email = %s", (email,))
+    
+    # 새로운 인증 코드 저장
+    cursor.execute("""
+        INSERT INTO email_verifications (email, verification_code, expires_at)
+        VALUES (%s, %s, %s)
+    """, (email, code, expires_at))
+    
+    connection.commit()
+    cursor.close()
+    connection.close()
+
+# 인증 코드를 이메일로 발송하는 함수
+def send_verification_email(email):
+    code = generate_verification_code()
+    save_verification_code(email, code)
+    
+    subject = "이메일 인증 코드"
+    body = f"귀하의 인증 코드는: {code} 입니다. 10분 내에 입력해주세요."
+    
+    return send_email(subject, body, email)
+
+
+# 인증 코드를 검증하는 함수
+def verify_code(email, entered_code):
+    connection = connect_db()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT verification_code, expires_at FROM email_verifications WHERE email = %s
+    """, (email,))
+    
+    result = cursor.fetchone()
+    if result:
+        saved_code, expires_at = result
+        if datetime.datetime.now() > expires_at:
+            return "인증 코드가 만료되었습니다."
+        if saved_code == entered_code:
+            cursor.execute("UPDATE users SET verification = TRUE WHERE email = %s", (email,))
+            connection.commit()
+            cursor.close()
+            connection.close()
+            return "이메일 인증이 성공적으로 완료되었습니다."
+        else:
+            return "잘못된 인증 코드입니다."
+    else:
+        return "이메일 주소를 찾을 수 없습니다."
+
+
+#로그기록
+def is_user_verified(email):
+    connection = connect_db()
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT verification FROM users WHERE email = %s", (email,))
+    result = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+    
+    if result and result[0]:  # verification이 True이면 인증된 사용자
+        return True
+    return False
+
+
+def log_user_change(action, email):
+    connection = get_db_connection()
+    if connection is None:
+        return 'Failed to connect to the database.'
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "INSERT INTO user_changes (action, e_mail_address, change_time) VALUES (%s, %s, NOW())",
+                (action, email)
+            )
+            connection.commit()
+            logger.info(f"Logged user change: {action} - {email}")
+    except Exception as e:
+        logger.error(f"Failed to log user change: {e}")
+    finally:
+        if connection is not None:
+            connection.close()

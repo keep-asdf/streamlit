@@ -344,60 +344,194 @@ def main():
 ##################################################################
 ##################################################################
 
-    # Email Notification 페이지
-    elif choice == "Email Notification":
+#     # Email Notification 페이지
+#     elif choice == "Email Notification":
         
-        # 여백 추가 (첫 번째 방법: st.write("") 사용)
-        st.write("")  # 한 줄의 여백 추가    
-        st.write("")  # 한 줄의 여백 추가    
-        st.write("")  # 한 줄의 여백 추가    
-        st.write("")  # 한 줄의 여백 추가    
+#         # 여백 추가 (첫 번째 방법: st.write("") 사용)
+#         st.write("")  # 한 줄의 여백 추가    
+#         st.write("")  # 한 줄의 여백 추가    
+#         st.write("")  # 한 줄의 여백 추가    
+#         st.write("")  # 한 줄의 여백 추가    
 
+#         st.header("이메일로 위험 알림 받기")
+#         st.write("")  # 한 줄의 여백 추가    
+#         email_address = st.text_input('이메일 주소를 입력해주세요', 
+#                                   key="email_address_input")
+
+#         st.write("")  # 한 줄의 여백 추가    
+#          # Add/Update User 버튼
+#         if st.button('이메일 등록을 원하시면 이 버튼을 클릭해주세요', key="add_update_user_button"):
+#             if not is_valid_email(email_address):
+#                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
+#             else:
+#                 result = add_user(email_address)
+#                 if 'successfully' in result:
+#                     st.success(result)
+#                 else:
+#                     st.warning(result)
+#         # Remove User 버튼
+#         if st.button('이메일 등록 취소를 원하시면 이 버튼을 클릭해주세요', key="remove_user_button"):
+#             if not is_valid_email(email_address):
+#                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
+#             else:
+#                 result = remove_user(email_address)
+#                 if 'removed successfully' in result:
+#                     st.success(result)
+#                 else:
+#                     st.warning(result)
+
+#         # 여백 추가 (첫 번째 방법: st.write("") 사용)
+#         st.write("")  # 한 줄의 여백 추가        
+        
+#         st.subheader("이메일 알림 테스트 하기")
+#         test_email_address = st.text_input('이메일 주소를 입력해주세요', 
+#                                            key="test_email_address_input")
+
+#         # 이메일 테스트 기능 추가
+#         if st.button('테스트 이메일 보내기', key="test_email_button"):
+#             if not test_email_address:
+#                 st.warning("테스트 이메일을 받을 이메일 주소를 입력해주세요.")
+#             elif not is_valid_email(test_email_address):
+#                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력해주세요")
+#             else:
+                
+      
+#                 # data_true_pred_html = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :].to_html(index=False)
+        
+#                 data_true_pred_email = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :]
+#                 data_true_pred_email = data_true_pred_email[['Time', 'True_Value', 'Predicted_Value']]
+#                 data_true_pred_email.columns = ['시간', '관측값', '예측값']
+#                 data_true_pred_email = data_true_pred_email.fillna('관측 전')
+#                 data_true_pred_html = data_true_pred_email.to_html(index=False)
+            
+
+#                 traffic_df_email = pd.read_csv('data/traffic_data.csv').iloc[1:, :]
+            
+#                 # 첫 번째 행이 비어 있는지 확인
+#                 if  traffic_df_email.empty :
+                    
+#                     traffic_df_html = '  -> 현재 미호천교 주변 교통 이슈 없음'
+                    
+#                 else:
+                    
+#                     traffic_df_html = traffic_df_email.to_html(index=False)
+
+#                 test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
+                
+#                 test_body =f"""
+                
+# <html>
+# <body>
+#     <h1>미호천교 위험 알림 시스템</h1>
+#     <p>이 이메일은 테스트를 위한 이메일입니다.</p>
+#     <p>미호천교의 현재 상황에 대한 업데이트를 아래에서 확인하세요:</p>
+    
+#     <h2>미호천교 현재 및 미래 예측 수위 데이터</h2>
+#     {data_true_pred_html}
+    
+#     <div style="margin-top: 20px;"></div> <!-- 20px의 상단 여백 추가 -->  
+    
+#     <h2>미호천교 근방 교통 상황 데이터</h2>
+#     {traffic_df_html}
+    
+#     <!-- 빈칸 추가 -->
+#     <div style="margin-top: 20px;"></div> <!-- 20px의 상단 여백 추가 -->
+
+#     <!-- 또는 줄 바꿈을 사용하여 빈칸 추가 -->
+#     <br><br> <!-- 2줄의 빈 줄 추가 -->
+    
+#     <!-- 썸네일 이미지와 설명이 포함된 링크 -->
+    
+#     <div style="border:1px solid #dcdcdc; padding: 10px; width: 300px;">
+    
+#         <a href="https://mhc-water-level.streamlit.app/" style="text-decoration:none; color:black;">
+        
+#             <img src="https://i.pinimg.com/564x/a5/ab/81/a5ab81cc6854d75ac3be20a90a22ab7b.jpg" alt="썸네일 이미지" style="width:100%; height:auto;">
+            
+#             <div style="padding-top: 10px;">
+            
+#                 <h3 style="margin: 0;">미호천교 위험 알림 시스템</h3>
+#                 <p style="margin: 0;">미호천교의 현재 수위 및 예측 수위, 교통 상황을 실시간으로 확인하세요.</p>
+                
+#             </div>
+#         </a>
+#     </div>
+    
+#     <p>감사합니다.</p>
+# </body>
+# </html>
+# """
+
+                
+                
+#                 test_result = send_email(test_subject, test_body, test_email_address)
+        
+#                 if 'successfully' in test_result:
+#                     st.success(f"테스트 이메일을 성공적으로 {test_email_address} 로 보냈습니다. 이메일을 확인해주세요")
+#                 else:
+#                     st.warning(f"테스트 이메일을 {test_result} 로 보내는데 실패했습니다")
+
+
+
+    elif choice == "Email Notification":
         st.header("이메일로 위험 알림 받기")
-        st.write("")  # 한 줄의 여백 추가    
-        email_address = st.text_input('이메일 주소를 입력해주세요', 
-                                  key="email_address_input")
-
-        st.write("")  # 한 줄의 여백 추가    
-         # Add/Update User 버튼
-        if st.button('이메일 등록을 원하시면 이 버튼을 클릭해주세요', key="add_update_user_button"):
+    
+        email_address = st.text_input('이메일 주소를 입력해주세요', key="email_address_input")
+    
+        if st.button('이메일 인증 코드 보내기', key="send_verification_code_button"):
             if not is_valid_email(email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
             else:
+                send_result = send_verification_email(email_address)
+                if 'successfully' in send_result:
+                    st.success(f"인증 코드를 {email_address}로 보냈습니다. 이메일을 확인해주세요.")
+                else:
+                    st.warning(f"인증 코드를 보내는데 실패했습니다: {send_result}")
+    
+        entered_code = st.text_input('이메일로 받은 인증 코드를 입력하세요', key="entered_verification_code")
+    
+        if st.button('이메일 인증하기', key="verify_email_button"):
+            verification_result = verify_code(email_address, entered_code)
+            if "성공적으로 완료" in verification_result:
+                st.success(verification_result)
+            elif "인증 코드가 만료되었습니다" in verification_result:
+                st.error(verification_result)
+            else:
+                st.warning(verification_result)
+
+        # 인증된 사용자만 이메일 등록/삭제 가능
+        if is_user_verified(email_address):
+            if st.button('이메일 등록을 원하시면 이 버튼을 클릭해주세요', key="add_update_user_button"):
                 result = add_user(email_address)
                 if 'successfully' in result:
                     st.success(result)
                 else:
                     st.warning(result)
-        # Remove User 버튼
-        if st.button('이메일 등록 취소를 원하시면 이 버튼을 클릭해주세요', key="remove_user_button"):
-            if not is_valid_email(email_address):
-                st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력하세요.")
-            else:
+
+            if st.button('이메일 등록 취소를 원하시면 이 버튼을 클릭해주세요', key="remove_user_button"):
                 result = remove_user(email_address)
                 if 'removed successfully' in result:
                     st.success(result)
                 else:
                     st.warning(result)
+        else:
+            st.warning("이메일을 인증한 후에 등록할 수 있습니다.")
 
-        # 여백 추가 (첫 번째 방법: st.write("") 사용)
-        st.write("")  # 한 줄의 여백 추가        
-        
         st.subheader("이메일 알림 테스트 하기")
-        test_email_address = st.text_input('이메일 주소를 입력해주세요', 
-                                           key="test_email_address_input")
+        test_email_address = st.text_input('이메일 주소를 입력해주세요', key="test_email_address_input")
 
-        # 이메일 테스트 기능 추가
         if st.button('테스트 이메일 보내기', key="test_email_button"):
+            
             if not test_email_address:
                 st.warning("테스트 이메일을 받을 이메일 주소를 입력해주세요.")
+                
             elif not is_valid_email(test_email_address):
                 st.warning("잘못된 이메일 형식입니다. 올바른 이메일 주소를 입력해주세요")
-            else:
                 
-      
-                # data_true_pred_html = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :].to_html(index=False)
-        
+            elif not is_user_verified(test_email_address):
+                st.warning("이 이메일은 인증되지 않았습니다. 먼저 인증을 완료해주세요.")
+                
+            else:
                 data_true_pred_email = pd.read_csv('data/true_pred_with_CI.csv').iloc[-4:, :]
                 data_true_pred_email = data_true_pred_email[['Time', 'True_Value', 'Predicted_Value']]
                 data_true_pred_email.columns = ['시간', '관측값', '예측값']
@@ -409,16 +543,14 @@ def main():
             
                 # 첫 번째 행이 비어 있는지 확인
                 if  traffic_df_email.empty :
-                    
                     traffic_df_html = '  -> 현재 미호천교 주변 교통 이슈 없음'
                     
                 else:
-                    
                     traffic_df_html = traffic_df_email.to_html(index=False)
 
-                test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
+                    test_subject = "(테스트 이메일 알림) 미호천교 위험 알림 시스템입니다. "
                 
-                test_body =f"""
+                    test_body =f"""
                 
 <html>
 <body>
@@ -461,13 +593,11 @@ def main():
 </body>
 </html>
 """
-
-                
-                
-                test_result = send_email(test_subject, test_body, test_email_address)
+                    test_result = send_email(test_subject, test_body, test_email_address)
         
                 if 'successfully' in test_result:
                     st.success(f"테스트 이메일을 성공적으로 {test_email_address} 로 보냈습니다. 이메일을 확인해주세요")
+                    
                 else:
                     st.warning(f"테스트 이메일을 {test_result} 로 보내는데 실패했습니다")
 
