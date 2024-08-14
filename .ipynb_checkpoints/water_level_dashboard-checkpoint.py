@@ -537,8 +537,7 @@ def main():
         
         st.write("")  # 한 줄의 여백 추가   
         test_email_address = st.text_input('이메일 주소를 입력해주세요', key="test_email_address_input")
-        
-        st.write("")  # 한 줄의 여백 추가   
+
         if st.button('테스트 이메일 보내기', key="test_email_button"):
             
             if not test_email_address:
