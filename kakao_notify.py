@@ -16,9 +16,10 @@ import re  # re 모듈을 임포트합니다.
 import random
 import string
 import datetime
-
 # MySQL 데이터베이스 연결 설정
-DB_HOST = st.secrets["database"]["DB_HOST"]
+# DB_HOST = st.secrets["database"]["DB_HOST"]
+
+DB_HOST = '3.90.247.218'
 DB_USER = st.secrets["database"]["DB_USER"]
 DB_PASSWORD = st.secrets["database"]["DB_PASSWORD"]
 DB_NAME = st.secrets["database"]["DB_NAME"]
